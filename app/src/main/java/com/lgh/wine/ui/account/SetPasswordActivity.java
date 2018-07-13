@@ -8,11 +8,10 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.lgh.wine.Contract.AccountContract;
+import com.lgh.wine.contract.AccountContract;
 import com.lgh.wine.R;
 import com.lgh.wine.base.BaseActivity;
 import com.lgh.wine.beans.Account;
-import com.lgh.wine.beans.LoginInput;
 import com.lgh.wine.model.AccountModel;
 import com.lgh.wine.presenter.AccountPresenter;
 

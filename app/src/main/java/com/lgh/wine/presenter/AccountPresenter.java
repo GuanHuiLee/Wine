@@ -1,6 +1,6 @@
 package com.lgh.wine.presenter;
 
-import com.lgh.wine.Contract.AccountContract;
+import com.lgh.wine.contract.AccountContract;
 import com.lgh.wine.MyCallBack;
 import com.lgh.wine.beans.Account;
 import com.lgh.wine.beans.BaseResult;

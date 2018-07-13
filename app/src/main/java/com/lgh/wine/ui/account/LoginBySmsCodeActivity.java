@@ -5,14 +5,12 @@ import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.RequiresApi;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.lgh.wine.Contract.AccountContract;
+import com.lgh.wine.contract.AccountContract;
 import com.lgh.wine.R;
 import com.lgh.wine.base.BaseActivity;
 import com.lgh.wine.beans.Account;

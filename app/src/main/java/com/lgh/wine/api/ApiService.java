@@ -15,6 +15,7 @@ import retrofit2.http.Body;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
+import retrofit2.http.Query;
 
 /**
  * Created by ligh on 2018/7/6.
@@ -38,8 +39,7 @@ public interface ApiService {
      * @return
      */
     @POST("login")
-    @FormUrlEncoded
-    Call<BaseResult<Account>> login(@FieldMap Map<String, Object> params);
+    Call<BaseResult<Account>> login(@Query("phone")String phone,@Query("sms_password")String pwd,@Query("type")int type);
 
     /**
      * 验证手机号

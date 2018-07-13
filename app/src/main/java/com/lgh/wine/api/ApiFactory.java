@@ -20,7 +20,7 @@ public class ApiFactory {
     static {
         mClient = new OkHttpClient.Builder()
                 .connectTimeout(10, TimeUnit.SECONDS)
-            .addInterceptor(new HttpLoggingInterceptor())
+                .addInterceptor(new HttpLoggingInterceptor())
                 .build();
 
         mRetrofit = new Retrofit.Builder()

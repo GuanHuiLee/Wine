@@ -1,4 +1,4 @@
-package com.lgh.wine.Contract;
+package com.lgh.wine.contract;
 
 import com.lgh.wine.base.BasePresenter;
 import com.lgh.wine.base.BaseView;

@@ -36,7 +36,7 @@ public class AccountModel extends BaseModel {
         params.put("phone", input.getPhone());
         params.put("sms_password", input.getSms_password());
         params.put("type", input.getType());
-        ApiFactory.getService().login(params).enqueue(callBack);
+        ApiFactory.getService().login(input.getPhone(), input.getSms_password(), input.getType()).enqueue(callBack);
     }
 
     /**
