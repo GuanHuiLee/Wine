@@ -5,7 +5,9 @@ import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -19,6 +21,7 @@ import com.lgh.wine.utils.ToastUtils;
 import java.util.LinkedList;
 import java.util.List;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
@@ -36,6 +39,10 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
 
     private Unbinder unbinder;
     private long mLastClickTime;
+    public Context mContext;
+
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
 
     /**
      * 业务逻辑类
@@ -52,10 +59,13 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         if (needStatusBar()) {
             setTranslucentStatus(R.color.color_white);
         }
+        mContext = this;
         initTAG(this);
         initUI();
         initData();
     }
+
+    protected abstract int getLayoutId();
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
@@ -69,6 +79,9 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         for (BasePresenter basePresenter : presenterList) {
             basePresenter.onCreate();
         }
+        setContentView(getLayoutId());
+        initToolbar(toolbar);
+        setSupportActionBar(toolbar);
     }
 
 
@@ -205,5 +218,16 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
 
     protected boolean needStatusBar() {
         return true;
+    }
+
+    abstract protected void initToolbar(Toolbar toolbar);
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

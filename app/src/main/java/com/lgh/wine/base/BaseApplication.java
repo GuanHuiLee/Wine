@@ -49,7 +49,6 @@ public abstract class BaseApplication extends Application {
     }
 
 
-    public abstract boolean isDevMode();
 
     /**
      * 初始化应用
@@ -84,7 +83,6 @@ public abstract class BaseApplication extends Application {
      *
      * @return
      */
-    public abstract String getAppId();
 
     public static final BaseApplication getApplication() {
         return mApp;

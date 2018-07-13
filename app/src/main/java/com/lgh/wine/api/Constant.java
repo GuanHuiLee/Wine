@@ -6,5 +6,5 @@ package com.lgh.wine.api;
  */
 class Constant {
 
-    public static String BASE_IP = "http://api.jisuapi.com/";
+    public static String BASE_IP = "http://api.mtsisuo.com/";
 }

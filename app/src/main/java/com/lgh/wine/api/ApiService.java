@@ -1,16 +1,62 @@
 package com.lgh.wine.api;
 
 
+import com.lgh.wine.beans.Account;
+import com.lgh.wine.beans.BaseResult;
+import com.lgh.wine.beans.LoginInput;
+import com.lgh.wine.beans.SmsCodeInput;
+import com.lgh.wine.beans.VerifyPhoneInput;
+
+import java.util.Map;
+
+import okhttp3.ResponseBody;
 import retrofit2.Call;
-import retrofit2.http.GET;
-import retrofit2.http.Query;
+import retrofit2.http.Body;
+import retrofit2.http.FieldMap;
+import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.POST;
 
 /**
- * Created by niujingtong on 2018/7/6.
+ * Created by ligh on 2018/7/6.
  * 模块：
  */
 public interface ApiService {
+    /**
+     * 获取验证码
+     *
+     * @return
+     */
+    @POST("sms_code")
+    @FormUrlEncoded
+    Call<BaseResult<String>> getSmsCode(@FieldMap Map<String, Object> params);
 
-//    @GET("rkl/search")
-//    Call<RaoKouLingResult> getData(@Query("appkey") String appkey, @Query("keyword") String key);
+
+    /**
+     * 登录
+     *
+     * @param
+     * @return
+     */
+    @POST("login")
+    @FormUrlEncoded
+    Call<BaseResult<Account>> login(@FieldMap Map<String, Object> params);
+
+    /**
+     * 验证手机号
+     *
+     * @return
+     */
+    @POST("verify_code")
+    @FormUrlEncoded
+    Call<BaseResult<String>> verifyCode(@FieldMap Map<String, Object> params);
+
+
+    /**
+     * 注册
+     *
+     * @return
+     */
+    @POST("register")
+    @FormUrlEncoded
+    Call<BaseResult<String>> register(@FieldMap Map<String, Object> params);
 }
