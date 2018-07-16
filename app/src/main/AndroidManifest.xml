@@ -8,7 +8,7 @@
         android:name=".WineApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:label="@string/app_name_1"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme1">
@@ -22,7 +22,23 @@
         </activity>
         <activity android:name=".ui.account.RegisterActivity" />
         <activity android:name=".ui.account.LoginBySmsCodeActivity" />
-        <activity android:name=".ui.account.SetPasswordActivity"></activity>
+        <activity android:name=".ui.account.SetPasswordActivity" />
+
+        <meta-data
+            android:name="DATABASE"
+            android:value="com.lgh.wine.db" />
+        <meta-data
+            android:name="VERSION"
+            android:value="1" />
+        <meta-data
+            android:name="QUERY_LOG"
+            android:value="true" />
+        <meta-data
+            android:name="DOMAIN_PACKAGE_NAME"
+            android:value="com.lgh.wine" />
+
+        <activity android:name=".ui.web.WebActivity" />
+        <activity android:name=".ui.product.ProductListActivity"></activity>
     </application>
 
 </manifest>

@@ -8,12 +8,15 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.lgh.wine.MainActivity;
 import com.lgh.wine.contract.AccountContract;
 import com.lgh.wine.R;
 import com.lgh.wine.base.BaseActivity;
 import com.lgh.wine.beans.Account;
 import com.lgh.wine.model.AccountModel;
 import com.lgh.wine.presenter.AccountPresenter;
+import com.lgh.wine.utils.AccountUtil;
+import com.lgh.wine.utils.MD5Helper;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -24,6 +27,7 @@ public class SetPasswordActivity extends BaseActivity implements AccountContract
 
     private AccountPresenter presenter;
     private String phone;
+    private String pwd;
 
     @Override
     protected int getLayoutId() {
@@ -65,14 +69,22 @@ public class SetPasswordActivity extends BaseActivity implements AccountContract
     }
 
     private void setPassword() {
-        String pwd = et_password.getText().toString();
+        pwd = et_password.getText().toString();
 
-        presenter.register(phone, pwd);
+        presenter.register(phone, MD5Helper.getMd5Value(pwd));
     }
 
     @Override
     public void showLoginInfo(Account data) {
-
+        if (data != null) {
+            if (AccountUtil.hasAccount()) {
+                Account.deleteAll(Account.class);
+            }
+            data.setUserPassword(pwd);
+            data.save();
+            startActivity(new Intent(mContext, MainActivity.class));
+            finish();
+        }
     }
 
     @Override
@@ -87,7 +99,7 @@ public class SetPasswordActivity extends BaseActivity implements AccountContract
 
     @Override
     public void registerSuccess() {
-        startActivity(new Intent(mContext, LoginActivity.class));
-        finish();
+        showError("注册成功");
+        presenter.login(phone, pwd, 1);
     }
 }

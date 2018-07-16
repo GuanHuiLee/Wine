@@ -56,9 +56,9 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
             Log.e(getClass().getSimpleName(), "current page is=>" + getClass().getSimpleName());
         }
         unbinder = ButterKnife.bind(this);
-        if (needStatusBar()) {
-            setTranslucentStatus(R.color.color_white);
-        }
+//        if (needStatusBar()) {
+//            setTranslucentStatus(R.color.color_white);
+//        }
         mContext = this;
         initTAG(this);
         initUI();

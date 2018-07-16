@@ -99,7 +99,7 @@ public class LoginBySmsCodeActivity extends BaseActivity implements AccountContr
         String phone = et_phone.getText().toString();
         String pwd = et_code.getText().toString();
 
-        presenter.login(new LoginInput(phone, pwd, 0));
+        presenter.login(phone, pwd, 0);
     }
 
     @Override

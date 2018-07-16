@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.lgh.wine.MainActivity;
 import com.lgh.wine.contract.AccountContract;
 import com.lgh.wine.R;
 import com.lgh.wine.base.BaseActivity;
@@ -15,6 +16,9 @@ import com.lgh.wine.beans.Account;
 import com.lgh.wine.beans.LoginInput;
 import com.lgh.wine.model.AccountModel;
 import com.lgh.wine.presenter.AccountPresenter;
+import com.lgh.wine.utils.AccountUtil;
+import com.lgh.wine.utils.MD5Helper;
+import com.orhanobut.logger.Logger;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -29,6 +33,7 @@ public class LoginActivity extends BaseActivity implements AccountContract.View 
     EditText et_password;
 
     private AccountPresenter presenter;
+    private String pwd;
 
     @Override
     protected int getLayoutId() {
@@ -38,7 +43,11 @@ public class LoginActivity extends BaseActivity implements AccountContract.View 
 
     @Override
     protected void initUI() {
-
+        Account account = AccountUtil.getAccount();
+        if (account != null) {
+            et_phone.setText(account.getUserPhone());
+            et_password.setText(account.getUserPassword());
+        }
     }
 
     @Override
@@ -82,14 +91,24 @@ public class LoginActivity extends BaseActivity implements AccountContract.View 
 
     private void login() {
         String phone = et_phone.getText().toString();
-        String pwd = et_password.getText().toString();
+        pwd = et_password.getText().toString();
 
-        presenter.login(new LoginInput(phone, pwd, 1));
+        presenter.login(phone, MD5Helper.getMd5Value(pwd), 1);
     }
 
     @Override
     public void showLoginInfo(Account data) {
+        if (data != null) {
+            showError("登录成功");
 
+            if (AccountUtil.hasAccount()) {
+                Account.deleteAll(Account.class);
+            }
+            data.setUserPassword(pwd);
+            data.save();
+            startActivity(new Intent(mContext, MainActivity.class));
+            finish();
+        }
     }
 
     @Override

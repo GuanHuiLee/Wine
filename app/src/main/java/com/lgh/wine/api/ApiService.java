@@ -39,7 +39,8 @@ public interface ApiService {
      * @return
      */
     @POST("login")
-    Call<BaseResult<Account>> login(@Query("phone")String phone,@Query("sms_password")String pwd,@Query("type")int type);
+    @FormUrlEncoded
+    Call<BaseResult<String>> login(@FieldMap Map<String, Object> params);
 
     /**
      * 验证手机号
@@ -59,4 +60,16 @@ public interface ApiService {
     @POST("register")
     @FormUrlEncoded
     Call<BaseResult<String>> register(@FieldMap Map<String, Object> params);
+
+
+    /**
+     * 首页
+     *
+     * @return
+     */
+    @POST("index")
+    Call<BaseResult<String>> getHomeData();
+
+    @POST("productList")
+    Call<BaseResult<String>> getProductList(@FieldMap Map<String, Object> params);
 }

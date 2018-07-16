@@ -33,7 +33,7 @@ public interface AccountContract {
         }
 
 
-        public abstract void login(LoginInput input);
+        public abstract void login(String phone,String pwd,int type);
 
         public abstract void getSmsCode(String phone, int type);
 

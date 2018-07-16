@@ -1,5 +1,6 @@
 package com.lgh.wine.presenter;
 
+import com.google.gson.Gson;
 import com.lgh.wine.contract.AccountContract;
 import com.lgh.wine.MyCallBack;
 import com.lgh.wine.beans.Account;
@@ -20,20 +21,26 @@ public class AccountPresenter extends AccountContract.Presenter {
     }
 
     @Override
-    public void login(LoginInput input) {
-        model.login(input, new MyCallBack<BaseResult<Account>>() {
+    public void login(String phone, String pwd, int type) {
+        view.showProgress("登录中");
+        model.login(phone, pwd, type, new MyCallBack<BaseResult<String>>() {
+
 
             @Override
-            public void onSuc(Response<BaseResult<Account>> response) {
-                BaseResult<Account> body = response.body();
+            public void onSuc(Response<BaseResult<String>> response) {
+                view.hideProgress();
+                BaseResult<String> body = response.body();
                 if (body.getCode() == 200) {
-                    view.showLoginInfo(body.getData());
+                    String data = body.getData();
+                    Account account = new Gson().fromJson(data, Account.class);
+                    view.showLoginInfo(account);
                 } else view.showError(body.getMsg());
             }
 
             @Override
             public void onFail(String message) {
                 view.showError(message);
+                view.hideProgress();
             }
         });
     }

@@ -28,15 +28,14 @@ public class AccountModel extends BaseModel {
     /**
      * 登录
      *
-     * @param input
      * @param callBack
      */
-    public void login(LoginInput input, MyCallBack callBack) {
+    public void login(String phone, String pwd, int type, MyCallBack callBack) {
         Map<String, Object> params = new HashMap<>();
-        params.put("phone", input.getPhone());
-        params.put("sms_password", input.getSms_password());
-        params.put("type", input.getType());
-        ApiFactory.getService().login(input.getPhone(), input.getSms_password(), input.getType()).enqueue(callBack);
+        params.put("phone", phone);
+        params.put("sms_password", pwd);
+        params.put("type", type);
+        ApiFactory.getService().login(params).enqueue(callBack);
     }
 
     /**

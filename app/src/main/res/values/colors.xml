@@ -7,4 +7,8 @@
     <color name="color_bg">#f5f5f5</color>
     <color name="color_grey_e5e5e5">#e5e5e5</color>
     <color name="color_main">#000000</color>
+    <color name="color_line_grey">#e6e6e6</color>
+    <color name="color_blue">#4aa5e7</color>
+    <color name="pink">#F01818</color>
+    <color name="black">#ff000000</color>
 </resources>

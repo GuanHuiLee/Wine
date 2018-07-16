@@ -16,6 +16,7 @@ import com.lgh.wine.base.BaseActivity;
 import com.lgh.wine.beans.Account;
 import com.lgh.wine.model.AccountModel;
 import com.lgh.wine.presenter.AccountPresenter;
+import com.lgh.wine.utils.MD5Helper;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -99,6 +100,7 @@ public class RegisterActivity extends BaseActivity implements AccountContract.Vi
 
     @Override
     public void showSmsCode(String code) {
+        showError("验证码已发送，请注意查收！");
         showTime();
     }
 
@@ -146,4 +148,10 @@ public class RegisterActivity extends BaseActivity implements AccountContract.Vi
             }
         }
     };
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mHandler.removeMessages(STOP);
+    }
 }
