@@ -11,54 +11,64 @@
 
     <RadioGroup
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_height="40dp"
+        android:layout_margin="@dimen/dp_10"
         android:orientation="horizontal">
 
         <RadioButton
+            android:id="@+id/rb_new"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/dp_10"
             android:layout_weight="1"
-            android:background="@drawable/product_top"
+            android:background="@drawable/product_top_text"
             android:button="@null"
-            android:checked="true"
+            android:drawableStart="@drawable/product_top_left"
             android:gravity="center"
             android:padding="@dimen/dp_10"
             android:text="最新"
             android:textColor="@color/protect_top" />
 
         <RadioButton
+            android:id="@+id/rb_price"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/dp_10"
             android:layout_weight="1"
-            android:background="@drawable/product_top"
+            android:background="@drawable/product_top_text"
             android:button="@null"
+            android:drawableStart="@drawable/product_top_left"
             android:gravity="center"
             android:padding="@dimen/dp_10"
-            android:text="价格" />
+            android:text="价格"
+            android:textColor="@color/protect_top" />
 
         <RadioButton
+            android:id="@+id/rb_sale"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/dp_10"
             android:layout_weight="1"
-            android:background="@drawable/product_top"
+            android:background="@drawable/product_top_text"
             android:button="@null"
+            android:drawableStart="@drawable/product_top_left"
             android:gravity="center"
             android:padding="@dimen/dp_10"
-            android:text="销量" />
+            android:text="销量"
+            android:textColor="@color/protect_top" />
 
         <RadioButton
+            android:id="@+id/rb_discuss"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@drawable/product_top"
+            android:background="@drawable/product_top_text"
             android:button="@null"
+            android:drawableStart="@drawable/product_top_left"
             android:gravity="center"
             android:padding="@dimen/dp_10"
-            android:text="评论" />
+            android:text="评论"
+            android:textColor="@color/protect_top" />
     </RadioGroup>
 
     <com.scwang.smartrefresh.layout.SmartRefreshLayout

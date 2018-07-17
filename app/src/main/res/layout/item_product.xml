@@ -8,9 +8,9 @@
 
     <ImageView
         android:id="@+id/iv_pic"
-        android:layout_width="100dp"
-        android:layout_height="150dp"
-        android:scaleType="centerCrop"
+        android:layout_width="160dp"
+        android:layout_height="180dp"
+        android:scaleType="fitXY"
         android:src="@mipmap/ic_launcher" />
 
     <TextView
@@ -18,6 +18,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
+        android:ellipsize="end"
+        android:lines="1"
+        android:maxEms="11"
         android:text="茅台集团天朝商品贵酒人品" />
 
     <TextView

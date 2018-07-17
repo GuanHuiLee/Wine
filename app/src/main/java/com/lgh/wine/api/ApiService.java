@@ -70,6 +70,18 @@ public interface ApiService {
     @POST("index")
     Call<BaseResult<String>> getHomeData();
 
+    /**
+     * 商品列表
+     *
+     * @param params
+     * @return
+     */
     @POST("productList")
+    @FormUrlEncoded
     Call<BaseResult<String>> getProductList(@FieldMap Map<String, Object> params);
+
+
+    @POST("productDetail")
+    @FormUrlEncoded
+    Call<BaseResult<String>> getProductDetail(@FieldMap Map<String, Object> params);
 }

@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.lgh.wine.R;
 import com.lgh.wine.api.Constant;
 import com.lgh.wine.base.BaseFragment;
@@ -22,6 +23,7 @@ import com.lgh.wine.contract.HomeContract;
 import com.lgh.wine.model.HomeModel;
 import com.lgh.wine.presenter.HomePresenter;
 import com.lgh.wine.ui.home.adapter.PictureAdapter;
+import com.lgh.wine.ui.product.ProductListActivity;
 import com.lgh.wine.ui.web.WebActivity;
 import com.lgh.wine.utils.GlideHelper;
 import com.lgh.wine.utils.SpannableStringUtils;
@@ -30,6 +32,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 import cn.bingoogolapple.bgabanner.BGABanner;
 
 /**
@@ -65,11 +68,6 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
 
     @Override
     protected void initUI() {
-        bulkList = new ArrayList<>();
-        customList = new ArrayList<>();
-        presenter = new HomePresenter(this, HomeModel.newInstance());
-        presenter.getHomeData();
-
         recyclerView_bulk.setLayoutManager(new GridLayoutManager(mContext, 2));
         adapterBulk = new PictureAdapter(R.layout.item_pic, bulkList);
         recyclerView_bulk.setAdapter(adapterBulk);
@@ -92,6 +90,19 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
                 }
             }
         });
+        adapterBulk.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                gotoProductList(3);
+            }
+        });
+
+        adapterCustom.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                gotoProductList(2);
+            }
+        });
 
         SpannableStringBuilder str = SpannableStringUtils.getBuilder("App版本已更新，下单更")
                 .append("优惠")
@@ -100,9 +111,30 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
         tv_update.setText(str);
     }
 
+    private void gotoProductList(int type) {
+        Intent intent = new Intent(mContext, ProductListActivity.class);
+        intent.putExtra("type", type);
+        startActivity(intent);
+    }
+
     @Override
     protected void initData() {
+        bulkList = new ArrayList<>();
+        customList = new ArrayList<>();
+        presenter = new HomePresenter(this, HomeModel.newInstance());
+        addPresenter(presenter);
+        presenter.getHomeData();
+    }
 
+    @OnClick({R.id.iv_brand, R.id.recyclerView_bluk, R.id.recyclerView_custom})
+    public void clickView(View view) {
+        switch (view.getId()) {
+            case R.id.iv_brand:
+                gotoProductList(1);
+                break;
+            default:
+                break;
+        }
     }
 
     @Override

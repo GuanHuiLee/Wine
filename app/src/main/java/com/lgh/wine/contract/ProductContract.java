@@ -6,14 +6,15 @@ import com.lgh.wine.beans.ProductBean;
 import com.lgh.wine.model.ProductModel;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by niujingtong on 2018/7/16.
  * 模块：
  */
-public class ProductContract {
+public interface ProductContract {
     public interface View extends BaseView {
-        void getProductList(List<ProductBean> beans);
+        void showProductList(List<ProductBean> beans);
     }
 
     public abstract class Presenter extends BasePresenter<View, ProductModel> {
@@ -22,6 +23,6 @@ public class ProductContract {
             super(view, model);
         }
 
-        public abstract void getProductList(int srartnum, int type);
+        public abstract void getProductList(Map<String, Object> params);
     }
 }

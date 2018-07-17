@@ -11,4 +11,7 @@
     <color name="color_blue">#4aa5e7</color>
     <color name="pink">#F01818</color>
     <color name="black">#ff000000</color>
+    <color name="color_red">#ffcc0000</color>
+    <color name="color_product_car">#F04830</color>
+    <color name="color_product_buy">#D81800</color>
 </resources>

@@ -20,9 +20,7 @@ public class ProductModel extends BaseModel {
         return model;
     }
 
-    public void getProductList(int startNum, int type, int order, MyCallBack callBack) {
-        Map<String, Object> params = new HashMap<>();
-
+    public void getProductList(Map<String, Object> params, MyCallBack callBack) {
         ApiFactory.getService().getProductList(params).enqueue(callBack);
     }
 }

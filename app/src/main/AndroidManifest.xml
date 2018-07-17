@@ -38,7 +38,8 @@
             android:value="com.lgh.wine" />
 
         <activity android:name=".ui.web.WebActivity" />
-        <activity android:name=".ui.product.ProductListActivity"></activity>
+        <activity android:name=".ui.product.ProductListActivity" />
+        <activity android:name=".ui.product.ProductDetailActivity"></activity>
     </application>
 
 </manifest>
