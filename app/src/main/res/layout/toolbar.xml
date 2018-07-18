@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/toolbar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_alignParentTop="true"
     android:minHeight="?attr/actionBarSize"
+    app:navigationIcon="@mipmap/ic_arrow_left"
     android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
     <TextView
@@ -13,6 +15,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:lines="1"
-        android:textColor="@color/color_white"
+        android:textColor="@color/black"
         android:textSize="17sp" />
 </android.support.v7.widget.Toolbar>

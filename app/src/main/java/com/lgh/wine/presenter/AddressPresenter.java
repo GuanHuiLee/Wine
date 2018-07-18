@@ -1,40 +1,44 @@
 package com.lgh.wine.presenter;
 
 import com.google.gson.Gson;
-import com.lgh.wine.contract.AccountContract;
+import com.google.gson.reflect.TypeToken;
 import com.lgh.wine.MyCallBack;
-import com.lgh.wine.beans.Account;
+import com.lgh.wine.beans.AddressBean;
 import com.lgh.wine.beans.BaseResult;
-import com.lgh.wine.beans.LoginInput;
-import com.lgh.wine.model.AccountModel;
+import com.lgh.wine.beans.ShoppingCartBean;
+import com.lgh.wine.contract.AddressContract;
+import com.lgh.wine.contract.ShoppingCartContract;
+import com.lgh.wine.model.AddressModel;
+import com.lgh.wine.model.ShoppingCartModel;
+
+import java.util.List;
+import java.util.Map;
 
 import retrofit2.Response;
 
 /**
- * Created by niujingtong on 2018/7/13.
+ * Created by niujingtong on 2018/7/16.
  * 模块：
  */
-public class AccountPresenter extends AccountContract.Presenter {
+public class AddressPresenter extends AddressContract.Presenter {
 
-    public AccountPresenter(AccountContract.View view, AccountModel model) {
+    public AddressPresenter(AddressContract.View view, AddressModel model) {
         super(view, model);
     }
 
+
     @Override
-    public void login(String phone, String pwd, int type) {
-        view.showProgress("登录中");
-        model.login(phone, pwd, type, new MyCallBack<BaseResult<String>>() {
-
-
+    public void getAddressList(Map<String, Object> params) {
+        model.getAddressList(params, new MyCallBack<BaseResult<String>>() {
             @Override
             public void onSuc(Response<BaseResult<String>> response) {
                 if (isAttach) {
                     view.hideProgress();
                     BaseResult<String> body = response.body();
                     if (body.getCode() == 200) {
-                        String data = body.getData();
-                        Account account = new Gson().fromJson(data, Account.class);
-                        view.showLoginInfo(account);
+                        List<AddressBean> list = new Gson().fromJson(body.getData(), new TypeToken<List<AddressBean>>() {
+                        }.getType());
+                        view.showAddressList(list);
                     } else view.showError(body.getMsg());
                 }
             }
@@ -42,76 +46,82 @@ public class AccountPresenter extends AccountContract.Presenter {
             @Override
             public void onFail(String message) {
                 if (isAttach) {
-                    view.showError(message);
                     view.hideProgress();
+                    view.showError(message);
                 }
             }
         });
     }
 
     @Override
-    public void getSmsCode(String phone, int type) {
-        model.getSmsCode(phone, type, new MyCallBack<BaseResult<String>>() {
-
+    public void getDefaultAddress(Map<String, Object> params) {
+        model.getDefaultAddress(params, new MyCallBack<BaseResult<String>>() {
             @Override
             public void onSuc(Response<BaseResult<String>> response) {
                 if (isAttach) {
+                    view.hideProgress();
                     BaseResult<String> body = response.body();
                     if (body.getCode() == 200) {
-                        view.showSmsCode(body.getData());
+                        AddressBean bean = new Gson().fromJson(body.getData(), AddressBean.class);
+                        view.showDefaultAddress(bean);
                     } else view.showError(body.getMsg());
                 }
             }
 
             @Override
             public void onFail(String message) {
-                if (isAttach)
+                if (isAttach) {
+                    view.hideProgress();
                     view.showError(message);
-
+                }
             }
         });
     }
 
     @Override
-    public void verifyCode(String phone, String sms_code) {
-        model.verifyCode(phone, sms_code, new MyCallBack<BaseResult<String>>() {
+    public void addAddress(Map<String, Object> params) {
+        model.addAddress(params, new MyCallBack<BaseResult<String>>() {
             @Override
             public void onSuc(Response<BaseResult<String>> response) {
                 if (isAttach) {
+                    view.hideProgress();
                     BaseResult<String> body = response.body();
                     if (body.getCode() == 200) {
-                        view.verifyCodeSuccess();
+                        view.dealAddAddressResult();
                     } else view.showError(body.getMsg());
                 }
             }
 
             @Override
             public void onFail(String message) {
-                if (isAttach)
+                if (isAttach) {
+                    view.hideProgress();
                     view.showError(message);
-
+                }
             }
         });
     }
 
     @Override
-    public void register(String phone, String password) {
-        model.register(phone, password, new MyCallBack<BaseResult<String>>() {
+    public void deleteAddress(Map<String, Object> params) {
+        model.deleteAddress(params, new MyCallBack<BaseResult<String>>() {
             @Override
             public void onSuc(Response<BaseResult<String>> response) {
                 if (isAttach) {
+                    view.hideProgress();
                     BaseResult<String> body = response.body();
                     if (body.getCode() == 200) {
-                        view.registerSuccess();
+                        view.dealDeleteAddressResult();
                     } else view.showError(body.getMsg());
                 }
             }
 
             @Override
             public void onFail(String message) {
-                if (isAttach)
+                if (isAttach) {
+                    view.hideProgress();
                     view.showError(message);
-
+                }
             }
         });
     }

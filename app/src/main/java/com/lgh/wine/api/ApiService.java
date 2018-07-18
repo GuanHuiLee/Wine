@@ -81,7 +81,147 @@ public interface ApiService {
     Call<BaseResult<String>> getProductList(@FieldMap Map<String, Object> params);
 
 
+    /**
+     * 商品详情
+     *
+     * @param params
+     * @return
+     */
     @POST("productDetail")
     @FormUrlEncoded
     Call<BaseResult<String>> getProductDetail(@FieldMap Map<String, Object> params);
+
+    /**
+     * 获取优惠劵
+     *
+     * @param params
+     * @return
+     */
+    @POST("couponList")
+    @FormUrlEncoded
+    Call<BaseResult<String>> getCouponList(@FieldMap Map<String, Object> params);
+
+
+    /**
+     * 用户领取优惠券
+     *
+     * @param params
+     * @return
+     */
+    @POST("add_user_coupon_info")
+    @FormUrlEncoded
+    Call<BaseResult<String>> addUserCoupon(@FieldMap Map<String, Object> params);
+
+    /**
+     * 添加到购物车
+     *
+     * @param params
+     * @return
+     */
+    @POST("addShoppingCartInfo")
+    @FormUrlEncoded
+    Call<BaseResult<String>> addShoppingCart(@FieldMap Map<String, Object> params);
+
+
+    /**
+     * 添加收藏
+     *
+     * @param params
+     * @return
+     */
+    @POST("addCollectProductInfo")
+    @FormUrlEncoded
+    Call<BaseResult<String>> addCollect(@FieldMap Map<String, Object> params);
+
+    /**
+     * 评论列表
+     *
+     * @param params
+     * @return
+     */
+    @POST("select_goods_comment_list")
+    @FormUrlEncoded
+    Call<BaseResult<String>> getCommentList(@FieldMap Map<String, Object> params);
+
+    /**
+     * 获取发现
+     *
+     * @param params
+     * @return
+     */
+    @POST("article_list")
+    @FormUrlEncoded
+    Call<BaseResult<String>> getArticleList(@FieldMap Map<String, Object> params);
+
+    /**
+     * 文章详情
+     *
+     * @param params
+     * @return
+     */
+    @POST("article_detail_by_article_id")
+    @FormUrlEncoded
+    Call<BaseResult<String>> getArticleDetail(@FieldMap Map<String, Object> params);
+
+    /**
+     * 点赞
+     *
+     * @param params
+     * @return
+     */
+    @POST("add_user_article")
+    @FormUrlEncoded
+    Call<BaseResult<String>> addUserArticle(@FieldMap Map<String, Object> params);
+
+
+    /**
+     * 查询购物车列表
+     *
+     * @param params
+     * @return
+     */
+    @POST("shoppingCartList")
+    @FormUrlEncoded
+    Call<BaseResult<String>> getShoppingCartList(@FieldMap Map<String, Object> params);
+
+    /**
+     * 获取地址列表
+     *
+     * @param params
+     * @return
+     */
+    @POST("address")
+    @FormUrlEncoded
+    Call<BaseResult<String>> getAddressList(@FieldMap Map<String, Object> params);
+
+    /**
+     * 获取默认地址
+     *
+     * @param params
+     * @return
+     */
+    @POST("select_default_address")
+    @FormUrlEncoded
+    Call<BaseResult<String>> getDefaultAddress(@FieldMap Map<String, Object> params);
+
+    /**
+     * 添加&修改地址
+     *
+     * @param params
+     * @return
+     */
+    @POST("addAddress")
+    @FormUrlEncoded
+    Call<BaseResult<String>> addAddress(@FieldMap Map<String, Object> params);
+
+
+    /**
+     * 删除地址
+     *
+     * @param params
+     * @return
+     */
+    @POST("deleteAddress")
+    @FormUrlEncoded
+    Call<BaseResult<String>> deleteAddress(@FieldMap Map<String, Object> params);
 }

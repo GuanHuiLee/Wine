@@ -24,15 +24,18 @@ public class HomePresenter extends HomeContract.Presenter {
         model.getHomeData(new MyCallBack<BaseResult<String>>() {
             @Override
             public void onSuc(Response<BaseResult<String>> response) {
-                BaseResult<String> body = response.body();
-                if (body.getCode() == 200) {
-                    HomeDataResult result = new Gson().fromJson(body.getData(), HomeDataResult.class);
-                    view.showHomeData(result);
-                } else view.showError(body.getMsg());
+                if (isAttach){
+                    BaseResult<String> body = response.body();
+                    if (body.getCode() == 200) {
+                        HomeDataResult result = new Gson().fromJson(body.getData(), HomeDataResult.class);
+                        view.showHomeData(result);
+                    } else view.showError(body.getMsg());
+                }
             }
 
             @Override
             public void onFail(String message) {
+                if (isAttach)
                 view.showError(message);
 
             }

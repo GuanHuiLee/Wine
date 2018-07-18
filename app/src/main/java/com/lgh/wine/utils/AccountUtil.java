@@ -24,4 +24,7 @@ public class AccountUtil {
         return account;
     }
 
+    public static String getUserId() {
+        return getAccount().getUserId();
+    }
 }

@@ -19,7 +19,7 @@ public class ProductBean implements Serializable {
     private String product_volume;//规格
 
     private String product_content;//净含量
-    private String if_collect;//是否收藏
+    private boolean if_collect;//是否收藏
     private String product_original;//原价
     private String update_time;
     private String product_id;//规格
@@ -120,11 +120,11 @@ public class ProductBean implements Serializable {
         this.product_content = product_content;
     }
 
-    public String getIf_collect() {
+    public boolean getIf_collect() {
         return if_collect;
     }
 
-    public void setIf_collect(String if_collect) {
+    public void setIf_collect(boolean if_collect) {
         this.if_collect = if_collect;
     }
 
