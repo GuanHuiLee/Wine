@@ -12,7 +12,7 @@ public class ProductBean implements Serializable {
     private String product_addr;//
     private String product_craft;//工艺
     private String product_save;//存储方式
-    private String product_type;
+    private int product_type;
     private String product_brand;
     private String product_degree;//度数
     private String prodcut_producer;//生产厂
@@ -72,11 +72,11 @@ public class ProductBean implements Serializable {
         this.product_save = product_save;
     }
 
-    public String getProduct_type() {
+    public int getProduct_type() {
         return product_type;
     }
 
-    public void setProduct_type(String product_type) {
+    public void setProduct_type(int product_type) {
         this.product_type = product_type;
     }
 

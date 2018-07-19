@@ -3,6 +3,7 @@ package com.lgh.wine.contract;
 import com.lgh.wine.base.BasePresenter;
 import com.lgh.wine.base.BaseView;
 import com.lgh.wine.beans.ProductBean;
+import com.lgh.wine.beans.ProductDetailBean;
 import com.lgh.wine.model.ProductModel;
 
 import java.util.List;
@@ -15,6 +16,8 @@ import java.util.Map;
 public interface ProductContract {
     public interface View extends BaseView {
         void showProductList(List<ProductBean> beans);
+
+        void showProductDetail(ProductDetailBean bean);
     }
 
     public abstract class Presenter extends BasePresenter<View, ProductModel> {
@@ -24,5 +27,7 @@ public interface ProductContract {
         }
 
         public abstract void getProductList(Map<String, Object> params);
+
+        public abstract void getProductDetail(Map<String, Object> params);
     }
 }

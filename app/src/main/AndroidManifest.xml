@@ -40,7 +40,8 @@
         <activity android:name=".ui.web.WebActivity" />
         <activity android:name=".ui.product.ProductListActivity" />
         <activity android:name=".ui.product.ProductDetailActivity" />
-        <activity android:name=".ui.coupon.CouponListActivity"></activity>
+        <activity android:name=".ui.coupon.CouponListActivity" />
+        <activity android:name=".ui.product.ProductParamsActivity"></activity>
     </application>
 
 </manifest>

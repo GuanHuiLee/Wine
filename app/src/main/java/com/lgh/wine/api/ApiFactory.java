@@ -1,5 +1,7 @@
 package com.lgh.wine.api;
 
+import com.lgh.wine.utils.Constant;
+
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;

@@ -6,6 +6,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.SpannableStringBuilder;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +15,7 @@ import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.lgh.wine.R;
-import com.lgh.wine.api.Constant;
+import com.lgh.wine.utils.Constant;
 import com.lgh.wine.base.BaseFragment;
 import com.lgh.wine.beans.BannerBean;
 import com.lgh.wine.beans.HomeDataResult;
@@ -81,11 +82,11 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
             public void onBannerItemClick(BGABanner banner, ImageView itemView, String model, int position) {
                 if (bannerBeans.size() > 0) {
                     BannerBean bannerBean = bannerBeans.get(position);
-//                    if (bannerBean.getType() == 1) { //广告，可以打开链接
-                    Intent intent = new Intent(mContext, WebActivity.class);
-                    intent.putExtra("url", bannerBean.getBanner_url());
-                    startActivity(intent);
-//                    }
+                    if (!TextUtils.isEmpty(bannerBean.getBanner_url())) { //广告，可以打开链接
+                        Intent intent = new Intent(mContext, WebActivity.class);
+                        intent.putExtra("url", bannerBean.getBanner_url());
+                        startActivity(intent);
+                    }
 
                 }
             }

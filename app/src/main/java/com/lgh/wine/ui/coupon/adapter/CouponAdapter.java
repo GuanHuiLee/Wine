@@ -3,15 +3,11 @@ package com.lgh.wine.ui.coupon.adapter;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.lgh.wine.R;
-import com.lgh.wine.api.Constant;
 import com.lgh.wine.beans.CouponBean;
-import com.lgh.wine.beans.WineAdBean;
-import com.lgh.wine.utils.GlideHelper;
 import com.lgh.wine.utils.TimeUtils;
 
 import java.util.List;

@@ -79,7 +79,10 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         for (BasePresenter basePresenter : presenterList) {
             basePresenter.onCreate();
         }
-        setContentView(getLayoutId());
+
+        if (getLayoutId() != 0)
+            setContentView(getLayoutId());
+
         initToolbar(toolbar);
         setSupportActionBar(toolbar);
     }

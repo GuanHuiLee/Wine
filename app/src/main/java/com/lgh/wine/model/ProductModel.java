@@ -23,4 +23,8 @@ public class ProductModel extends BaseModel {
     public void getProductList(Map<String, Object> params, MyCallBack callBack) {
         ApiFactory.getService().getProductList(params).enqueue(callBack);
     }
+
+    public void getProductDetail(Map<String, Object> params, MyCallBack callBack) {
+        ApiFactory.getService().getProductDetail(params).enqueue(callBack);
+    }
 }

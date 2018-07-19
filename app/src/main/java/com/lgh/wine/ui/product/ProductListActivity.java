@@ -1,25 +1,20 @@
 package com.lgh.wine.ui.product;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.FrameLayout;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.lgh.wine.R;
-import com.lgh.wine.api.Constant;
+import com.lgh.wine.utils.Constant;
 import com.lgh.wine.base.BaseActivity;
 import com.lgh.wine.beans.ProductBean;
+import com.lgh.wine.beans.ProductDetailBean;
 import com.lgh.wine.contract.ProductContract;
 import com.lgh.wine.model.ProductModel;
 import com.lgh.wine.presenter.ProductPresenter;
@@ -27,16 +22,16 @@ import com.lgh.wine.ui.home.adapter.ProductAdapter;
 import com.lgh.wine.utils.BaseRecyclerAdapter;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnCheckedChanged;
+
+import static com.lgh.wine.utils.Constant.START_NUM;
 
 public class ProductListActivity extends BaseActivity implements OnRefreshLoadMoreListener, ProductContract.View {
     @BindView(R.id.recyclerView)
@@ -61,7 +56,7 @@ public class ProductListActivity extends BaseActivity implements OnRefreshLoadMo
     private static final String TAG_SALE = "sale_orderby";//销量
     private static final String TAG_DISCUSS = "comment_orderby";//评论
 
-    private static final String START_NUM = "startnum";
+
     private static final String TYPE = "product_type";
 
     private Map<String, Object> params;
@@ -170,6 +165,11 @@ public class ProductListActivity extends BaseActivity implements OnRefreshLoadMo
             ++pageNum;
         }
 //        refreshLayout.setEnableLoadMore(beans.getTotal() > mProductAdapter.getItemCount());
+    }
+
+    @Override
+    public void showProductDetail(ProductDetailBean bean) {
+
     }
 
 

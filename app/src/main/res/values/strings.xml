@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name_1">贵酒仁品</string>
+    <string name="betting_ulv_holder">请输入小于%1$d的整数</string>
 </resources>

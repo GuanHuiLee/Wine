@@ -1,14 +1,12 @@
 package com.lgh.wine.ui.home.adapter;
 
 import android.support.annotation.Nullable;
-import android.view.View;
 import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.lgh.wine.R;
-import com.lgh.wine.api.Constant;
+import com.lgh.wine.utils.Constant;
 import com.lgh.wine.beans.WineAdBean;
 import com.lgh.wine.utils.GlideHelper;
 

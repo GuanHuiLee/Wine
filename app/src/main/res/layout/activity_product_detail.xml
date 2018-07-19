@@ -9,9 +9,7 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp">
-
-        <include layout="@layout/toolbar" />
+        android:layout_height="250dp">
 
 
         <cn.bingoogolapple.bgabanner.BGABanner
@@ -28,6 +26,8 @@
             app:banner_pointContainerBackground="@android:color/transparent"
             app:banner_pointTopBottomMargin="10dp"
             app:banner_transitionEffect="defaultEffect" />
+
+        <include layout="@layout/toolbar" />
     </FrameLayout>
 
     <android.support.v4.widget.NestedScrollView
@@ -268,56 +268,5 @@
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/tv_service"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/dp_10"
-            android:layout_marginRight="@dimen/dp_10"
-            android:drawablePadding="5dp"
-            android:drawableTop="@mipmap/ic_customer"
-            android:gravity="center"
-            android:text="客服"
-            android:textColor="@color/black" />
-
-        <TextView
-            android:id="@+id/tv_car"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/dp_10"
-            android:layout_marginRight="@dimen/dp_10"
-            android:drawablePadding="5dp"
-            android:drawableTop="@mipmap/ic_shopping_cart"
-            android:gravity="center"
-            android:text="购物车"
-            android:textColor="@color/black" />
-
-        <TextView
-            android:id="@+id/tv_add_car"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@color/color_product_car"
-            android:gravity="center"
-            android:text="加入购物车"
-            android:textColor="@color/color_white"
-            android:textSize="15sp" />
-
-        <TextView
-            android:id="@+id/tv_buy"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@color/color_product_buy"
-            android:gravity="center"
-            android:text="立即购买"
-            android:textColor="@color/color_white"
-            android:textSize="15sp" />
-    </LinearLayout>
+    <include layout="@layout/include_buy" />
 </LinearLayout>
