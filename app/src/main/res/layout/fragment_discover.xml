@@ -5,8 +5,14 @@
     android:orientation="vertical">
 
     <TextView
-        android:gravity="center"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="发现" />
+        android:layout_height="56dp"
+        android:gravity="center"
+        android:text="发现"
+        android:textColor="@color/black"
+        android:textSize="17sp" />
+
+    <View style="@style/comDivider" />
+
+    <include layout="@layout/include_reflush_layout" />
 </LinearLayout>

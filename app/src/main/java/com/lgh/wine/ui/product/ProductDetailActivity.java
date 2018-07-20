@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.lgh.wine.R;
+import com.lgh.wine.ui.shopping.ShoppingCartActivity;
 import com.lgh.wine.utils.Constant;
 import com.lgh.wine.base.BaseActivity;
 import com.lgh.wine.beans.ProductBean;
@@ -116,7 +117,8 @@ public class ProductDetailActivity extends BaseActivity implements ShoppingCartC
     }
 
     @OnClick({R.id.ll_discuss, R.id.ll_img_text, R.id.ll_params,
-            R.id.tv_coupon, R.id.tv_add_car, R.id.tv_collect, R.id.tv_buy})
+            R.id.tv_coupon, R.id.tv_add_car, R.id.tv_collect, R.id.tv_buy,
+            R.id.tv_car})
     public void clickView(View view) {
         switch (view.getId()) {
             case R.id.ll_discuss:
@@ -145,6 +147,9 @@ public class ProductDetailActivity extends BaseActivity implements ShoppingCartC
                     type = TYPE_BUY;
                     showDialog();
                 }
+                break;
+            case R.id.tv_car:
+                startActivity(new Intent(mContext, ShoppingCartActivity.class));
                 break;
             default:
                 break;
@@ -288,7 +293,7 @@ public class ProductDetailActivity extends BaseActivity implements ShoppingCartC
     }
 
     @Override
-    public void dealShoppingCartResult() {
+    public void dealAddShoppingCartResult() {
         showError("添加成功");
         if (type == TYPE_BUY) {
             buy();
@@ -301,6 +306,11 @@ public class ProductDetailActivity extends BaseActivity implements ShoppingCartC
 
     @Override
     public void showShoppingCart(List<ShoppingCartBean> list) {
+
+    }
+
+    @Override
+    public void dealDeleteShoppingCartResult() {
 
     }
 

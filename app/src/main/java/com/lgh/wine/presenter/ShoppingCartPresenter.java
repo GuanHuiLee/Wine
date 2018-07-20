@@ -4,11 +4,8 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.lgh.wine.MyCallBack;
 import com.lgh.wine.beans.BaseResult;
-import com.lgh.wine.beans.CouponBean;
 import com.lgh.wine.beans.ShoppingCartBean;
-import com.lgh.wine.contract.CouponContract;
 import com.lgh.wine.contract.ShoppingCartContract;
-import com.lgh.wine.model.CouponModel;
 import com.lgh.wine.model.ShoppingCartModel;
 
 import java.util.List;
@@ -35,7 +32,7 @@ public class ShoppingCartPresenter extends ShoppingCartContract.Presenter {
                     view.hideProgress();
                     BaseResult<String> body = response.body();
                     if (body.getCode() == 200) {
-                        view.dealShoppingCartResult();
+                        view.dealAddShoppingCartResult();
                     } else view.showError(body.getMsg());
                 }
             }
@@ -62,6 +59,30 @@ public class ShoppingCartPresenter extends ShoppingCartContract.Presenter {
                         List<ShoppingCartBean> list = new Gson().fromJson(body.getData(), new TypeToken<List<ShoppingCartBean>>() {
                         }.getType());
                         view.showShoppingCart(list);
+                    } else view.showError(body.getMsg());
+                }
+            }
+
+            @Override
+            public void onFail(String message) {
+                if (isAttach) {
+                    view.hideProgress();
+                    view.showError(message);
+                }
+            }
+        });
+    }
+
+    @Override
+    public void deleteShoppingCartInfo(Map<String, Object> params) {
+        model.deleteShoppingCartInfo(params, new MyCallBack<BaseResult<String>>() {
+            @Override
+            public void onSuc(Response<BaseResult<String>> response) {
+                if (isAttach) {
+                    view.hideProgress();
+                    BaseResult<String> body = response.body();
+                    if (body.getCode() == 200) {
+                        view.dealDeleteShoppingCartResult();
                     } else view.showError(body.getMsg());
                 }
             }

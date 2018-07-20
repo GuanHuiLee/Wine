@@ -41,7 +41,9 @@
         <activity android:name=".ui.product.ProductListActivity" />
         <activity android:name=".ui.product.ProductDetailActivity" />
         <activity android:name=".ui.coupon.CouponListActivity" />
-        <activity android:name=".ui.product.ProductParamsActivity"></activity>
+        <activity android:name=".ui.product.ProductParamsActivity" />
+        <activity android:name=".ui.shopping.ShoppingCartActivity" />
+        <activity android:name=".ui.discover.ArticleDetailActivity"></activity>
     </application>
 
 </manifest>

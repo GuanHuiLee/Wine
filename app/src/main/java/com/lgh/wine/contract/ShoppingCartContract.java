@@ -17,9 +17,11 @@ import java.util.Map;
 public interface ShoppingCartContract {
     public interface View extends BaseView {
 
-        void dealShoppingCartResult();
+        void dealAddShoppingCartResult();
 
         void showShoppingCart(List<ShoppingCartBean> list);
+
+        void dealDeleteShoppingCartResult();
     }
 
     public abstract class Presenter extends BasePresenter<View, ShoppingCartModel> {
@@ -32,5 +34,7 @@ public interface ShoppingCartContract {
         public abstract void addShoppingCart(Map<String, Object> params);
 
         public abstract void getShoppingCartList(Map<String, Object> params);
+
+        public abstract void deleteShoppingCartInfo(Map<String, Object> params);
     }
 }

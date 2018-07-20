@@ -72,4 +72,5 @@ public class ProductParamsActivity extends BaseActivity implements ProductContra
         if (bean != null)
             binding.setProductDetailBean(bean);
     }
+
 }

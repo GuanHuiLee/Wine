@@ -224,4 +224,14 @@ public interface ApiService {
     @POST("deleteAddress")
     @FormUrlEncoded
     Call<BaseResult<String>> deleteAddress(@FieldMap Map<String, Object> params);
+
+    /**
+     * 删除购物车商品
+     *
+     * @param params
+     * @return
+     */
+    @POST("deleteShoppingCartInfo")
+    @FormUrlEncoded
+    Call<BaseResult<String>> deleteShoppingCartInfo(@FieldMap Map<String, Object> params);
 }

@@ -27,4 +27,8 @@ public class ShoppingCartModel extends BaseModel {
     public void getShoppingCartList(Map<String, Object> params, MyCallBack callBack) {
         ApiFactory.getService().getShoppingCartList(params).enqueue(callBack);
     }
+
+    public void deleteShoppingCartInfo(Map<String, Object> params, MyCallBack callBack) {
+        ApiFactory.getService().deleteShoppingCartInfo(params).enqueue(callBack);
+    }
 }

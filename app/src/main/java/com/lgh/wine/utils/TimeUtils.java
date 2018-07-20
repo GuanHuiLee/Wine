@@ -24,6 +24,11 @@ public class TimeUtils {
         SimpleDateFormat format = new SimpleDateFormat("yyyy.MM.dd HH:mm");
         return format.format(date);
     }
+    public static String changeMDHM(Long l) {
+        Date date = new Date(l);
+        SimpleDateFormat format = new SimpleDateFormat("MM-dd HH:mm");
+        return format.format(date);
+    }
 
     public static String changeToHM(Long l) {
         Date date = new Date(l);
