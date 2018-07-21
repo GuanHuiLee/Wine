@@ -51,7 +51,7 @@ public class ArticleListAdapter extends BaseRecyclerAdapter<ArticleBean, Article
 
         ArticleBean item = getItem(position);
 
-        GlideHelper.loadImage(context, holder.iv_pic, item.getArticle_icon());
+        GlideHelper.loadRadiusImage(context, holder.iv_pic, item.getArticle_icon(), 10, R.mipmap.iv_error);
         holder.tv_title.setText(item.getArticle_title());
         holder.tv_content.setText(item.getArticle_abstract());
         holder.tv_count.setText(item.getArticle_reading());

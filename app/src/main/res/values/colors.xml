@@ -14,4 +14,6 @@
     <color name="color_red">#ffcc0000</color>
     <color name="color_product_car">#F04830</color>
     <color name="color_product_buy">#D81800</color>
+    <color name="edit">#A8A8F0</color>
+
 </resources>

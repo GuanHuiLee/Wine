@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.personal.SettingActivity">
+
+    <include layout="@layout/toolbar" />
+
+    <View style="@style/comDivider" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dp_10">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="29dp"
+            android:gravity="center_vertical"
+            android:text="物流消息"
+            android:textSize="15sp" />
+
+        <vn.luongvo.widget.iosswitchview.SwitchView
+            android:id="@+id/switch_view"
+            android:layout_width="48dp"
+            android:layout_height="29dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            app:color_off="#e5e5e5"
+            app:color_on="#6fd865" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dp_10">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="29dp"
+            android:gravity="center_vertical"
+            android:text="系统消息"
+            android:textSize="15sp" />
+
+        <vn.luongvo.widget.iosswitchview.SwitchView
+            android:id="@+id/switch_view_2"
+            android:layout_width="48dp"
+            android:layout_height="29dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            app:color_off="#e5e5e5"
+            app:color_on="#6fd865" />
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10"
+        android:layout_marginTop="20dp"
+        android:drawableEnd="@mipmap/ic_right_arrow"
+        android:text="微信分享"
+        android:textSize="15sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10"
+        android:layout_marginTop="20dp"
+        android:drawableEnd="@mipmap/ic_right_arrow"
+        android:text="微博分享"
+        android:textSize="15sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10"
+        android:layout_marginTop="20dp"
+        android:drawableEnd="@mipmap/ic_right_arrow"
+        android:text="QQ分享"
+        android:textSize="15sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10"
+        android:layout_marginTop="20dp"
+        android:drawableEnd="@mipmap/ic_right_arrow"
+        android:text="软件评分"
+        android:textSize="15sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10"
+        android:layout_marginTop="20dp"
+        android:drawableEnd="@mipmap/ic_right_arrow"
+        android:text="清除图片缓存"
+        android:textSize="15sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10"
+        android:layout_marginTop="20dp"
+        android:drawableEnd="@mipmap/ic_right_arrow"
+        android:text="关于我们"
+        android:textSize="15sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginTop="30dp"
+        android:drawablePadding="20dp"
+        android:drawableStart="@mipmap/ic_quit"
+        android:gravity="center"
+        android:text="退出登录"
+        android:textSize="15sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:gravity="center"
+        android:text="version:1.0" />
+</LinearLayout>

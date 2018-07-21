@@ -1,4 +1,15 @@
 <resources>
     <string name="app_name_1">贵酒仁品</string>
     <string name="betting_ulv_holder">请输入小于%1$d的整数</string>
+    <string name="error_gif">x or y bound size should be at least %1$dpx and file size should be no more than %2$sM</string>
+
+    <string name="album_name_all">全部照片</string>
+    <string name="button_preview">预览</string>
+    <string name="button_apply_default">完成</string>
+    <string name="button_apply">完成(%1$d)</string>
+    <string name="button_back">返回</string>
+    <string name="photo_grid_capture">拍一张</string>
+    <string name="empty_text">没有图片</string>
+
+    <string name="crop_image_menu_crop">确定</string>
 </resources>
