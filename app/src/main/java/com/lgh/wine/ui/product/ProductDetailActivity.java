@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.lgh.wine.R;
+import com.lgh.wine.beans.SpoorBean;
 import com.lgh.wine.ui.shopping.ShoppingCartActivity;
 import com.lgh.wine.utils.Constant;
 import com.lgh.wine.base.BaseActivity;
@@ -332,5 +333,15 @@ public class ProductDetailActivity extends BaseActivity implements ShoppingCartC
             productDetailBean = bean;
             initDialog();
         }
+    }
+
+    @Override
+    public void showSpoorList(List<SpoorBean> beans) {
+
+    }
+
+    @Override
+    public void dealDeleteSpoorListResult() {
+
     }
 }

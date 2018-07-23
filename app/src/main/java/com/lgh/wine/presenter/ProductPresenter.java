@@ -6,6 +6,7 @@ import com.lgh.wine.MyCallBack;
 import com.lgh.wine.beans.BaseResult;
 import com.lgh.wine.beans.ProductBean;
 import com.lgh.wine.beans.ProductDetailBean;
+import com.lgh.wine.beans.SpoorBean;
 import com.lgh.wine.contract.ProductContract;
 import com.lgh.wine.model.ProductModel;
 
@@ -30,7 +31,6 @@ public class ProductPresenter extends ProductContract.Presenter {
             @Override
             public void onSuc(Response<BaseResult<String>> response) {
                 if (isAttach) {
-                    view.hideProgress();
                     BaseResult<String> body = response.body();
                     if (body.getCode() == 200) {
                         String data = body.getData();
@@ -38,6 +38,58 @@ public class ProductPresenter extends ProductContract.Presenter {
                         }.getType());
                         view.showProductList(list);
                     } else view.showError(body.getMsg());
+                    view.hideProgress();
+                }
+            }
+
+            @Override
+            public void onFail(String message) {
+                if (isAttach) {
+                    view.showError(message);
+                    view.hideProgress();
+                }
+            }
+        });
+    }
+
+    @Override
+    public void getProductDetail(Map<String, Object> params) {
+        view.showProgress("加载中");
+        model.getProductDetail(params, new MyCallBack<BaseResult<String>>() {
+            @Override
+            public void onSuc(Response<BaseResult<String>> response) {
+                if (isAttach) {
+                    BaseResult<String> body = response.body();
+                    if (body.getCode() == 200) {
+                        String data = body.getData();
+                        ProductDetailBean bean = new Gson().fromJson(data, ProductDetailBean.class);
+                        view.showProductDetail(bean);
+                    } else view.showError(body.getMsg());
+                    view.hideProgress();
+                }
+            }
+
+            @Override
+            public void onFail(String message) {
+                if (isAttach) {
+                    view.showError(message);
+                    view.hideProgress();
+                }
+            }
+        });
+    }
+
+    @Override
+    public void deleteSpoorList(Map<String, Object> params) {
+        model.deleteSpoorList(params, new MyCallBack<BaseResult<String>>() {
+            @Override
+            public void onSuc(Response<BaseResult<String>> response) {
+                if (isAttach) {
+                    BaseResult<String> body = response.body();
+                    if (body.getCode() == 200) {
+                        view.dealDeleteSpoorListResult();
+                    } else view.showError(body.getMsg());
+                    view.hideProgress();
                 }
             }
 
@@ -52,27 +104,27 @@ public class ProductPresenter extends ProductContract.Presenter {
     }
 
     @Override
-    public void getProductDetail(Map<String, Object> params) {
-        view.showProgress("加载中");
-        model.getProductDetail(params, new MyCallBack<BaseResult<String>>() {
+    public void getSpoorList(Map<String, Object> params) {
+        model.getSpoorList(params, new MyCallBack<BaseResult<String>>() {
             @Override
             public void onSuc(Response<BaseResult<String>> response) {
                 if (isAttach) {
-                    view.hideProgress();
                     BaseResult<String> body = response.body();
                     if (body.getCode() == 200) {
                         String data = body.getData();
-                        ProductDetailBean bean = new Gson().fromJson(data, ProductDetailBean.class);
-                        view.showProductDetail(bean);
+                        List<SpoorBean> list = new Gson().fromJson(data, new TypeToken<List<SpoorBean>>() {
+                        }.getType());
+                        view.showSpoorList(list);
                     } else view.showError(body.getMsg());
+                    view.hideProgress();
                 }
             }
 
             @Override
             public void onFail(String message) {
                 if (isAttach) {
-                    view.hideProgress();
                     view.showError(message);
+                    view.hideProgress();
                 }
             }
         });

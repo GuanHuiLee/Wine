@@ -11,6 +11,7 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.lgh.wine.R;
+import com.lgh.wine.beans.SpoorBean;
 import com.lgh.wine.utils.Constant;
 import com.lgh.wine.base.BaseActivity;
 import com.lgh.wine.beans.ProductBean;
@@ -18,7 +19,7 @@ import com.lgh.wine.beans.ProductDetailBean;
 import com.lgh.wine.contract.ProductContract;
 import com.lgh.wine.model.ProductModel;
 import com.lgh.wine.presenter.ProductPresenter;
-import com.lgh.wine.ui.home.adapter.ProductAdapter;
+import com.lgh.wine.ui.product.adapter.ProductAdapter;
 import com.lgh.wine.utils.BaseRecyclerAdapter;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -141,6 +142,10 @@ public class ProductListActivity extends BaseActivity implements OnRefreshLoadMo
     public void onLoadMore(RefreshLayout refreshLayout) {
         loadType = Constant.LOAD_TYPE.LOAD_MORE;
         pageNum += 1;
+        getData();
+    }
+
+    private void getData() {
         params.put(START_NUM, pageNum * size);
         productPresenter.getProductList(params);
     }
@@ -149,7 +154,7 @@ public class ProductListActivity extends BaseActivity implements OnRefreshLoadMo
     public void onRefresh(RefreshLayout refreshLayout) {
         loadType = Constant.LOAD_TYPE.REFRESH;
         pageNum = 0;
-        productPresenter.getProductList(params);
+        getData();
     }
 
     @Override
@@ -169,6 +174,16 @@ public class ProductListActivity extends BaseActivity implements OnRefreshLoadMo
 
     @Override
     public void showProductDetail(ProductDetailBean bean) {
+
+    }
+
+    @Override
+    public void showSpoorList(List<SpoorBean> beans) {
+
+    }
+
+    @Override
+    public void dealDeleteSpoorListResult() {
 
     }
 

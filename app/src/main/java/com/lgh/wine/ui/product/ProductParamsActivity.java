@@ -11,6 +11,7 @@ import com.lgh.wine.R;
 import com.lgh.wine.base.BaseActivity;
 import com.lgh.wine.beans.ProductBean;
 import com.lgh.wine.beans.ProductDetailBean;
+import com.lgh.wine.beans.SpoorBean;
 import com.lgh.wine.contract.ProductContract;
 import com.lgh.wine.databinding.ActivityProductParamsBinding;
 import com.lgh.wine.model.ProductModel;
@@ -71,6 +72,16 @@ public class ProductParamsActivity extends BaseActivity implements ProductContra
     public void showProductDetail(ProductDetailBean bean) {
         if (bean != null)
             binding.setProductDetailBean(bean);
+    }
+
+    @Override
+    public void showSpoorList(List<SpoorBean> beans) {
+
+    }
+
+    @Override
+    public void dealDeleteSpoorListResult() {
+
     }
 
 }

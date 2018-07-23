@@ -62,7 +62,10 @@
                 android:resource="@xml/filepaths" />
         </provider>
 
-        <activity android:name=".ui.personal.SettingActivity"></activity>
+        <activity android:name=".ui.personal.SettingActivity" />
+        <activity android:name=".ui.personal.AboutActivity" />
+        <activity android:name=".ui.personal.FeedbackActivity" />
+        <activity android:name=".ui.product.SpoorListActivity"></activity>
     </application>
 
 </manifest>

@@ -33,21 +33,21 @@ public class AddressPresenter extends AddressContract.Presenter {
             @Override
             public void onSuc(Response<BaseResult<String>> response) {
                 if (isAttach) {
-                    view.hideProgress();
                     BaseResult<String> body = response.body();
                     if (body.getCode() == 200) {
                         List<AddressBean> list = new Gson().fromJson(body.getData(), new TypeToken<List<AddressBean>>() {
                         }.getType());
                         view.showAddressList(list);
                     } else view.showError(body.getMsg());
+                    view.hideProgress();
                 }
             }
 
             @Override
             public void onFail(String message) {
                 if (isAttach) {
-                    view.hideProgress();
                     view.showError(message);
+                    view.hideProgress();
                 }
             }
         });
@@ -59,20 +59,20 @@ public class AddressPresenter extends AddressContract.Presenter {
             @Override
             public void onSuc(Response<BaseResult<String>> response) {
                 if (isAttach) {
-                    view.hideProgress();
                     BaseResult<String> body = response.body();
                     if (body.getCode() == 200) {
                         AddressBean bean = new Gson().fromJson(body.getData(), AddressBean.class);
                         view.showDefaultAddress(bean);
                     } else view.showError(body.getMsg());
+                    view.hideProgress();
                 }
             }
 
             @Override
             public void onFail(String message) {
                 if (isAttach) {
-                    view.hideProgress();
                     view.showError(message);
+                    view.hideProgress();
                 }
             }
         });
@@ -84,19 +84,19 @@ public class AddressPresenter extends AddressContract.Presenter {
             @Override
             public void onSuc(Response<BaseResult<String>> response) {
                 if (isAttach) {
-                    view.hideProgress();
                     BaseResult<String> body = response.body();
                     if (body.getCode() == 200) {
                         view.dealAddAddressResult();
                     } else view.showError(body.getMsg());
+                    view.hideProgress();
                 }
             }
 
             @Override
             public void onFail(String message) {
                 if (isAttach) {
-                    view.hideProgress();
                     view.showError(message);
+                    view.hideProgress();
                 }
             }
         });
@@ -108,19 +108,19 @@ public class AddressPresenter extends AddressContract.Presenter {
             @Override
             public void onSuc(Response<BaseResult<String>> response) {
                 if (isAttach) {
-                    view.hideProgress();
                     BaseResult<String> body = response.body();
                     if (body.getCode() == 200) {
                         view.dealDeleteAddressResult();
                     } else view.showError(body.getMsg());
+                    view.hideProgress();
                 }
             }
 
             @Override
             public void onFail(String message) {
                 if (isAttach) {
-                    view.hideProgress();
                     view.showError(message);
+                    view.hideProgress();
                 }
             }
         });

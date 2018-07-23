@@ -29,13 +29,13 @@ public class AccountPresenter extends AccountContract.Presenter {
             @Override
             public void onSuc(Response<BaseResult<String>> response) {
                 if (isAttach) {
-                    view.hideProgress();
                     BaseResult<String> body = response.body();
                     if (body.getCode() == 200) {
                         String data = body.getData();
                         Account account = new Gson().fromJson(data, Account.class);
                         view.showLoginInfo(account);
                     } else view.showError(body.getMsg());
+                    view.hideProgress();
                 }
             }
 

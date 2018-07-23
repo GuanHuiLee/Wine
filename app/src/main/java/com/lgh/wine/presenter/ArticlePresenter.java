@@ -31,21 +31,21 @@ public class ArticlePresenter extends ArticleContract.Presenter {
             @Override
             public void onSuc(Response<BaseResult<String>> response) {
                 if (isAttach) {
-                    view.hideProgress();
                     BaseResult<String> body = response.body();
                     if (body.getCode() == 200) {
                         List<ArticleBean> list = new Gson().fromJson(body.getData(), new TypeToken<List<ArticleBean>>() {
                         }.getType());
                         view.showArticleList(list);
                     } else view.showError(body.getMsg());
+                    view.hideProgress();
                 }
             }
 
             @Override
             public void onFail(String message) {
                 if (isAttach) {
-                    view.hideProgress();
                     view.showError(message);
+                    view.hideProgress();
                 }
             }
         });
@@ -57,20 +57,20 @@ public class ArticlePresenter extends ArticleContract.Presenter {
             @Override
             public void onSuc(Response<BaseResult<String>> response) {
                 if (isAttach) {
-                    view.hideProgress();
                     BaseResult<String> body = response.body();
                     if (body.getCode() == 200) {
                         ArticleBean bean = new Gson().fromJson(body.getData(), ArticleBean.class);
                         view.showArticleDetail(bean);
                     } else view.showError(body.getMsg());
+                    view.hideProgress();
                 }
             }
 
             @Override
             public void onFail(String message) {
                 if (isAttach) {
-                    view.hideProgress();
                     view.showError(message);
+                    view.hideProgress();
                 }
             }
         });
@@ -82,19 +82,19 @@ public class ArticlePresenter extends ArticleContract.Presenter {
             @Override
             public void onSuc(Response<BaseResult<String>> response) {
                 if (isAttach) {
-                    view.hideProgress();
                     BaseResult<String> body = response.body();
                     if (body.getCode() == 200) {
                         view.dealAddUserResult();
                     } else view.showError(body.getMsg());
+                    view.hideProgress();
                 }
             }
 
             @Override
             public void onFail(String message) {
                 if (isAttach) {
-                    view.hideProgress();
                     view.showError(message);
+                    view.hideProgress();
                 }
             }
         });

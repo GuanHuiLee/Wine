@@ -16,6 +16,7 @@ import com.lgh.wine.MainActivity;
 import com.lgh.wine.R;
 import com.lgh.wine.base.BaseFragment;
 import com.lgh.wine.ui.home.HomeFragment;
+import com.lgh.wine.ui.product.SpoorListActivity;
 import com.lgh.wine.utils.GifSizeFilter;
 import com.lgh.wine.utils.GlideHelper;
 import com.lgh.wine.utils.MyGlideEngine;
@@ -64,11 +65,16 @@ public class PersonalFragment extends BaseFragment {
 
     }
 
-    @OnClick({R.id.iv_icon})
+    @OnClick({R.id.iv_icon, R.id.tv_spoor})
     public void clickView(View view) {
         switch (view.getId()) {
             case R.id.iv_icon:
                 selectPic();
+                break;
+            case R.id.tv_spoor:
+                startActivity(new Intent(mContext, SpoorListActivity.class));
+                break;
+            default:
                 break;
         }
     }
@@ -132,11 +138,14 @@ public class PersonalFragment extends BaseFragment {
         }
     }
 
-    @OnClick({R.id.iv_setting})
+    @OnClick({R.id.iv_setting, R.id.tv_feedback})
     public void clickSetting(View view) {
         switch (view.getId()) {
             case R.id.iv_setting:
                 startActivity(new Intent(mContext, SettingActivity.class));
+                break;
+            case R.id.tv_feedback:
+                startActivity(new Intent(mContext, FeedbackActivity.class));
                 break;
             default:
                 break;

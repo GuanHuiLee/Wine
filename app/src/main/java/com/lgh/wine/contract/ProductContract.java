@@ -4,6 +4,7 @@ import com.lgh.wine.base.BasePresenter;
 import com.lgh.wine.base.BaseView;
 import com.lgh.wine.beans.ProductBean;
 import com.lgh.wine.beans.ProductDetailBean;
+import com.lgh.wine.beans.SpoorBean;
 import com.lgh.wine.model.ProductModel;
 
 import java.util.List;
@@ -18,6 +19,10 @@ public interface ProductContract {
         void showProductList(List<ProductBean> beans);
 
         void showProductDetail(ProductDetailBean bean);
+
+        void showSpoorList(List<SpoorBean> beans);
+
+        void dealDeleteSpoorListResult();
     }
 
     public abstract class Presenter extends BasePresenter<View, ProductModel> {
@@ -29,5 +34,9 @@ public interface ProductContract {
         public abstract void getProductList(Map<String, Object> params);
 
         public abstract void getProductDetail(Map<String, Object> params);
+
+        public abstract void deleteSpoorList(Map<String, Object> params);
+
+        public abstract void getSpoorList(Map<String, Object> params);
     }
 }

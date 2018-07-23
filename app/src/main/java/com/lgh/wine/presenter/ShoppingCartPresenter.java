@@ -29,19 +29,19 @@ public class ShoppingCartPresenter extends ShoppingCartContract.Presenter {
             @Override
             public void onSuc(Response<BaseResult<String>> response) {
                 if (isAttach) {
-                    view.hideProgress();
                     BaseResult<String> body = response.body();
                     if (body.getCode() == 200) {
                         view.dealAddShoppingCartResult();
                     } else view.showError(body.getMsg());
+                    view.hideProgress();
                 }
             }
 
             @Override
             public void onFail(String message) {
                 if (isAttach) {
-                    view.hideProgress();
                     view.showError(message);
+                    view.hideProgress();
                 }
             }
         });
@@ -53,21 +53,21 @@ public class ShoppingCartPresenter extends ShoppingCartContract.Presenter {
             @Override
             public void onSuc(Response<BaseResult<String>> response) {
                 if (isAttach) {
-                    view.hideProgress();
                     BaseResult<String> body = response.body();
                     if (body.getCode() == 200) {
                         List<ShoppingCartBean> list = new Gson().fromJson(body.getData(), new TypeToken<List<ShoppingCartBean>>() {
                         }.getType());
                         view.showShoppingCart(list);
                     } else view.showError(body.getMsg());
+                    view.hideProgress();
                 }
             }
 
             @Override
             public void onFail(String message) {
                 if (isAttach) {
-                    view.hideProgress();
                     view.showError(message);
+                    view.hideProgress();
                 }
             }
         });
@@ -79,19 +79,19 @@ public class ShoppingCartPresenter extends ShoppingCartContract.Presenter {
             @Override
             public void onSuc(Response<BaseResult<String>> response) {
                 if (isAttach) {
-                    view.hideProgress();
                     BaseResult<String> body = response.body();
                     if (body.getCode() == 200) {
                         view.dealDeleteShoppingCartResult();
                     } else view.showError(body.getMsg());
+                    view.hideProgress();
                 }
             }
 
             @Override
             public void onFail(String message) {
                 if (isAttach) {
-                    view.hideProgress();
                     view.showError(message);
+                    view.hideProgress();
                 }
             }
         });

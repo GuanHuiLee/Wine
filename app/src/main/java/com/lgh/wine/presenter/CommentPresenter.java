@@ -31,21 +31,21 @@ public class CommentPresenter extends CommentContract.Presenter {
             @Override
             public void onSuc(Response<BaseResult<String>> response) {
                 if (isAttach) {
-                    view.hideProgress();
                     BaseResult<String> body = response.body();
                     if (body.getCode() == 200) {
                         List<CommentBean> list = new Gson().fromJson(body.getData(), new TypeToken<List<CommentBean>>() {
                         }.getType());
                         view.showCommentList(list);
                     } else view.showError(body.getMsg());
+                    view.hideProgress();
                 }
             }
 
             @Override
             public void onFail(String message) {
                 if (isAttach) {
-                    view.hideProgress();
                     view.showError(message);
+                    view.hideProgress();
                 }
             }
         });

@@ -37,5 +37,14 @@ public class SettingActivity extends BaseActivity {
         tv_title.setText("设置");
     }
 
-
+    @OnClick({R.id.tv_about})
+    public void clickView(View view) {
+        switch (view.getId()) {
+            case R.id.tv_about:
+                startActivity(new Intent(mContext, AboutActivity.class));
+                break;
+            default:
+                break;
+        }
+    }
 }
