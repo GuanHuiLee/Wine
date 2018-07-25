@@ -6,6 +6,8 @@ import com.lgh.wine.beans.Account;
 import com.lgh.wine.beans.LoginInput;
 import com.lgh.wine.model.AccountModel;
 
+import java.util.Map;
+
 /**
  * Created by niujingtong on 2018/7/13.
  * 模块：
@@ -24,6 +26,8 @@ public interface AccountContract {
 
         void registerSuccess();
 
+        void dealAddFeedbackResult();
+
     }
 
     public abstract class Presenter extends BasePresenter<View, AccountModel> {
@@ -40,5 +44,7 @@ public interface AccountContract {
         public abstract void verifyCode(String phone, String sms_code);
 
         public abstract void register(String phone, String password);
+
+        public abstract void addFeedback(Map<String,Object> params);
     }
 }

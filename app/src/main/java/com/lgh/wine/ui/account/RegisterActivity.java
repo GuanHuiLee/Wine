@@ -115,6 +115,11 @@ public class RegisterActivity extends BaseActivity implements AccountContract.Vi
 
     }
 
+    @Override
+    public void dealAddFeedbackResult() {
+
+    }
+
     private void showTime() {
         final Timer timer = new Timer();
         timer.schedule(new TimerTask() {

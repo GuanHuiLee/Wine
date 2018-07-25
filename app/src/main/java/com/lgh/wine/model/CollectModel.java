@@ -23,4 +23,12 @@ public class CollectModel extends BaseModel {
         ApiFactory.getService().addCollect(params).enqueue(callBack);
     }
 
+    public void getCollect(Map<String, Object> params, MyCallBack callBack) {
+        ApiFactory.getService().getCollect(params).enqueue(callBack);
+    }
+
+    public void deleteCollect(Map<String, Object> params, MyCallBack callBack) {
+        ApiFactory.getService().deleteCollect(params).enqueue(callBack);
+    }
+
 }

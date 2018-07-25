@@ -8,6 +8,8 @@ import com.lgh.wine.beans.BaseResult;
 import com.lgh.wine.beans.LoginInput;
 import com.lgh.wine.model.AccountModel;
 
+import java.util.Map;
+
 import retrofit2.Response;
 
 /**
@@ -111,6 +113,32 @@ public class AccountPresenter extends AccountContract.Presenter {
             public void onFail(String message) {
                 if (isAttach)
                     view.showError(message);
+
+            }
+        });
+    }
+
+    @Override
+    public void addFeedback(Map<String, Object> params) {
+        model.addFeedback(params, new MyCallBack<BaseResult<String>>() {
+            @Override
+            public void onSuc(Response<BaseResult<String>> response) {
+                if (isAttach) {
+                    BaseResult<String> body = response.body();
+                    if (body.getCode() == 200) {
+                        view.dealAddFeedbackResult();
+                    } else view.showError(body.getMsg());
+
+                    view.hideProgress();
+                }
+            }
+
+            @Override
+            public void onFail(String message) {
+                if (isAttach) {
+                    view.showError(message);
+                    view.hideProgress();
+                }
 
             }
         });

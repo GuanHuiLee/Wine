@@ -78,4 +78,13 @@ public class AccountModel extends BaseModel {
         params.put("password", password);
         ApiFactory.getService().register(params).enqueue(callBack);
     }
+
+    /**
+     * 反馈
+     *
+     * @param callBack
+     */
+    public void addFeedback(Map<String,Object> params, MyCallBack callBack) {
+        ApiFactory.getService().register(params).enqueue(callBack);
+    }
 }

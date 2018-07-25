@@ -97,6 +97,11 @@ public class CouponListActivity extends BaseActivity implements OnRefreshListene
     }
 
     @Override
+    public void showUserCouponList(List<CouponBean> beans) {
+
+    }
+
+    @Override
     public void hideProgress() {
         super.hideProgress();
         refreshLayout.finishRefresh();

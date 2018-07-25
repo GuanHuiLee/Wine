@@ -15,6 +15,8 @@ import com.bumptech.glide.Glide;
 import com.lgh.wine.MainActivity;
 import com.lgh.wine.R;
 import com.lgh.wine.base.BaseFragment;
+import com.lgh.wine.ui.collect.CollectListActivity;
+import com.lgh.wine.ui.coupon.CouponMainActivity;
 import com.lgh.wine.ui.home.HomeFragment;
 import com.lgh.wine.ui.product.SpoorListActivity;
 import com.lgh.wine.utils.GifSizeFilter;
@@ -65,7 +67,7 @@ public class PersonalFragment extends BaseFragment {
 
     }
 
-    @OnClick({R.id.iv_icon, R.id.tv_spoor})
+    @OnClick({R.id.iv_icon, R.id.tv_spoor, R.id.tv_collect, R.id.tv_coupon})
     public void clickView(View view) {
         switch (view.getId()) {
             case R.id.iv_icon:
@@ -73,6 +75,12 @@ public class PersonalFragment extends BaseFragment {
                 break;
             case R.id.tv_spoor:
                 startActivity(new Intent(mContext, SpoorListActivity.class));
+                break;
+            case R.id.tv_collect:
+                startActivity(new Intent(mContext, CollectListActivity.class));
+                break;
+            case R.id.tv_coupon:
+                startActivity(new Intent(mContext, CouponMainActivity.class));
                 break;
             default:
                 break;

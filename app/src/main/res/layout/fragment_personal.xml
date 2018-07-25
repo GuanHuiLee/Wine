@@ -149,6 +149,7 @@
             </LinearLayout>
 
             <TextView
+                android:id="@+id/tv_coupon"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dp_10"
@@ -160,11 +161,12 @@
                 android:textSize="15sp" />
 
             <TextView
+                android:id="@+id/tv_collect"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dp_10"
                 android:layout_marginRight="@dimen/dp_10"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="30dp"
                 android:drawableEnd="@mipmap/ic_right_arrow"
                 android:text="商品收藏"
                 android:textColor="@color/black"
@@ -176,7 +178,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dp_10"
                 android:layout_marginRight="@dimen/dp_10"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="30dp"
                 android:drawableEnd="@mipmap/ic_right_arrow"
                 android:text="浏览足迹"
                 android:textColor="@color/black"
@@ -187,7 +189,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dp_10"
                 android:layout_marginRight="@dimen/dp_10"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="30dp"
                 android:drawableEnd="@mipmap/ic_right_arrow"
                 android:text="我的评价"
                 android:textColor="@color/black"
@@ -198,7 +200,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dp_10"
                 android:layout_marginRight="@dimen/dp_10"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="30dp"
                 android:drawableEnd="@mipmap/ic_right_arrow"
                 android:text="我的点赞"
                 android:textColor="@color/black"
@@ -210,7 +212,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dp_10"
                 android:layout_marginRight="@dimen/dp_10"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="30dp"
                 android:drawableEnd="@mipmap/ic_right_arrow"
                 android:text="意见反馈"
                 android:textColor="@color/black"

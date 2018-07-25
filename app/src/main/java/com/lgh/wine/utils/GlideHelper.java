@@ -30,6 +30,7 @@ public class GlideHelper {
     public static void loadImage(Context context, ImageView imageView, String url) {
         RequestOptions options = new RequestOptions()
                 .placeholder(placeholderResId)
+                .centerCrop()
                 .error(errorResId);
         load(context, url, imageView, options);
     }

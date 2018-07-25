@@ -76,4 +76,31 @@ public class CouponPresenter extends CouponContract.Presenter {
             }
         });
     }
+
+    @Override
+    public void getUserCouponList(String userId, int type) {
+        model.getUserCouponList(userId, type, new MyCallBack<BaseResult<String>>() {
+            @Override
+            public void onSuc(Response<BaseResult<String>> response) {
+                if (isAttach) {
+                    BaseResult<String> body = response.body();
+                    if (body.getCode() == 200) {
+                        String data = body.getData();
+                        List<CouponBean> list = new Gson().fromJson(data, new TypeToken<List<CouponBean>>() {
+                        }.getType());
+                        view.showUserCouponList(list);
+                    } else view.showError(body.getMsg());
+                    view.hideProgress();
+                }
+            }
+
+            @Override
+            public void onFail(String message) {
+                if (isAttach) {
+                    view.showError(message);
+                    view.hideProgress();
+                }
+            }
+        });
+    }
 }

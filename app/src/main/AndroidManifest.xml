@@ -65,7 +65,9 @@
         <activity android:name=".ui.personal.SettingActivity" />
         <activity android:name=".ui.personal.AboutActivity" />
         <activity android:name=".ui.personal.FeedbackActivity" />
-        <activity android:name=".ui.product.SpoorListActivity"></activity>
+        <activity android:name=".ui.product.SpoorListActivity" />
+        <activity android:name=".ui.collect.CollectListActivity" />
+        <activity android:name=".ui.coupon.CouponMainActivity"></activity>
     </application>
 
 </manifest>

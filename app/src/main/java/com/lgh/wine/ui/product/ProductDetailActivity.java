@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.lgh.wine.R;
+import com.lgh.wine.beans.CollectBean;
 import com.lgh.wine.beans.SpoorBean;
 import com.lgh.wine.ui.shopping.ShoppingCartActivity;
 import com.lgh.wine.utils.Constant;
@@ -114,7 +115,7 @@ public class ProductDetailActivity extends BaseActivity implements ShoppingCartC
             }
         });
 
-        dealCollectResult();
+        dealAddCollectResult();
     }
 
     @OnClick({R.id.ll_discuss, R.id.ll_img_text, R.id.ll_params,
@@ -316,10 +317,20 @@ public class ProductDetailActivity extends BaseActivity implements ShoppingCartC
     }
 
     @Override
-    public void dealCollectResult() {
+    public void dealAddCollectResult() {
         Drawable dra = getResources().getDrawable(isCollect ? R.mipmap.ic_collection_def : R.mipmap.ic_collection_sel);
         dra.setBounds(0, 0, dra.getMinimumWidth(), dra.getMinimumHeight());
         tv_collect.setCompoundDrawables(dra, null, null, null);
+    }
+
+    @Override
+    public void showCollectList(List<CollectBean> list) {
+
+    }
+
+    @Override
+    public void dealDeleteCollect() {
+
     }
 
     @Override

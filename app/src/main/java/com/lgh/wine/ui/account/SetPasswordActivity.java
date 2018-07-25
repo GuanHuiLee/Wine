@@ -102,4 +102,9 @@ public class SetPasswordActivity extends BaseActivity implements AccountContract
         showError("注册成功");
         presenter.login(phone, pwd, 1);
     }
+
+    @Override
+    public void dealAddFeedbackResult() {
+
+    }
 }

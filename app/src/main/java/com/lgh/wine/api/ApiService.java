@@ -9,12 +9,15 @@ import com.lgh.wine.beans.VerifyPhoneInput;
 
 import java.util.Map;
 
+import okhttp3.MultipartBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 import retrofit2.http.Query;
 
 /**
@@ -132,6 +135,26 @@ public interface ApiService {
     @POST("addCollectProductInfo")
     @FormUrlEncoded
     Call<BaseResult<String>> addCollect(@FieldMap Map<String, Object> params);
+
+    /**
+     * 收藏列表
+     *
+     * @param params
+     * @return
+     */
+    @POST("collectProductList")
+    @FormUrlEncoded
+    Call<BaseResult<String>> getCollect(@FieldMap Map<String, Object> params);
+
+    /**
+     * 收藏列表
+     *
+     * @param params
+     * @return
+     */
+    @POST("deleteCollectProductInfo")
+    @FormUrlEncoded
+    Call<BaseResult<String>> deleteCollect(@FieldMap Map<String, Object> params);
 
     /**
      * 评论列表
@@ -254,4 +277,33 @@ public interface ApiService {
     @POST("deleteSpoorProductInfo")
     @FormUrlEncoded
     Call<BaseResult<String>> deleteSpoorList(@FieldMap Map<String, Object> params);
+
+    /**
+     * 反馈
+     *
+     * @param params
+     * @return
+     */
+    @POST("add_feed_back_info")
+    @FormUrlEncoded
+    Call<BaseResult<String>> addFeedback(@FieldMap Map<String, Object> params);
+
+    /**
+     * 上传文件
+     *
+     * @return
+     */
+    @Multipart
+    @POST("oss/upImg")
+    Call<BaseResult<String>> uploadFile(@Part MultipartBody.Part partList);
+
+    /**
+     * 我的优惠券
+     *
+     * @param params
+     * @return
+     */
+    @POST("user_coupon_list")
+    @FormUrlEncoded
+    Call<BaseResult<String>> getUserCouponList(@FieldMap Map<String, Object> params);
 }

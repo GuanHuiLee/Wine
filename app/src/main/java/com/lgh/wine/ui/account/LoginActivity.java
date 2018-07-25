@@ -126,4 +126,9 @@ public class LoginActivity extends BaseActivity implements AccountContract.View 
 
     }
 
+    @Override
+    public void dealAddFeedbackResult() {
+
+    }
+
 }
