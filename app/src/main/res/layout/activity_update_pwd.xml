@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_bg"
+    android:orientation="vertical"
+    tools:context=".ui.personal.UpdatePwdActivity">
+
+    <include layout="@layout/toolbar_1" />
+
+    <com.lgh.wine.utils.ClearEditText
+        android:id="@+id/ct_pwd_now"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@null"
+        android:inputType="textPassword"
+        android:hint="当前密码"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp" />
+
+    <View style="@style/comDivider" />
+
+    <com.lgh.wine.utils.ClearEditText
+        android:id="@+id/ct_pwd_new"
+        android:inputType="textPassword"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@null"
+        android:hint="新密码"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp" />
+
+    <View style="@style/comDivider" />
+
+    <com.lgh.wine.utils.ClearEditText
+        android:id="@+id/ct_pwd_new_2"
+        android:inputType="textPassword"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@null"
+        android:hint="确认密码"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp" />
+
+    <View style="@style/comDivider" />
+</LinearLayout>

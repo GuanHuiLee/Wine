@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_bg"
+    android:orientation="vertical"
+    tools:context=".ui.personal.UserInfoActivity">
+
+    <include layout="@layout/toolbar" />
+
+    <LinearLayout
+        android:id="@+id/ll_icon"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/color_white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/dp_10"
+        android:paddingRight="@dimen/dp_10">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="头像" />
+
+        <ImageView
+            android:id="@+id/iv_icon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@mipmap/ic_launcher" />
+
+    </LinearLayout>
+
+    <com.lgh.wine.utils.InputItemView
+        android:id="@+id/input_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:inputItemTitle="昵称" />
+
+    <com.lgh.wine.utils.InputItemView
+        android:id="@+id/input_sex"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:inputItemTitle="性别" />
+
+    <com.lgh.wine.utils.InputItemView
+        android:id="@+id/input_address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:inputItemTitle="住址" />
+
+    <com.lgh.wine.utils.InputItemView
+        android:id="@+id/input_birthday"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:inputItemHint="生日有礼，填写后不可修改"
+        app:inputItemHintColor="@color/color_red"
+        app:inputItemTitle="生日" />
+
+    <com.lgh.wine.utils.InputItemView
+        android:id="@+id/input_address_manage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:inputItemTitle="地址管理" />
+
+    <com.lgh.wine.utils.InputItemView
+        android:id="@+id/input_safety"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:inputItemTitle="账号安全" />
+</LinearLayout>

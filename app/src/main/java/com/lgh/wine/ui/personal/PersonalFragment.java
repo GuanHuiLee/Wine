@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,10 +16,15 @@ import com.bumptech.glide.Glide;
 import com.lgh.wine.MainActivity;
 import com.lgh.wine.R;
 import com.lgh.wine.base.BaseFragment;
+import com.lgh.wine.beans.Account;
+import com.lgh.wine.contract.UploadFileContract;
+import com.lgh.wine.model.UploadFileModel;
+import com.lgh.wine.presenter.UploadFilePresenter;
 import com.lgh.wine.ui.collect.CollectListActivity;
 import com.lgh.wine.ui.coupon.CouponMainActivity;
 import com.lgh.wine.ui.home.HomeFragment;
 import com.lgh.wine.ui.product.SpoorListActivity;
+import com.lgh.wine.utils.AccountUtil;
 import com.lgh.wine.utils.GifSizeFilter;
 import com.lgh.wine.utils.GlideHelper;
 import com.lgh.wine.utils.MyGlideEngine;
@@ -43,13 +49,15 @@ import static android.app.Activity.RESULT_OK;
  * Created by niujingtong on 2018/7/12.
  * 模块：
  */
-public class PersonalFragment extends BaseFragment {
+public class PersonalFragment extends BaseFragment implements UploadFileContract.View {
     public static final String TAG = PersonalFragment.class.getName();
     private static final int REQUEST_CODE_CHOOSE = 1;
     List<Uri> mSelected;
 
     @BindView(R.id.iv_icon)
     ImageView iv_icon;
+
+    private UploadFilePresenter presenter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -59,19 +67,23 @@ public class PersonalFragment extends BaseFragment {
 
     @Override
     protected void initUI() {
-
+        setIcon();
     }
 
     @Override
     protected void initData() {
-
+        presenter = new UploadFilePresenter(this, UploadFileModel.newInstance());
+        addPresenter(presenter);
     }
 
-    @OnClick({R.id.iv_icon, R.id.tv_spoor, R.id.tv_collect, R.id.tv_coupon})
+    @OnClick({R.id.iv_icon, R.id.tv_spoor, R.id.tv_collect, R.id.tv_coupon, R.id.tv_edit})
     public void clickView(View view) {
         switch (view.getId()) {
             case R.id.iv_icon:
-                selectPic();
+//                selectPic();
+                break;
+            case R.id.tv_edit:
+                startActivity(new Intent(mContext, UserInfoActivity.class));
                 break;
             case R.id.tv_spoor:
                 startActivity(new Intent(mContext, SpoorListActivity.class));
@@ -127,8 +139,10 @@ public class PersonalFragment extends BaseFragment {
             mSelected = Matisse.obtainResult(data);
             Logger.d("mSelected: " + mSelected);
             if (!mSelected.isEmpty()) {
-                CropImage.activity(mSelected.get(0))
-                        .start(getActivity());
+//                CropImage.activity(mSelected.get(0))
+//                        .start(getActivity());
+                List<String> strings = Matisse.obtainPathResult(data);
+                presenter.uploadFile(strings.get(0));
             }
         } else if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
@@ -158,5 +172,24 @@ public class PersonalFragment extends BaseFragment {
             default:
                 break;
         }
+    }
+
+    @Override
+    public void dealUploadFileResult(String url) {
+        showError("头像修改成功");
+
+        Account account = AccountUtil.getAccount();
+        account.setUserIcon(url);
+        account.update();
+
+        setIcon();
+
+    }
+
+    private void setIcon() {
+        Account account = AccountUtil.getAccount();
+        String userIcon = account.getUserIcon();
+        if (!TextUtils.isEmpty(userIcon))
+            GlideHelper.loadImage(mContext, iv_icon, userIcon);
     }
 }

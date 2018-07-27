@@ -67,7 +67,11 @@
         <activity android:name=".ui.personal.FeedbackActivity" />
         <activity android:name=".ui.product.SpoorListActivity" />
         <activity android:name=".ui.collect.CollectListActivity" />
-        <activity android:name=".ui.coupon.CouponMainActivity"></activity>
+        <activity android:name=".ui.coupon.CouponMainActivity" />
+        <activity android:name=".ui.personal.UserInfoActivity" />
+        <activity android:name=".ui.personal.AddressManageActivity" />
+        <activity android:name=".ui.personal.AddAddressActivity" />
+        <activity android:name=".ui.personal.UpdatePwdActivity"></activity>
     </application>
 
 </manifest>

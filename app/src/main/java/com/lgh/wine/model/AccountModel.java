@@ -84,7 +84,16 @@ public class AccountModel extends BaseModel {
      *
      * @param callBack
      */
-    public void addFeedback(Map<String,Object> params, MyCallBack callBack) {
+    public void addFeedback(Map<String, Object> params, MyCallBack callBack) {
         ApiFactory.getService().register(params).enqueue(callBack);
+    }
+
+    /**
+     * 修改个人信息
+     * @param params
+     * @param callBack
+     */
+    public void updateUser(Map<String, Object> params, MyCallBack callBack) {
+        ApiFactory.getService().updateUser(params).enqueue(callBack);
     }
 }

@@ -49,7 +49,6 @@ public class CouponFragment extends BaseFragment implements CouponContract.View,
     private CouponPresenter presenter;
     private CouponUserAdapter adapter;
 
-    public static final String TAG = CouponFragment.class.getName();
     public static final int TYPE_NOT_USE = 1;
     public static final int TYPE_USED = 2;
     public static final int TYPE_OVERDUE = 3;

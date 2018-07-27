@@ -10,5 +10,17 @@
         <attr name="editTColor" format="color" />
         <attr name="onTextChanged" format="boolean" />
     </declare-styleable>
-
+    <declare-styleable name="InputItemView">
+        <attr name="inputItemTitle" format="string" />
+        <attr name="inputItemHint" format="string" />
+        <attr name="inputItemHintColor" format="color" />
+        <attr name="inputItemRightArrow" format="boolean" />
+        <attr name="inputItemMaxLength" format="integer" />
+        <attr name="inputItemType" format="enum">
+            <enum name="number" value="0" />
+            <enum name="text" value="1" />
+            <enum name="phone" value="2" />
+            <enum name="decimal" value="3" />
+        </attr>
+    </declare-styleable>
 </resources>

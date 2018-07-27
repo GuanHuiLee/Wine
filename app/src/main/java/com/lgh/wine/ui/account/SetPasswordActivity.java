@@ -107,4 +107,9 @@ public class SetPasswordActivity extends BaseActivity implements AccountContract
     public void dealAddFeedbackResult() {
 
     }
+
+    @Override
+    public void dealUpdateUserResult() {
+
+    }
 }

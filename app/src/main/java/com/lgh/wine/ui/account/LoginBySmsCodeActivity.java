@@ -127,6 +127,11 @@ public class LoginBySmsCodeActivity extends BaseActivity implements AccountContr
 
     }
 
+    @Override
+    public void dealUpdateUserResult() {
+
+    }
+
     private void showTime() {
         final Timer timer = new Timer();
         timer.schedule(new TimerTask() {

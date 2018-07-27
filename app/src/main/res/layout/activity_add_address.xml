@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.personal.AddAddressActivity">
+
+    <include layout="@layout/toolbar_1" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="@dimen/dp_10">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="收件人"
+            android:textColor="@color/black" />
+
+        <com.lgh.wine.utils.ClearEditText
+            android:id="@+id/ct_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:background="@null"
+            android:hint="请输入收件人" />
+    </LinearLayout>
+
+    <View
+        style="@style/comDivider"
+        android:layout_marginLeft="@dimen/dp_10" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="@dimen/dp_10">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="联系方式"
+            android:textColor="@color/black" />
+
+        <com.lgh.wine.utils.ClearEditText
+            android:id="@+id/ct_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:background="@null"
+            android:hint="请输入联系方式" />
+    </LinearLayout>
+
+    <View
+        style="@style/comDivider"
+        android:layout_marginLeft="@dimen/dp_10" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="@dimen/dp_10">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="所在区域"
+            android:textColor="@color/black" />
+
+        <com.lgh.wine.utils.ClearEditText
+            android:id="@+id/ct_city"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:background="@null"
+            android:hint="请选择所在区域" />
+    </LinearLayout>
+
+    <View
+        style="@style/comDivider"
+        android:layout_marginLeft="@dimen/dp_10" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="@dimen/dp_10">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="详细地址"
+            android:textColor="@color/black" />
+
+        <com.lgh.wine.utils.ClearEditText
+            android:id="@+id/ct_detail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:background="@null"
+            android:hint="请输入详细地址" />
+    </LinearLayout>
+
+    <View
+        style="@style/comDivider"
+        android:layout_marginLeft="@dimen/dp_10" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:padding="@dimen/dp_10">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:text="设为默认"
+            android:textColor="@color/black" />
+
+        <vn.luongvo.widget.iosswitchview.SwitchView
+            android:id="@+id/switch_view"
+            android:layout_width="48dp"
+            android:layout_height="29dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            app:color_off="#e5e5e5"
+            app:color_on="@color/color_red" />
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/btn_delete"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_margin="@dimen/dp_10"
+        android:background="@drawable/address_delete_bg"
+        android:text="删除"
+        android:textColor="@color/color_white"
+        android:textSize="15sp"
+        android:visibility="gone" />
+</LinearLayout>

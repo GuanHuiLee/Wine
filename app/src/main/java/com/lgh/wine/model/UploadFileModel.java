@@ -38,7 +38,7 @@ public class UploadFileModel extends BaseModel {
 
         Retrofit retrofit = new Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())
-                .baseUrl(Constant.BASE_IP)
+                .baseUrl(Constant.IMG_IP)
                 .build();
         retrofit.create(ApiService.class).uploadFile(body).
                 enqueue(callBack);

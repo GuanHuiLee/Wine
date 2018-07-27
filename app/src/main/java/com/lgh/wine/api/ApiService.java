@@ -294,7 +294,7 @@ public interface ApiService {
      * @return
      */
     @Multipart
-    @POST("oss/upImg")
+    @POST("alogle")
     Call<BaseResult<String>> uploadFile(@Part MultipartBody.Part partList);
 
     /**
@@ -306,4 +306,14 @@ public interface ApiService {
     @POST("user_coupon_list")
     @FormUrlEncoded
     Call<BaseResult<String>> getUserCouponList(@FieldMap Map<String, Object> params);
+
+    /**
+     * 修改个人信息
+     *
+     * @param params
+     * @return
+     */
+    @POST("updateUser")
+    @FormUrlEncoded
+    Call<BaseResult<String>> updateUser(@FieldMap Map<String, Object> params);
 }

@@ -143,4 +143,30 @@ public class AccountPresenter extends AccountContract.Presenter {
             }
         });
     }
+
+    @Override
+    public void updateUser(Map<String, Object> params) {
+        model.updateUser(params, new MyCallBack<BaseResult<String>>() {
+            @Override
+            public void onSuc(Response<BaseResult<String>> response) {
+                if (isAttach) {
+                    BaseResult<String> body = response.body();
+                    if (body.getCode() == 200) {
+                        view.dealUpdateUserResult();
+                    } else view.showError(body.getMsg());
+
+                    view.hideProgress();
+                }
+            }
+
+            @Override
+            public void onFail(String message) {
+                if (isAttach) {
+                    view.showError(message);
+                    view.hideProgress();
+                }
+
+            }
+        });
+    }
 }

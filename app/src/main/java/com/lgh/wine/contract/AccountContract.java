@@ -28,6 +28,8 @@ public interface AccountContract {
 
         void dealAddFeedbackResult();
 
+        void dealUpdateUserResult();
+
     }
 
     public abstract class Presenter extends BasePresenter<View, AccountModel> {
@@ -37,7 +39,7 @@ public interface AccountContract {
         }
 
 
-        public abstract void login(String phone,String pwd,int type);
+        public abstract void login(String phone, String pwd, int type);
 
         public abstract void getSmsCode(String phone, int type);
 
@@ -45,6 +47,8 @@ public interface AccountContract {
 
         public abstract void register(String phone, String password);
 
-        public abstract void addFeedback(Map<String,Object> params);
+        public abstract void addFeedback(Map<String, Object> params);
+
+        public abstract void updateUser(Map<String, Object> params);
     }
 }
