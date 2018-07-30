@@ -29,6 +29,7 @@ public class UpdatePwdActivity extends BaseActivity implements AccountContract.V
     ClearEditText ct_pwd_new_2;
     @BindView(R.id.ct_pwd_new)
     ClearEditText ct_pwd_new;
+    private String pwd_new;
 
     @Override
     protected int getLayoutId() {
@@ -64,7 +65,7 @@ public class UpdatePwdActivity extends BaseActivity implements AccountContract.V
     }
 
     private void updatePwd() {
-        String pwd_new = ct_pwd_new.getText().toString();
+        pwd_new = ct_pwd_new.getText().toString();
         String pwd_new_2 = ct_pwd_new_2.getText().toString();
         String pwd_now = ct_pwd_now.getText().toString();
         Account account = AccountUtil.getAccount();
@@ -110,6 +111,10 @@ public class UpdatePwdActivity extends BaseActivity implements AccountContract.V
 
     @Override
     public void dealUpdateUserResult() {
+        Account account = AccountUtil.getAccount();
+        account.setUserPassword(pwd_new);
+        account.update();
+
         showError("修改成功");
         finish();
     }

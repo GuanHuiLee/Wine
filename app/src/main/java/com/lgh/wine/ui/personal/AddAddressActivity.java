@@ -47,8 +47,8 @@ public class AddAddressActivity extends BaseActivity implements AddressContract.
     private static final int MSG_LOAD_SUCCESS = 0x002;
     private static final int MSG_LOAD_FAIL = 0x003;
 
-    @BindView(R.id.ct_city)
-    ClearEditText ct_city;
+    @BindView(R.id.tv_city)
+    TextView tv_city;
     @BindView(R.id.ct_detail)
     ClearEditText ct_detail;
     @BindView(R.id.ct_name)
@@ -97,6 +97,17 @@ public class AddAddressActivity extends BaseActivity implements AddressContract.
         btn_delete.setVisibility(type == TYPE_ADD ? View.GONE : View.VISIBLE);
         if (type == TYPE_UPDATE) {
             switchView.setChecked(addressBean.getIs_default());
+            String addr_province = addressBean.getAddr_province();
+            String addr_city = addressBean.getAddr_city();
+            String addr_district = addressBean.getAddr_district();
+            strCity = addr_province + "|" + addr_city + "|" + addr_district;
+
+            tv_city.setText(addr_province + addr_city + addr_district);
+            ct_name.setText(addressBean.getAddr_cnee());
+            ct_detail.setText(addressBean.getDetail_address());
+            ct_phone.setText(addressBean.getAddr_phone());
+
+            switchView.setChecked(addressBean.getIs_default());
         }
     }
 
@@ -126,7 +137,7 @@ public class AddAddressActivity extends BaseActivity implements AddressContract.
     private void addAddress() {
         String detail = ct_detail.getText().toString();
         String name = ct_name.getText().toString();
-        String city = ct_city.getText().toString();
+        String city = tv_city.getText().toString();
         String phone = ct_phone.getText().toString();
 
         if (TextUtils.isEmpty(detail)) {
@@ -158,17 +169,25 @@ public class AddAddressActivity extends BaseActivity implements AddressContract.
         params.put("addr_region", strCity);
         params.put("addr_phone", phone);
         params.put("addr_cnee", name);
+
+        presenter.addAddress(params);
     }
 
     @Override
     public void dealAddAddressResult() {
-        showError("新增地址成功");
+        if (type == TYPE_UPDATE) {
+            showError("地址修改成功");
+        }else
+            showError("地址新增成功");
+
+        setResult(RESULT_OK);
         finish();
     }
 
     @Override
     public void dealDeleteAddressResult() {
-        showError("删除地址成功");
+        showError("地址删除成功");
+        setResult(RESULT_OK);
         finish();
     }
 
@@ -182,13 +201,13 @@ public class AddAddressActivity extends BaseActivity implements AddressContract.
 
     }
 
-    @OnClick({R.id.ct_city, R.id.btn_delete})
+    @OnClick({R.id.tv_city, R.id.btn_delete})
     public void clickView(View view) {
         switch (view.getId()) {
             case R.id.btn_delete:
                 deleteAddress();
                 break;
-            case R.id.ct_city:
+            case R.id.tv_city:
                 if (isLoaded) {
                     showPickerView();
                 } else
@@ -208,7 +227,7 @@ public class AddAddressActivity extends BaseActivity implements AddressContract.
                 String str3 = options3.get(o1).get(o2).get(o3);
                 strCity = str1 + "|" + str2 + "|" + str3;
 
-                ct_city.setText(str1 + str2 + str3);
+                tv_city.setText(str1 + str2 + str3);
             }
         }).setTitleText("城市选择").setSubmitColor(ContextCompat.getColor(mContext, R.color.color_button))//确定按钮文字颜色
                 .setCancelColor(ContextCompat.getColor(mContext, R.color.color_button))//取消按钮文字颜色

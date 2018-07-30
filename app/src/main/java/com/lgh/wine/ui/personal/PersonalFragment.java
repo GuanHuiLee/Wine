@@ -25,6 +25,7 @@ import com.lgh.wine.ui.coupon.CouponMainActivity;
 import com.lgh.wine.ui.home.HomeFragment;
 import com.lgh.wine.ui.product.SpoorListActivity;
 import com.lgh.wine.utils.AccountUtil;
+import com.lgh.wine.utils.Constant;
 import com.lgh.wine.utils.GifSizeFilter;
 import com.lgh.wine.utils.GlideHelper;
 import com.lgh.wine.utils.MyGlideEngine;
@@ -46,7 +47,7 @@ import butterknife.OnClick;
 import static android.app.Activity.RESULT_OK;
 
 /**
- * Created by niujingtong on 2018/7/12.
+ * Created by ligh on 2018/7/12.
  * 模块：
  */
 public class PersonalFragment extends BaseFragment implements UploadFileContract.View {
@@ -190,6 +191,6 @@ public class PersonalFragment extends BaseFragment implements UploadFileContract
         Account account = AccountUtil.getAccount();
         String userIcon = account.getUserIcon();
         if (!TextUtils.isEmpty(userIcon))
-            GlideHelper.loadImage(mContext, iv_icon, userIcon);
+            GlideHelper.loadCircleImage(mContext, iv_icon, Constant.IMG_IP + userIcon, R.mipmap.iv_error);
     }
 }

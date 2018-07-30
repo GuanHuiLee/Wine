@@ -70,6 +70,7 @@ public class UserInfoActivity extends BaseActivity implements UploadFileContract
     private String iconUrl;
     private boolean isEdit;
     private int sex;
+    private Account account;
 
     @Override
     protected int getLayoutId() {
@@ -79,7 +80,8 @@ public class UserInfoActivity extends BaseActivity implements UploadFileContract
 
     @Override
     protected void initUI() {
-        Account account = AccountUtil.getAccount();
+        inputAddress.setEnable(true);
+        account = AccountUtil.getAccount();
         if (account != null) {
             String userIcon = account.getUserIcon();
             showIcon(userIcon);
@@ -87,6 +89,8 @@ public class UserInfoActivity extends BaseActivity implements UploadFileContract
             inputAddress.setContent(account.getUserAddress());
             inputSex.setContent(account.getUserSex() == 1 ? "男" : "女");
             inputBirthday.setContent(account.getUserBirthday());
+            iconUrl = userIcon;
+            sex = account.getUserSex();
         }
     }
 
@@ -127,7 +131,7 @@ public class UserInfoActivity extends BaseActivity implements UploadFileContract
                 startActivity(new Intent(mContext, UpdatePwdActivity.class));
                 break;
             case R.id.input_birthday:
-                PickerDialogHelper.showTimePicker(mContext, Calendar.getInstance(), true, new OnTimeSelectListener() {
+                PickerDialogHelper.showTimePicker(mContext, Calendar.getInstance(), false, new OnTimeSelectListener() {
                     @Override
                     public void onTimeSelect(Date date, View v) {
                         long time = date.getTime();
@@ -145,6 +149,7 @@ public class UserInfoActivity extends BaseActivity implements UploadFileContract
                 });
                 break;
             case R.id.ll_icon:
+                selectPic();
                 break;
             default:
                 break;
@@ -152,7 +157,6 @@ public class UserInfoActivity extends BaseActivity implements UploadFileContract
     }
 
     private void selectPic() {
-
         AndPermission.with(this)
                 .runtime()
                 .permission(Manifest.permission.READ_EXTERNAL_STORAGE)
@@ -268,12 +272,35 @@ public class UserInfoActivity extends BaseActivity implements UploadFileContract
         }
         Map<String, Object> params = new HashMap<>();
         params.put(Constant.USER_ID, AccountUtil.getUserId());
-        params.put("user_birthday", inputBirthday.getContent());
-        params.put("user_sex", sex);
-        params.put("user_icon", iconUrl);
-        params.put("user_address", inputAddress.getContent());
-        params.put("user_nickname", inputName.getContent());
+
+        String name = inputName.getContent();
+        if (!name.equals(account.getUserNickname())) {
+            params.put("user_nickname", name);
+        }
+
+        if (!iconUrl.equals(account.getUserIcon())) {
+            params.put("user_icon", iconUrl);
+        }
+
+        if (sex != account.getUserSex()) {
+            params.put("user_sex", sex);
+        }
+
+        String address = inputAddress.getContent();
+        if (!TextUtils.isEmpty(address)) {
+            params.put("user_address", address);
+        }
+        String birthday = inputBirthday.getContent();
+        if (!TextUtils.isEmpty(birthday)) {
+            params.put("user_birthday", birthday);
+        }
 
         accountPresenter.updateUser(params);
+    }
+
+    @Override
+    public void showError(String message) {
+        super.showError(message);
+        finish();
     }
 }

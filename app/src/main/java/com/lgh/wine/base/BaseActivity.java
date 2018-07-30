@@ -61,6 +61,9 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
 //        }
         mContext = this;
         initTAG(this);
+
+        initToolbar(toolbar);
+        setSupportActionBar(toolbar);
         initUI();
         initData();
     }
@@ -82,9 +85,6 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
 
         if (getLayoutId() != 0)
             setContentView(getLayoutId());
-
-        initToolbar(toolbar);
-        setSupportActionBar(toolbar);
     }
 
 
