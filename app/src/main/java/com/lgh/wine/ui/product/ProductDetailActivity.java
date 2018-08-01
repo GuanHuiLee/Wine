@@ -206,7 +206,8 @@ public class ProductDetailActivity extends BaseActivity implements ShoppingCartC
             @Override
             public void onClick(View view) {
                 dialog.dismiss();
-                addShoppoingCart();
+//                addShoppoingCart();
+                addOrder();
             }
         });
 
@@ -298,12 +299,13 @@ public class ProductDetailActivity extends BaseActivity implements ShoppingCartC
     public void dealAddShoppingCartResult() {
         showError("添加成功");
         if (type == TYPE_BUY) {
-            buy();
+//            addOrder();
         }
     }
 
-    private void buy() {
-
+    private void addOrder() {
+        Intent intent = new Intent(mContext, AddOrderActivity.class);
+        startActivity(intent);
     }
 
     @Override

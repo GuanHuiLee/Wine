@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_bg"
+    android:orientation="vertical"
+    tools:context=".ui.product.InvoiceSelectActivity">
+
+    <include layout="@layout/toolbar_1" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dp_10"
+        android:text="发票类型"
+        android:textColor="@color/black"
+        android:textSize="15sp" />
+
+    <RadioGroup
+        android:id="@+id/rg_type"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_margin="@dimen/dp_10"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rb_paper"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/dp_10"
+            android:background="@drawable/invoice_bg"
+            android:button="@null"
+            android:checked="true"
+            android:gravity="center"
+            android:padding="@dimen/dp_10"
+            android:text="纸质发票"
+            android:textColor="@color/invoice" />
+
+        <RadioButton
+            android:id="@+id/rb_no"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/invoice_bg"
+            android:button="@null"
+            android:gravity="center"
+            android:padding="@dimen/dp_10"
+            android:text="不需要发票"
+            android:textColor="@color/invoice" />
+    </RadioGroup>
+
+    <LinearLayout
+        android:id="@+id/ll_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/dp_10">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="发票内容"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
+
+        <RadioGroup
+            android:id="@+id/rg_content"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+
+            <RadioButton
+                android:id="@+id/rb_wine"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:button="@drawable/checkbox_bg"
+                android:text="酒水" />
+
+            <RadioButton
+                android:id="@+id/rb_detail"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:button="@drawable/checkbox_bg"
+                android:text="明细" />
+        </RadioGroup>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_10"
+        android:orientation="vertical"
+        android:padding="@dimen/dp_10">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="发票抬头"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
+
+        <RadioGroup
+            android:id="@+id/rg_name"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+
+            <RadioButton
+                android:id="@+id/rb_personal"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:button="@drawable/checkbox_bg"
+                android:checked="true"
+                android:text="个人" />
+
+            <RadioButton
+                android:id="@+id/rb_company"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:button="@drawable/checkbox_bg"
+                android:text="单位" />
+        </RadioGroup>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_remind"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/dp_10"
+        android:visibility="gone">
+
+        <com.lgh.wine.utils.ClearEditText
+            android:id="@+id/ct_company"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:hint="请输入单位名称"
+            android:textSize="14sp" />
+
+        <com.lgh.wine.utils.ClearEditText
+            android:id="@+id/ct_code"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10"
+            android:background="@null"
+            android:hint="请输入纳税人识别号"
+            android:textSize="14sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:src="@mipmap/ic_remind_sm" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:lineSpacingMultiplier="1.2"
+                android:text="温馨提示：根据“国税总局【2017】16号公告”自2017年7月1日起，购买方为企业单位的，索取增值税普通发票时，应向销售方提供纳税人识别号或社会信用代码；销售方为其开具增值税普通发票时，应在“购买方纳税人识别号”栏填写购买方的纳税人识别号或统一社会信用代码。不符合规定的发票，不得作为税收凭证"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+</LinearLayout>

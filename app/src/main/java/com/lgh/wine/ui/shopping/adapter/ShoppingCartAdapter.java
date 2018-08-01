@@ -58,7 +58,7 @@ public class ShoppingCartAdapter extends BaseRecyclerAdapter<ShoppingCartBean, S
 
         countMap = new HashMap<>();
         for (int i = 0; i < datas.size(); i++) {
-            countMap.put(i, 1);
+            countMap.put(i, datas.get(i).getGoods_count());
         }
     }
 
@@ -92,6 +92,7 @@ public class ShoppingCartAdapter extends BaseRecyclerAdapter<ShoppingCartBean, S
         });
 
         holder.checkbox.setChecked(map.get(position));
+        holder.volume.setVolume(countMap.get(position));
         holder.checkbox.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -105,7 +106,6 @@ public class ShoppingCartAdapter extends BaseRecyclerAdapter<ShoppingCartBean, S
             }
         });
 
-        holder.volume.setVolume(item.getGoods_count());
     }
 
     @Override

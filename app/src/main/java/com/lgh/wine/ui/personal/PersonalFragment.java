@@ -77,7 +77,8 @@ public class PersonalFragment extends BaseFragment implements UploadFileContract
         addPresenter(presenter);
     }
 
-    @OnClick({R.id.iv_icon, R.id.tv_spoor, R.id.tv_collect, R.id.tv_coupon, R.id.tv_edit})
+    @OnClick({R.id.iv_icon, R.id.input_spoor, R.id.input_collect, R.id.input_coupon, R.id.tv_edit
+            , R.id.iv_setting, R.id.iv_feedback})
     public void clickView(View view) {
         switch (view.getId()) {
             case R.id.iv_icon:
@@ -86,14 +87,20 @@ public class PersonalFragment extends BaseFragment implements UploadFileContract
             case R.id.tv_edit:
                 startActivity(new Intent(mContext, UserInfoActivity.class));
                 break;
-            case R.id.tv_spoor:
+            case R.id.input_spoor:
                 startActivity(new Intent(mContext, SpoorListActivity.class));
                 break;
-            case R.id.tv_collect:
+            case R.id.input_collect:
                 startActivity(new Intent(mContext, CollectListActivity.class));
                 break;
-            case R.id.tv_coupon:
+            case R.id.input_coupon:
                 startActivity(new Intent(mContext, CouponMainActivity.class));
+                break;
+            case R.id.iv_feedback:
+                startActivity(new Intent(mContext, FeedbackActivity.class));
+                break;
+            case R.id.iv_setting:
+                startActivity(new Intent(mContext, SettingActivity.class));
                 break;
             default:
                 break;
@@ -161,19 +168,6 @@ public class PersonalFragment extends BaseFragment implements UploadFileContract
         }
     }
 
-    @OnClick({R.id.iv_setting, R.id.tv_feedback})
-    public void clickSetting(View view) {
-        switch (view.getId()) {
-            case R.id.iv_setting:
-                startActivity(new Intent(mContext, SettingActivity.class));
-                break;
-            case R.id.tv_feedback:
-                startActivity(new Intent(mContext, FeedbackActivity.class));
-                break;
-            default:
-                break;
-        }
-    }
 
     @Override
     public void dealUploadFileResult(String url) {

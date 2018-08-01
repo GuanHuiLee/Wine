@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v7.widget.Toolbar;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -17,20 +19,24 @@ import com.lgh.wine.beans.LoginInput;
 import com.lgh.wine.model.AccountModel;
 import com.lgh.wine.presenter.AccountPresenter;
 import com.lgh.wine.utils.AccountUtil;
+import com.lgh.wine.utils.ClearEditText;
 import com.lgh.wine.utils.MD5Helper;
 import com.orhanobut.logger.Logger;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import vn.luongvo.widget.iosswitchview.SwitchView;
 
 /**
  * 登录界面
  */
 public class LoginActivity extends BaseActivity implements AccountContract.View {
     @BindView(R.id.et_phone)
-    EditText et_phone;
+    ClearEditText et_phone;
     @BindView(R.id.et_password)
-    EditText et_password;
+    ClearEditText et_password;
+    @BindView(R.id.switch_view)
+    SwitchView switch_view;
 
     private AccountPresenter presenter;
     private String pwd;
@@ -48,6 +54,14 @@ public class LoginActivity extends BaseActivity implements AccountContract.View 
             et_phone.setText(account.getUserPhone());
             et_password.setText(account.getUserPassword());
         }
+        switch_view.setOnCheckedChangeListener(new SwitchView.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(SwitchView switchView, boolean b) {
+                et_password.setTransformationMethod(b ? HideReturnsTransformationMethod.getInstance() :
+                        PasswordTransformationMethod.getInstance()
+                );
+            }
+        });
     }
 
     @Override
@@ -62,7 +76,6 @@ public class LoginActivity extends BaseActivity implements AccountContract.View 
         toolbar.setTitle("");
         TextView tvTitle = toolbar.findViewById(R.id.toolbar_title);
         TextView tvOther = toolbar.findViewById(R.id.toolbar_other);
-        tvTitle.setTextColor(getResources().getColor(android.R.color.black));
         tvOther.setTextColor(getResources().getColor(android.R.color.black));
 
         tvOther.setOnClickListener(new View.OnClickListener() {
@@ -73,7 +86,6 @@ public class LoginActivity extends BaseActivity implements AccountContract.View 
         });
         tvOther.setText("注册");
         tvTitle.setText("账号登录");
-        toolbar.setNavigationIcon(R.mipmap.ic_arrow_left);
     }
 
     @OnClick({R.id.btn_login, R.id.tv_quick_login})

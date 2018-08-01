@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -7,6 +8,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="56dp"
+        android:background="@color/color_white"
         android:gravity="center"
         android:orientation="horizontal">
 
@@ -32,7 +34,8 @@
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/color_bg">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -43,6 +46,7 @@
                 android:id="@+id/ll_edit"
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
+                android:background="@color/color_white"
                 android:orientation="horizontal">
 
                 <ImageView
@@ -91,21 +95,23 @@
                 </LinearLayout>
             </LinearLayout>
 
-
-            <TextView
+            <com.lgh.wine.utils.InputItemView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/dp_10"
-                android:drawableEnd="@mipmap/ic_right_arrow"
-                android:text="我的商品"
-                android:textColor="@color/black"
-                android:textSize="15sp" />
+                android:layout_marginTop="10dp"
+                android:background="@color/color_white"
+                app:inputItemHint=" "
+                app:inputItemRightArrow="true"
+                app:inputItemTitle="我的商品" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_10"
-                android:orientation="horizontal">
+                android:background="@color/color_white"
+                android:orientation="horizontal"
+                android:paddingBottom="@dimen/dp_10"
+                android:paddingTop="@dimen/dp_10">
 
                 <TextView
                     android:id="@+id/tv_need_pay"
@@ -148,75 +154,61 @@
                     android:text="待评价" />
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/tv_coupon"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dp_10"
-                android:layout_marginRight="@dimen/dp_10"
-                android:layout_marginTop="20dp"
-                android:drawableEnd="@mipmap/ic_right_arrow"
-                android:text="优惠券"
-                android:textColor="@color/black"
-                android:textSize="15sp" />
 
-            <TextView
-                android:id="@+id/tv_collect"
+            <com.lgh.wine.utils.InputItemView
+                android:id="@+id/input_coupon"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dp_10"
-                android:layout_marginRight="@dimen/dp_10"
-                android:layout_marginTop="30dp"
-                android:drawableEnd="@mipmap/ic_right_arrow"
-                android:text="商品收藏"
-                android:textColor="@color/black"
-                android:textSize="15sp" />
+                android:layout_marginTop="10dp"
+                android:background="@color/color_white"
+                app:inputItemHint=" "
+                app:inputItemRightArrow="true"
+                app:inputItemTitle="优惠券" />
 
-            <TextView
-                android:id="@+id/tv_spoor"
+            <com.lgh.wine.utils.InputItemView
+                android:id="@+id/input_collect"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dp_10"
-                android:layout_marginRight="@dimen/dp_10"
-                android:layout_marginTop="30dp"
-                android:drawableEnd="@mipmap/ic_right_arrow"
-                android:text="浏览足迹"
-                android:textColor="@color/black"
-                android:textSize="15sp" />
+                android:background="@color/color_white"
+                app:inputItemHint=" "
+                app:inputItemRightArrow="true"
+                app:inputItemTitle="商品收藏" />
 
-            <TextView
+            <com.lgh.wine.utils.InputItemView
+                android:id="@+id/input_spoor"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dp_10"
-                android:layout_marginRight="@dimen/dp_10"
-                android:layout_marginTop="30dp"
-                android:drawableEnd="@mipmap/ic_right_arrow"
-                android:text="我的评价"
-                android:textColor="@color/black"
-                android:textSize="15sp" />
+                android:background="@color/color_white"
+                app:inputItemHint=" "
+                app:inputItemRightArrow="true"
+                app:inputItemTitle="浏览足迹" />
 
-            <TextView
+            <com.lgh.wine.utils.InputItemView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dp_10"
-                android:layout_marginRight="@dimen/dp_10"
-                android:layout_marginTop="30dp"
-                android:drawableEnd="@mipmap/ic_right_arrow"
-                android:text="我的点赞"
-                android:textColor="@color/black"
-                android:textSize="15sp" />
+                android:background="@color/color_white"
+                app:inputItemHint=" "
+                app:inputItemRightArrow="true"
+                app:inputItemTitle="我的评价" />
 
-            <TextView
-                android:id="@+id/tv_feedback"
+            <com.lgh.wine.utils.InputItemView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dp_10"
-                android:layout_marginRight="@dimen/dp_10"
-                android:layout_marginTop="30dp"
-                android:drawableEnd="@mipmap/ic_right_arrow"
-                android:text="意见反馈"
-                android:textColor="@color/black"
-                android:textSize="15sp" />
+                android:layout_marginTop="10dp"
+                android:background="@color/color_white"
+                app:inputItemHint=" "
+                app:inputItemRightArrow="true"
+                app:inputItemTitle="我的点赞" />
+
+            <com.lgh.wine.utils.InputItemView
+                android:id="@+id/iv_feedback"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/color_white"
+                app:inputItemHint=" "
+                app:inputItemRightArrow="true"
+                app:inputItemTitle="意见反馈" />
+
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 </LinearLayout>

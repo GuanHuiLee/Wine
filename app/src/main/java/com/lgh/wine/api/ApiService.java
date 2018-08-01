@@ -316,4 +316,65 @@ public interface ApiService {
     @POST("updateUser")
     @FormUrlEncoded
     Call<BaseResult<String>> updateUser(@FieldMap Map<String, Object> params);
+
+    /**
+     * 生成订单
+     *
+     * @param params
+     * @return
+     */
+    @POST("add_user_order_info")
+    @FormUrlEncoded
+    Call<BaseResult<String>> addOrder(@FieldMap Map<String, Object> params);
+
+    /**
+     * 订单详情
+     *
+     * @param params
+     * @return
+     */
+    @POST("order_detail_info")
+    @FormUrlEncoded
+    Call<BaseResult<String>> getOrderDetail(@FieldMap Map<String, Object> params);
+
+    /**
+     * 订单列表
+     *
+     * @param params
+     * @return
+     */
+    @POST("user_order_master_list")
+    @FormUrlEncoded
+    Call<BaseResult<String>> getOrderList(@FieldMap Map<String, Object> params);
+
+
+    /**
+     * 获取订单每个状态的数量
+     *
+     * @param params
+     * @return
+     */
+    @POST("user_order_status_num")
+    @FormUrlEncoded
+    Call<BaseResult<String>> getOrderStatusNum(@FieldMap Map<String, Object> params);
+
+    /**
+     * 删除订单
+     *
+     * @param params
+     * @return
+     */
+    @POST("delete_order_info")
+    @FormUrlEncoded
+    Call<BaseResult<String>> deleteOrder(@FieldMap Map<String, Object> params);
+
+    /**
+     * 修改订单状态
+     *
+     * @param params
+     * @return
+     */
+    @POST("update_order_info")
+    @FormUrlEncoded
+    Call<BaseResult<String>> updateOrder(@FieldMap Map<String, Object> params);
 }

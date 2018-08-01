@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/color_bg"
     android:orientation="vertical"
     tools:context=".ui.account.LoginActivity">
 
@@ -12,12 +13,12 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="44dp"
-        android:layout_marginLeft="@dimen/sp_16"
-        android:layout_marginRight="@dimen/sp_16"
         android:layout_marginTop="40dp"
         android:background="@color/color_white"
         android:gravity="center_vertical"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
 
         <ImageView
             android:layout_width="wrap_content"
@@ -31,21 +32,32 @@
             android:layout_height="match_parent"
             android:layout_marginEnd="10dp"
             android:background="@null"
-            android:text="18275317961"
             android:hint="手机号"
             android:inputType="phone"
             android:maxLength="11"
+            android:text="18275317961"
             android:textSize="14sp" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="@color/color_white"
+        android:gravity="center_vertical">
+
+        <View
+            style="@style/comDivider"
+            android:layout_marginLeft="10dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="44dp"
-        android:layout_marginLeft="@dimen/sp_16"
-        android:layout_marginRight="@dimen/sp_16"
-        android:layout_marginTop="10dp"
+        android:background="@color/color_white"
         android:gravity="center_vertical"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
 
         <ImageView
             android:layout_width="wrap_content"
@@ -55,24 +67,34 @@
 
         <com.lgh.wine.utils.ClearEditText
             android:id="@+id/et_password"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginEnd="10dp"
+            android:layout_weight="1"
             android:background="@null"
             android:hint="密码"
             android:inputType="textPassword"
             android:textSize="14sp" />
+
+        <vn.luongvo.widget.iosswitchview.SwitchView
+            android:id="@+id/switch_view"
+            android:layout_width="48dp"
+            android:layout_height="wrap_content"
+            app:color_off="#e5e5e5"
+            app:color_on="@color/color_red" />
     </LinearLayout>
 
     <Button
         android:id="@+id/btn_login"
         style="?android:attr/borderlessButtonStyle"
         android:layout_width="match_parent"
-        android:layout_height="47dp"
+        android:layout_height="45dp"
         android:layout_marginLeft="@dimen/sp_16"
         android:layout_marginRight="@dimen/sp_16"
         android:layout_marginTop="10dp"
+        android:background="@color/color_grey_999999"
         android:text="登录"
+        android:textColor="@color/color_white"
         android:textSize="18sp" />
 
     <TextView

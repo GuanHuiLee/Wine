@@ -71,7 +71,11 @@
         <activity android:name=".ui.personal.UserInfoActivity" />
         <activity android:name=".ui.personal.AddressManageActivity" />
         <activity android:name=".ui.personal.AddAddressActivity" />
-        <activity android:name=".ui.personal.UpdatePwdActivity"></activity>
+        <activity android:name=".ui.personal.UpdatePwdActivity" />
+        <activity android:name=".ui.product.AddOrderActivity" />
+        <activity android:name=".ui.personal.AddressSelectActivity" />
+        <activity android:name=".ui.product.InvoiceSelectActivity" />
+        <activity android:name=".ui.personal.ProductOrderMainActivity"></activity>
     </application>
 
 </manifest>

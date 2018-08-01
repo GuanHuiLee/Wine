@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v7.widget.Toolbar;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -20,10 +22,14 @@ import com.lgh.wine.utils.MD5Helper;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import vn.luongvo.widget.iosswitchview.SwitchView;
 
 public class SetPasswordActivity extends BaseActivity implements AccountContract.View {
     @BindView(R.id.et_password)
     EditText et_password;
+    @BindView(R.id.switch_view)
+    SwitchView switch_view;
+
 
     private AccountPresenter presenter;
     private String phone;
@@ -37,7 +43,14 @@ public class SetPasswordActivity extends BaseActivity implements AccountContract
 
     @Override
     protected void initUI() {
-
+        switch_view.setOnCheckedChangeListener(new SwitchView.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(SwitchView switchView, boolean b) {
+                et_password.setTransformationMethod(b ? HideReturnsTransformationMethod.getInstance() :
+                        PasswordTransformationMethod.getInstance()
+                );
+            }
+        });
     }
 
     @Override
