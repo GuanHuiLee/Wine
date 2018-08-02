@@ -25,7 +25,7 @@ public class ProductBean implements Serializable {
     private String product_id;//规格
     private String product_icon;//图片
     private String product_judge;//评论
-    private String product_price;//单价
+    private float product_price;//单价
     private String product_stock;//库存
     private String product_name;
     private String product_pictures;//图片集合
@@ -168,11 +168,11 @@ public class ProductBean implements Serializable {
         this.product_judge = product_judge;
     }
 
-    public String getProduct_price() {
+    public float getProduct_price() {
         return product_price;
     }
 
-    public void setProduct_price(String product_price) {
+    public void setProduct_price(float product_price) {
         this.product_price = product_price;
     }
 

@@ -16,7 +16,7 @@ import java.util.Map;
 public interface OrderContract {
     public interface View extends BaseView {
 
-        void dealAddOrderResult();
+        void dealAddOrderResult(String id);
 
         void showOrderDetail(OrderBean bean);
 
@@ -27,6 +27,10 @@ public interface OrderContract {
         void showOrderList(List<OrderBean> list);
 
         void showOrderStatusNum(OrderStatusBean bean);
+
+        void showCodeError(String s);
+
+        void showPaySign(String s);
     }
 
     public abstract class Presenter extends BasePresenter<View, OrderModel> {
@@ -47,5 +51,7 @@ public interface OrderContract {
         public abstract void deleteOrder(Map<String, Object> params);
 
         public abstract void updateOrder(Map<String, Object> params);
+
+        public abstract void getPaySign(Map<String, Object> params);
     }
 }

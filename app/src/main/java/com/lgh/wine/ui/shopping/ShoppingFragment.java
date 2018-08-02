@@ -1,5 +1,6 @@
 package com.lgh.wine.ui.shopping;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -14,10 +15,12 @@ import android.widget.TextView;
 
 import com.lgh.wine.R;
 import com.lgh.wine.base.BaseFragment;
+import com.lgh.wine.beans.GoodsDetailBean;
 import com.lgh.wine.beans.ShoppingCartBean;
 import com.lgh.wine.contract.ShoppingCartContract;
 import com.lgh.wine.model.ShoppingCartModel;
 import com.lgh.wine.presenter.ShoppingCartPresenter;
+import com.lgh.wine.ui.product.AddOrderActivity;
 import com.lgh.wine.ui.shopping.adapter.ShoppingCartAdapter;
 import com.lgh.wine.utils.AccountUtil;
 import com.lgh.wine.utils.Constant;
@@ -25,6 +28,8 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -126,7 +131,7 @@ public class ShoppingFragment extends BaseFragment implements ShoppingCartContra
                 Integer key = entry.getKey();
                 Integer i = countMap.get(key);
                 ShoppingCartBean item = mShoppingCartAdapter.getItem(key);
-                totle_price += i * item.getGoods_price() * item.getGoods_count();
+                totle_price += i * item.getGoods_price();
 
                 cart_ids += item.getCart_id();
             }
@@ -233,7 +238,8 @@ public class ShoppingFragment extends BaseFragment implements ShoppingCartContra
                 mShoppingCartAdapter.selectAll();
                 break;
             case R.id.tv_buy:
-
+                if (getSelectCount() > 0)
+                    addOrder();
                 break;
             case R.id.tv_delete:
                 delete();
@@ -241,6 +247,35 @@ public class ShoppingFragment extends BaseFragment implements ShoppingCartContra
             default:
                 break;
         }
+    }
+
+    private void addOrder() {
+        Intent intent = new Intent(mContext, AddOrderActivity.class);
+
+        List<GoodsDetailBean> selectGoods = getSelectGoods();
+        intent.putExtra("data", (Serializable) selectGoods);
+        startActivity(intent);
+    }
+
+    private List<GoodsDetailBean> getSelectGoods() {
+        List<GoodsDetailBean> list = new ArrayList<>();
+        HashMap<Integer, Boolean> map = mShoppingCartAdapter.getMap();
+        HashMap<Integer, Integer> countMap = mShoppingCartAdapter.getCountMap();
+        Set<Map.Entry<Integer, Boolean>> entries = map.entrySet();
+        for (Map.Entry<Integer, Boolean> entry : entries) {
+            if (entry.getValue()) {
+                ShoppingCartBean productBean = mShoppingCartAdapter.getItem(entry.getKey());
+                GoodsDetailBean bean = new GoodsDetailBean();
+                bean.setCount(countMap.get(entry.getKey()));
+                bean.setGoods_id(productBean.getGoods_id());
+                bean.setName(productBean.getGoods_name());
+                bean.setPrice(productBean.getGoods_price());
+                bean.setIcon(productBean.getGoods_pic());
+
+                list.add(bean);
+            }
+        }
+        return list;
     }
 
     private void delete() {

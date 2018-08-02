@@ -44,7 +44,7 @@
                         android:id="@+id/tv_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="收货人：李官辉  17685302679"
+                        android:text="收货人："
                         android:textColor="@color/black"
                         android:textSize="15sp" />
 
@@ -52,8 +52,7 @@
                         android:id="@+id/tv_address"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:text="贵州省贵阳市南明区" />
+                        android:layout_marginTop="5dp" />
                 </LinearLayout>
 
                 <ImageView
@@ -62,53 +61,10 @@
                     android:src="@mipmap/ic_right_arrow" />
             </LinearLayout>
 
-            <LinearLayout
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:background="@color/color_white"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:padding="@dimen/dp_10">
-
-                <ImageView
-                    android:id="@+id/iv_icon"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:src="@mipmap/ic_launcher" />
-
-                <TextView
-                    android:id="@+id/tv_product"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dp_10"
-                    android:layout_weight="1"
-                    android:text="茅台镇原浆酱香散酒"
-                    android:textColor="@color/black"
-                    android:textSize="15sp" />
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="right"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/tv_price"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="￥268.00"
-                        android:textColor="@color/color_red" />
-
-                    <TextView
-                        android:id="@+id/tv_count"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:text="x6" />
-                </LinearLayout>
-
-
-            </LinearLayout>
+                android:layout_height="wrap_content" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -154,7 +110,7 @@
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentTop="true"
                     android:drawableEnd="@mipmap/ic_right_arrow"
-                    android:text="不需要发票"
+                    android:text="不需要"
                     android:textColor="@color/black"
                     android:textSize="15sp" />
             </RelativeLayout>
@@ -208,7 +164,7 @@
 
                 <com.lgh.wine.utils.ClearEditText
                     android:id="@+id/ct_code"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@null"
                     android:hint="请输入推荐人推广码（选填）"
@@ -235,7 +191,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@null"
-                    android:text="￥1608.00"
                     android:textColor="@color/color_red"
                     android:textSize="15sp" />
             </LinearLayout>
@@ -260,7 +215,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@null"
-                    android:text="￥30.00"
                     android:textColor="@color/color_red"
                     android:textSize="15sp" />
             </LinearLayout>
@@ -310,7 +264,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@null"
-            android:text="￥1578.00"
             android:textColor="@color/color_red"
             android:textSize="15sp" />
 

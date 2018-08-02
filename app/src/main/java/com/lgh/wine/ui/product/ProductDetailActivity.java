@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.lgh.wine.R;
 import com.lgh.wine.beans.CollectBean;
+import com.lgh.wine.beans.GoodsDetailBean;
 import com.lgh.wine.beans.SpoorBean;
 import com.lgh.wine.ui.shopping.ShoppingCartActivity;
 import com.lgh.wine.utils.Constant;
@@ -39,6 +40,8 @@ import com.lgh.wine.utils.AccountUtil;
 import com.lgh.wine.utils.GlideHelper;
 import com.lgh.wine.utils.VolumeView;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -206,8 +209,7 @@ public class ProductDetailActivity extends BaseActivity implements ShoppingCartC
             @Override
             public void onClick(View view) {
                 dialog.dismiss();
-//                addShoppoingCart();
-                addOrder();
+                addShoppoingCart();
             }
         });
 
@@ -269,7 +271,8 @@ public class ProductDetailActivity extends BaseActivity implements ShoppingCartC
         params.put("goods_name", productBean.getProduct_name() + grade_name);//商品名称（如果为定制酒是则将定制酒名称“-”拼接在后面）
         params.put("goods_price", productBean.getProduct_price());
         params.put("goods_pics", productBean.getProduct_pictures());
-        params.put("grade_id", grade_id);//定制酒ID（如果为定制酒时上传所选择的散酒id）
+        if (grade_id != null)
+            params.put("grade_id", grade_id);//定制酒ID（如果为定制酒时上传所选择的散酒id）
 
         cartPresenter.addShoppingCart(params);
     }
@@ -297,14 +300,26 @@ public class ProductDetailActivity extends BaseActivity implements ShoppingCartC
 
     @Override
     public void dealAddShoppingCartResult() {
-        showError("添加成功");
         if (type == TYPE_BUY) {
-//            addOrder();
-        }
+            addOrder();
+        } else
+            showError("添加成功");
     }
 
     private void addOrder() {
         Intent intent = new Intent(mContext, AddOrderActivity.class);
+
+        GoodsDetailBean bean = new GoodsDetailBean();
+        bean.setCount(count);
+        bean.setGoods_id(productBean.getProduct_id());
+        bean.setName(productBean.getProduct_name());
+        bean.setPrice(productBean.getProduct_price());
+        bean.setIcon(productBean.getProduct_icon());
+
+        List<GoodsDetailBean> list = new ArrayList<>();
+        list.add(bean);
+
+        intent.putExtra("data", (Serializable) list);
         startActivity(intent);
     }
 

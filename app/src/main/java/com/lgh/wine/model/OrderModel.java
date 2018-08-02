@@ -42,4 +42,8 @@ public class OrderModel extends BaseModel {
     public void updateOrder(Map<String, Object> params, MyCallBack callBack) {
         ApiFactory.getService().updateOrder(params).enqueue(callBack);
     }
+
+    public void getPaySign(Map<String, Object> params, MyCallBack callBack) {
+        ApiFactory.getService().getPaySign(params).enqueue(callBack);
+    }
 }

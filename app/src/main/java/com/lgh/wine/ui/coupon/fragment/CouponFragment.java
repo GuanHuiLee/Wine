@@ -110,6 +110,11 @@ public class CouponFragment extends BaseFragment implements CouponContract.View,
     }
 
     @Override
+    public void showUserCouponByPrice(CouponBean bean) {
+
+    }
+
+    @Override
     public void onRefresh(RefreshLayout refreshLayout) {
         getData();
     }

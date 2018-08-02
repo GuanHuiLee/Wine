@@ -41,6 +41,7 @@ public class AddressSelectActivity extends BaseActivity implements AddressContra
 
     private AddressPresenter presenter;
     private AddressSelectAdapter mAddressAdapter;
+    private List<AddressBean> list;
 
     @Override
     protected int getLayoutId() {
@@ -72,9 +73,15 @@ public class AddressSelectActivity extends BaseActivity implements AddressContra
                 startActivityForResult(intent, ADD_UPDATE_ADDRESS);
             }
 
+        });
+        mAddressAdapter.setOnItemViewClickListener(new BaseRecyclerAdapter.OnItemViewClickListener() {
             @Override
-            public void onCheckBoxClick(int position) {
-
+            public void onViewClick(View view, int position) {
+                AddressBean item = mAddressAdapter.getItem(position);
+                Intent i = new Intent();
+                i.putExtra("data", item);
+                setResult(RESULT_OK, i);
+                finish();
             }
         });
 
@@ -84,7 +91,13 @@ public class AddressSelectActivity extends BaseActivity implements AddressContra
     protected void initData() {
         presenter = new AddressPresenter(this, AddressModel.newInstance());
         addPresenter(presenter);
-        refreshLayout.autoRefresh();
+        list = (List<AddressBean>) getIntent().getSerializableExtra("data");
+        if (list != null) {
+            showAddressList(list);
+        } else {
+
+            refreshLayout.autoRefresh();
+        }
     }
 
     @Override

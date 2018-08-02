@@ -18,7 +18,7 @@ import java.util.Map;
 import retrofit2.Response;
 
 /**
- * Created by niujingtong on 2018/7/16.
+ * Created by ligh on 2018/7/16.
  * 模块：
  */
 public class OrderPresenter extends OrderContract.Presenter {
@@ -29,13 +29,16 @@ public class OrderPresenter extends OrderContract.Presenter {
 
     @Override
     public void addOrder(Map<String, Object> params) {
+        view.showProgress("加载中");
         model.addOrder(params, new MyCallBack<BaseResult<String>>() {
             @Override
             public void onSuc(Response<BaseResult<String>> response) {
                 if (isAttach) {
                     BaseResult<String> body = response.body();
                     if (body.getCode() == 200) {
-                        view.dealAddOrderResult();
+                        view.dealAddOrderResult(body.getData());
+                    } else if (body.getCode() == 1001) {
+                        view.showCodeError(body.getMsg());
                     } else view.showError(body.getMsg());
                     view.hideProgress();
                 }
@@ -160,6 +163,30 @@ public class OrderPresenter extends OrderContract.Presenter {
                     BaseResult<String> body = response.body();
                     if (body.getCode() == 200) {
                         view.dealUpdateOrderResult();
+                    } else view.showError(body.getMsg());
+                    view.hideProgress();
+                }
+            }
+
+            @Override
+            public void onFail(String message) {
+                if (isAttach) {
+                    view.showError(message);
+                    view.hideProgress();
+                }
+            }
+        });
+    }
+
+    @Override
+    public void getPaySign(Map<String, Object> params) {
+        model.getPaySign(params, new MyCallBack<BaseResult<String>>() {
+            @Override
+            public void onSuc(Response<BaseResult<String>> response) {
+                if (isAttach) {
+                    BaseResult<String> body = response.body();
+                    if (body.getCode() == 200) {
+                        view.showPaySign(body.getData());
                     } else view.showError(body.getMsg());
                     view.hideProgress();
                 }

@@ -308,6 +308,16 @@ public interface ApiService {
     Call<BaseResult<String>> getUserCouponList(@FieldMap Map<String, Object> params);
 
     /**
+     * 根据金额获取优惠券
+     *
+     * @param params
+     * @return
+     */
+    @POST("user_coupon_ifused")
+    @FormUrlEncoded
+    Call<BaseResult<String>> getUserCouponByPrice(@FieldMap Map<String, Object> params);
+
+    /**
      * 修改个人信息
      *
      * @param params
@@ -377,4 +387,14 @@ public interface ApiService {
     @POST("update_order_info")
     @FormUrlEncoded
     Call<BaseResult<String>> updateOrder(@FieldMap Map<String, Object> params);
+
+    /**
+     * 获取支付签名（目前只支持支付宝）
+     *
+     * @param params
+     * @return
+     */
+    @POST("pay_info_sign")
+    @FormUrlEncoded
+    Call<BaseResult<String>> getPaySign(@FieldMap Map<String, Object> params);
 }

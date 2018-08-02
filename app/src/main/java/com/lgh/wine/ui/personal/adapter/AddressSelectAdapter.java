@@ -48,26 +48,13 @@ public class AddressSelectAdapter extends BaseRecyclerAdapter<AddressBean, Addre
         holder.tvAddress.setText(item.getAddr_province() + item.getAddr_city() +
                 item.getAddr_district() + item.getDetail_address());
 
-        holder.ivEdit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-            }
-        });
-
-        holder.cb_address.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (onChildClickListener != null)
-                    onChildClickListener.onCheckBoxClick(position);
-            }
-        });
 
         holder.ivEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (onChildClickListener != null)
-                    onChildClickListener.onCheckBoxClick(position);
+                    onChildClickListener.onEditClick(position);
             }
         });
     }
@@ -107,7 +94,5 @@ public class AddressSelectAdapter extends BaseRecyclerAdapter<AddressBean, Addre
 
   public   interface OnChildClickListener {
         void onEditClick(int position);
-
-        void onCheckBoxClick(int position);
     }
 }

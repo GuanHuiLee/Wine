@@ -40,4 +40,11 @@ public class CouponModel extends BaseModel {
         params.put("is_used", type);
         ApiFactory.getService().getUserCouponList(params).enqueue(callBack);
     }
+
+    public void getUserCouponByPrice(String userId, float price, MyCallBack callBack) {
+        Map<String, Object> params = new HashMap<>();
+        params.put(Constant.USER_ID, userId);
+        params.put("order_amount", price);
+        ApiFactory.getService().getUserCouponByPrice(params).enqueue(callBack);
+    }
 }

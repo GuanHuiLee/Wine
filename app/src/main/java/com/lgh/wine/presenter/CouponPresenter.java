@@ -103,4 +103,30 @@ public class CouponPresenter extends CouponContract.Presenter {
             }
         });
     }
+
+    @Override
+    public void getUserCouponByPrice(String userId, float price) {
+        model.getUserCouponByPrice(userId, price, new MyCallBack<BaseResult<String>>() {
+            @Override
+            public void onSuc(Response<BaseResult<String>> response) {
+                if (isAttach) {
+                    BaseResult<String> body = response.body();
+                    if (body.getCode() == 200) {
+                        String data = body.getData();
+                        CouponBean bean = new Gson().fromJson(data, CouponBean.class);
+                        view.showUserCouponByPrice(bean);
+                    } else view.showError(body.getMsg());
+                    view.hideProgress();
+                }
+            }
+
+            @Override
+            public void onFail(String message) {
+                if (isAttach) {
+                    view.showError(message);
+                    view.hideProgress();
+                }
+            }
+        });
+    }
 }

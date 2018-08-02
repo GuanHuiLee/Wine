@@ -21,6 +21,8 @@ public interface CouponContract {
         void dealAddUserCouponResult();
 
         void showUserCouponList(List<CouponBean> beans);
+
+        void showUserCouponByPrice(CouponBean bean);
     }
 
     public abstract class Presenter extends BasePresenter<View, CouponModel> {
@@ -34,5 +36,7 @@ public interface CouponContract {
         public abstract void addUserCoupon(String userId, String couponId);
 
         public abstract void getUserCouponList(String userId, int type);
+
+        public abstract void getUserCouponByPrice(String userId, float price);
     }
 }

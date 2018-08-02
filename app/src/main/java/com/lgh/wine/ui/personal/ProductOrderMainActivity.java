@@ -120,7 +120,8 @@ public class ProductOrderMainActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-
+        int type = getIntent().getIntExtra("type", OrderFragment.TYPE_ALL);
+        viewpager.setCurrentItem(type);
     }
 
     @Override

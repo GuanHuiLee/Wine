@@ -31,7 +31,7 @@ public class OrderBean {
     private long send_time;
     private long complete_time;
     private long update_time;
-    private List<ProductBean> orderGoodsListl;
+    private List<ShoppingCartBean> orderGoodsList;
     private int order_goods_count;
     private String orderAddress;
 
@@ -211,12 +211,12 @@ public class OrderBean {
         this.update_time = update_time;
     }
 
-    public List<ProductBean> getOrderGoodsListl() {
-        return orderGoodsListl;
+    public List<ShoppingCartBean> getOrderGoodsList() {
+        return orderGoodsList;
     }
 
-    public void setOrderGoodsListl(List<ProductBean> orderGoodsListl) {
-        this.orderGoodsListl = orderGoodsListl;
+    public void setOrderGoodsList(List<ShoppingCartBean> orderGoodsList) {
+        this.orderGoodsList = orderGoodsList;
     }
 
     public int getOrder_goods_count() {

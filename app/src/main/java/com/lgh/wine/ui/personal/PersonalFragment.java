@@ -6,23 +6,29 @@ import android.content.pm.ActivityInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.lgh.wine.MainActivity;
+import com.jauker.widget.BadgeView;
 import com.lgh.wine.R;
 import com.lgh.wine.base.BaseFragment;
 import com.lgh.wine.beans.Account;
+import com.lgh.wine.beans.OrderBean;
+import com.lgh.wine.beans.OrderStatusBean;
+import com.lgh.wine.contract.OrderContract;
 import com.lgh.wine.contract.UploadFileContract;
+import com.lgh.wine.model.OrderModel;
 import com.lgh.wine.model.UploadFileModel;
+import com.lgh.wine.presenter.OrderPresenter;
 import com.lgh.wine.presenter.UploadFilePresenter;
 import com.lgh.wine.ui.collect.CollectListActivity;
 import com.lgh.wine.ui.coupon.CouponMainActivity;
-import com.lgh.wine.ui.home.HomeFragment;
 import com.lgh.wine.ui.product.SpoorListActivity;
 import com.lgh.wine.utils.AccountUtil;
 import com.lgh.wine.utils.Constant;
@@ -35,11 +41,12 @@ import com.yanzhenjie.permission.Action;
 import com.yanzhenjie.permission.AndPermission;
 import com.zhihu.matisse.Matisse;
 import com.zhihu.matisse.MimeType;
-import com.zhihu.matisse.engine.impl.GlideEngine;
 import com.zhihu.matisse.filter.Filter;
 import com.zhihu.matisse.internal.entity.CaptureStrategy;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -50,7 +57,22 @@ import static android.app.Activity.RESULT_OK;
  * Created by ligh on 2018/7/12.
  * 模块：
  */
-public class PersonalFragment extends BaseFragment implements UploadFileContract.View {
+public class PersonalFragment extends BaseFragment implements UploadFileContract.View, OrderContract.View {
+    @BindView(R.id.tv_need_access)
+    TextView tv_access;
+    @BindView(R.id.tv_need_send)
+    TextView tv_send;
+    @BindView(R.id.tv_need_pay)
+    TextView tv_pay;
+    @BindView(R.id.tv_receive)
+    TextView tv_receive;
+
+    BadgeView bv_access;
+    BadgeView bv_send;
+    BadgeView bv_receive;
+    BadgeView bv_pay;
+
+
     public static final String TAG = PersonalFragment.class.getName();
     private static final int REQUEST_CODE_CHOOSE = 1;
     List<Uri> mSelected;
@@ -59,6 +81,7 @@ public class PersonalFragment extends BaseFragment implements UploadFileContract
     ImageView iv_icon;
 
     private UploadFilePresenter presenter;
+    private OrderPresenter orderPresenter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -69,16 +92,37 @@ public class PersonalFragment extends BaseFragment implements UploadFileContract
     @Override
     protected void initUI() {
         setIcon();
+
+        bv_access = new BadgeView(mContext);
+        bv_access.setTargetView(tv_access);
+        bv_pay = new BadgeView(mContext);
+        bv_pay.setTargetView(tv_pay);
+        bv_receive = new BadgeView(mContext);
+        bv_receive.setTargetView(tv_receive);
+        bv_send = new BadgeView(mContext);
+        bv_send.setTargetView(tv_send);
+
+        bv_pay.setBadgeGravity(Gravity.TOP | Gravity.RIGHT);
+        bv_access.setBadgeGravity(Gravity.TOP | Gravity.RIGHT);
+        bv_receive.setBadgeGravity(Gravity.TOP | Gravity.RIGHT);
+        bv_send.setBadgeGravity(Gravity.TOP | Gravity.RIGHT);
     }
 
     @Override
     protected void initData() {
         presenter = new UploadFilePresenter(this, UploadFileModel.newInstance());
+        orderPresenter = new OrderPresenter(this, OrderModel.newInstance());
         addPresenter(presenter);
+        addPresenter(orderPresenter);
+
+        Map<String, Object> params = new HashMap<>();
+        params.put(Constant.USER_ID, AccountUtil.getUserId());
+        orderPresenter.getOrderStatusNum(params);
     }
 
     @OnClick({R.id.iv_icon, R.id.input_spoor, R.id.input_collect, R.id.input_coupon, R.id.tv_edit
-            , R.id.iv_setting, R.id.iv_feedback})
+            , R.id.iv_setting, R.id.iv_feedback
+            , R.id.tv_need_pay, R.id.tv_need_send, R.id.tv_receive, R.id.tv_need_access})
     public void clickView(View view) {
         switch (view.getId()) {
             case R.id.iv_icon:
@@ -102,9 +146,28 @@ public class PersonalFragment extends BaseFragment implements UploadFileContract
             case R.id.iv_setting:
                 startActivity(new Intent(mContext, SettingActivity.class));
                 break;
+
+            case R.id.tv_need_pay:
+                startOrder(1);
+                break;
+            case R.id.tv_need_send:
+                startOrder(2);
+                break;
+            case R.id.tv_need_access:
+                startOrder(4);
+                break;
+            case R.id.tv_receive:
+                startOrder(3);
+                break;
             default:
                 break;
         }
+    }
+
+    private void startOrder(int typeNeedPay) {
+        Intent intent = new Intent(mContext, ProductOrderMainActivity.class);
+        intent.putExtra("type", typeNeedPay);
+        startActivity(intent);
     }
 
     private void selectPic() {
@@ -186,5 +249,60 @@ public class PersonalFragment extends BaseFragment implements UploadFileContract
         String userIcon = account.getUserIcon();
         if (!TextUtils.isEmpty(userIcon))
             GlideHelper.loadCircleImage(mContext, iv_icon, Constant.IMG_IP + userIcon, R.mipmap.iv_error);
+    }
+
+    @Override
+    public void dealAddOrderResult(String id) {
+
+    }
+
+    @Override
+    public void showOrderDetail(OrderBean bean) {
+
+    }
+
+    @Override
+    public void dealDeleteOrderResult() {
+
+    }
+
+    @Override
+    public void dealUpdateOrderResult() {
+
+    }
+
+    @Override
+    public void showOrderList(List<OrderBean> list) {
+
+    }
+
+    @Override
+    public void showOrderStatusNum(OrderStatusBean bean) {
+        if (bean != null) {
+            int dfh = bean.getOrder_num_dfh();
+            int dfk = bean.getOrder_num_dfk();
+            int dsh = bean.getOrder_num_dsh();
+            int dpj = bean.getOrder_num_dpj();
+
+            bv_send.setBadgeCount(dfh);
+            bv_receive.setBadgeCount(dsh);
+            bv_pay.setBadgeCount(dfk);
+            bv_access.setBadgeCount(dpj);
+
+            bv_send.setVisibility(dfh != 0 ? View.VISIBLE : View.GONE);
+            bv_receive.setVisibility(dsh != 0 ? View.VISIBLE : View.GONE);
+            bv_pay.setVisibility(dfk != 0 ? View.VISIBLE : View.GONE);
+            bv_access.setVisibility(dpj != 0 ? View.VISIBLE : View.GONE);
+        }
+    }
+
+    @Override
+    public void showCodeError(String s) {
+
+    }
+
+    @Override
+    public void showPaySign(String s) {
+
     }
 }

@@ -22,6 +22,7 @@ import com.lgh.wine.presenter.OrderPresenter;
 import com.lgh.wine.ui.coupon.adapter.CouponUserAdapter;
 import com.lgh.wine.ui.product.adapter.OrderAdapter;
 import com.lgh.wine.utils.AccountUtil;
+import com.lgh.wine.utils.Constant;
 import com.orhanobut.logger.Logger;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -105,7 +106,7 @@ public class OrderFragment extends BaseFragment implements OrderContract.View, O
         Logger.d("type: " + type);
 
         Map<String, Object> params = new HashMap<>();
-
+        params.put(Constant.USER_ID, AccountUtil.getUserId());
         presenter.getOrderList(params);
     }
 
@@ -118,7 +119,7 @@ public class OrderFragment extends BaseFragment implements OrderContract.View, O
     }
 
     @Override
-    public void dealAddOrderResult() {
+    public void dealAddOrderResult(String id) {
 
     }
 
@@ -140,12 +141,32 @@ public class OrderFragment extends BaseFragment implements OrderContract.View, O
     @Override
     public void showOrderList(List<OrderBean> beans) {
         if (beans != null) {
-            adapter.loadData(beans);
+            if (type == TYPE_ALL) {
+                adapter.loadData(beans);
+            } else {
+                List<OrderBean> list = new ArrayList<>();
+                for (OrderBean bean : beans) {
+                    if (bean.getOrder_status() == type) {
+                        list.add(bean);
+                    }
+                }
+                adapter.loadData(list);
+            }
         }
     }
 
     @Override
     public void showOrderStatusNum(OrderStatusBean bean) {
+
+    }
+
+    @Override
+    public void showCodeError(String s) {
+
+    }
+
+    @Override
+    public void showPaySign(String s) {
 
     }
 }
