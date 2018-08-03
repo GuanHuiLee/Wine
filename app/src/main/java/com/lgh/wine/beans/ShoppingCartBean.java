@@ -1,10 +1,12 @@
 package com.lgh.wine.beans;
 
+import java.io.Serializable;
+
 /**
  * Created by niujingtong on 2018/7/18.
  * 模块：
  */
-public class ShoppingCartBean {
+public class ShoppingCartBean implements Serializable {
     private String cart_id;
     private String goods_name;
     private String goods_pics;

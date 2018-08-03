@@ -20,7 +20,11 @@ public class CommentModel extends BaseModel {
     }
 
     public void getCommentList(Map<String, Object> params, MyCallBack callBack) {
-        ApiFactory.getService().getCommentList(params).enqueue(callBack);
+        ApiFactory.getService().getOrderCommentList(params).enqueue(callBack);
+    }
+
+    public void addComment(Map<String, Object> params, MyCallBack callBack) {
+        ApiFactory.getService().addComment(params).enqueue(callBack);
     }
 
 }

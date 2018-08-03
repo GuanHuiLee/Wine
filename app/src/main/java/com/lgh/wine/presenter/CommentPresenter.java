@@ -50,4 +50,28 @@ public class CommentPresenter extends CommentContract.Presenter {
             }
         });
     }
+
+    @Override
+    public void addComment(Map<String, Object> params) {
+        model.addComment(params, new MyCallBack<BaseResult<String>>() {
+            @Override
+            public void onSuc(Response<BaseResult<String>> response) {
+                if (isAttach) {
+                    BaseResult<String> body = response.body();
+                    if (body.getCode() == 200) {
+                        view.dealAddCommentResult();
+                    } else view.showError(body.getMsg());
+                    view.hideProgress();
+                }
+            }
+
+            @Override
+            public void onFail(String message) {
+                if (isAttach) {
+                    view.showError(message);
+                    view.hideProgress();
+                }
+            }
+        });
+    }
 }

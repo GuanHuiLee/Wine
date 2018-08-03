@@ -126,6 +126,8 @@
                         android:drawableTop="@mipmap/ic_pending_payment"
                         android:gravity="center"
                         android:paddingBottom="@dimen/dp_10"
+                        android:paddingLeft="2dp"
+                        android:paddingRight="2dp"
                         android:paddingTop="@dimen/dp_10"
                         android:text="待付款" />
                 </LinearLayout>
@@ -144,6 +146,8 @@
                         android:drawableTop="@mipmap/ic_pending_delivery"
                         android:gravity="center"
                         android:paddingBottom="@dimen/dp_10"
+                        android:paddingLeft="2dp"
+                        android:paddingRight="2dp"
                         android:paddingTop="@dimen/dp_10"
                         android:text="待发货" />
                 </LinearLayout>
@@ -162,6 +166,8 @@
                         android:drawableTop="@mipmap/ic_pending_receipt"
                         android:gravity="center"
                         android:paddingBottom="@dimen/dp_10"
+                        android:paddingLeft="2dp"
+                        android:paddingRight="2dp"
                         android:paddingTop="@dimen/dp_10"
                         android:text="待收货" />
                 </LinearLayout>
@@ -180,6 +186,8 @@
                         android:drawableTop="@mipmap/ic_pending_comment"
                         android:gravity="center"
                         android:paddingBottom="@dimen/dp_10"
+                        android:paddingLeft="2dp"
+                        android:paddingRight="2dp"
                         android:paddingTop="@dimen/dp_10"
                         android:text="待评价" />
                 </LinearLayout>
@@ -215,6 +223,7 @@
                 app:inputItemTitle="浏览足迹" />
 
             <com.lgh.wine.utils.InputItemView
+                android:id="@+id/input_comment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/color_white"

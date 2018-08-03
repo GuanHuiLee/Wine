@@ -17,6 +17,7 @@ import com.lgh.wine.beans.ShoppingCartBean;
 import com.lgh.wine.utils.BaseRecyclerAdapter;
 import com.lgh.wine.utils.Constant;
 import com.lgh.wine.utils.GlideHelper;
+import com.lgh.wine.utils.TimeUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +30,11 @@ import butterknife.ButterKnife;
  * 模块：
  */
 public class OrderAdapter extends BaseRecyclerAdapter<OrderBean, OrderAdapter.ViewHolder> {
+    public OnChildClickListener onChildClickListener;
+
+    public void setOnChildClickListener(OnChildClickListener onChildClickListener) {
+        this.onChildClickListener = onChildClickListener;
+    }
 
     public OrderAdapter(Context mContext) {
         super(mContext);
@@ -41,7 +47,7 @@ public class OrderAdapter extends BaseRecyclerAdapter<OrderBean, OrderAdapter.Vi
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, int position) {
         super.onBindViewHolder(holder, position);
         OrderBean item = getItem(position);
 
@@ -56,6 +62,70 @@ public class OrderAdapter extends BaseRecyclerAdapter<OrderBean, OrderAdapter.Vi
         holder.recyclerView.setAdapter(adapter);
         holder.recyclerView.setNestedScrollingEnabled(false);
         adapter.loadData(getList(orderGoodsList));
+
+        holder.tv_buy_again.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (onChildClickListener != null)
+                    onChildClickListener.onPayClick(holder.getAdapterPosition());
+            }
+        });
+        holder.tv_delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (onChildClickListener != null)
+                    onChildClickListener.onDeleteClick(holder.getAdapterPosition());
+            }
+        });
+
+        int order_status = item.getOrder_status();
+        switch (order_status) {//0待支付，1待发货，2待收货，3已完成，4待评价，5支付已关闭
+            case 0:
+                holder.tv_time.setVisibility(View.VISIBLE);
+                holder.tv_status.setText("等待付款");
+                holder.tv_buy_again.setText("去支付");
+                holder.tv_delete.setVisibility(View.GONE);
+                holder.tv_time.setText(TimeUtils.getDeadline(item.getCreate_time()));
+                break;
+            case 1:
+                holder.tv_time.setVisibility(View.GONE);
+                holder.tv_status.setText("已确认");
+                holder.tv_buy_again.setText("再次购买");
+                holder.tv_delete.setVisibility(View.GONE);
+                break;
+            case 2:
+                holder.tv_time.setVisibility(View.GONE);
+                holder.tv_status.setText("已确认");
+                holder.tv_buy_again.setText("确认收货");
+                holder.tv_delete.setText("查看物流");
+                holder.tv_delete.setVisibility(View.VISIBLE);
+                break;
+            case 3:
+                holder.tv_time.setVisibility(View.GONE);
+                holder.tv_status.setText("已完成");
+                holder.tv_buy_again.setText("去支付");
+                holder.tv_delete.setVisibility(View.VISIBLE);
+                break;
+            case 4:
+                holder.tv_time.setVisibility(View.GONE);
+                holder.tv_status.setText("待评价");
+                holder.tv_buy_again.setText("评价");
+                holder.tv_delete.setText("删除订单");
+                holder.tv_delete.setVisibility(View.VISIBLE);
+                break;
+            case 5:
+                holder.tv_time.setVisibility(View.GONE);
+                holder.tv_status.setText("已取消");
+                holder.tv_buy_again.setText("去支付");
+                holder.tv_delete.setVisibility(View.VISIBLE);
+                break;
+            default:
+                holder.tv_time.setVisibility(View.GONE);
+                holder.tv_status.setText("删除订单");
+                holder.tv_buy_again.setText("再次购买");
+                holder.tv_delete.setVisibility(View.VISIBLE);
+                break;
+        }
     }
 
     private List<GoodsDetailBean> getList(List<ShoppingCartBean> orderGoodsList) {
@@ -101,9 +171,18 @@ public class OrderAdapter extends BaseRecyclerAdapter<OrderBean, OrderAdapter.Vi
         @BindView(R.id.recyclerView)
         RecyclerView recyclerView;
 
+        @BindView(R.id.tv_time)
+        TextView tv_time;
+
         public ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
+    }
+
+    public interface OnChildClickListener {
+        void onPayClick(int position);
+
+        void onDeleteClick(int position);
     }
 }

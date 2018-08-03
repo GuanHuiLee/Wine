@@ -17,6 +17,8 @@ public interface CommentContract {
     public interface View extends BaseView {
 
         void showCommentList(List<CommentBean> list);
+
+        void dealAddCommentResult();
     }
 
     public abstract class Presenter extends BasePresenter<View, CommentModel> {
@@ -27,5 +29,7 @@ public interface CommentContract {
 
 
         public abstract void getCommentList(Map<String, Object> params);
+
+        public abstract void addComment(Map<String, Object> params);
     }
 }

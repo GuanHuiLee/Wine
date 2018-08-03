@@ -1,5 +1,6 @@
 package com.lgh.wine.ui.product;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -10,16 +11,12 @@ import android.widget.FrameLayout;
 
 import com.lgh.wine.R;
 import com.lgh.wine.base.BaseFragment;
-import com.lgh.wine.beans.CouponBean;
 import com.lgh.wine.beans.OrderBean;
 import com.lgh.wine.beans.OrderStatusBean;
-import com.lgh.wine.contract.CouponContract;
 import com.lgh.wine.contract.OrderContract;
-import com.lgh.wine.model.CouponModel;
 import com.lgh.wine.model.OrderModel;
-import com.lgh.wine.presenter.CouponPresenter;
 import com.lgh.wine.presenter.OrderPresenter;
-import com.lgh.wine.ui.coupon.adapter.CouponUserAdapter;
+import com.lgh.wine.ui.personal.AddOrderCommentActivity;
 import com.lgh.wine.ui.product.adapter.OrderAdapter;
 import com.lgh.wine.utils.AccountUtil;
 import com.lgh.wine.utils.Constant;
@@ -27,6 +24,12 @@ import com.orhanobut.logger.Logger;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
+import com.xgr.easypay.EasyPay;
+import com.xgr.easypay.alipay.AliPay;
+import com.xgr.easypay.alipay.AlipayInfoImpli;
+import com.xgr.easypay.callback.IPayCallback;
+import com.xgr.easypay.wxpay.WXPay;
+import com.xgr.easypay.wxpay.WXPayInfoImpli;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -34,6 +37,8 @@ import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
+
+import static android.app.Activity.RESULT_OK;
 
 /**
  * Created by ligh on 2018/7/12.
@@ -73,6 +78,95 @@ public class OrderFragment extends BaseFragment implements OrderContract.View, O
         recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         adapter = new OrderAdapter(mContext);
         recyclerView.setAdapter(adapter);
+        adapter.setOnChildClickListener(new OrderAdapter.OnChildClickListener() {
+            @Override
+            public void onPayClick(int position) {
+                OrderBean item = adapter.getItem(position);
+                dealPayClick(item);
+            }
+
+            @Override
+            public void onDeleteClick(int position) {
+                OrderBean item = adapter.getItem(position);
+                dealDeleteClick(item);
+            }
+        });
+    }
+
+    private void dealDeleteClick(OrderBean item) {
+        int order_status = item.getOrder_status();
+
+        switch (order_status) {//0待支付，1待发货，2待收货，3已完成，4待评价，5支付已关闭
+            case 0:
+                break;
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                deleteOrder(item);
+                break;
+            case 5:
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void deleteOrder(OrderBean item) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("order_id", item.getOrder_id());
+        presenter.deleteOrder(params);
+    }
+
+    private void dealPayClick(OrderBean item) {
+        int order_status = item.getOrder_status();
+
+        switch (order_status) {//0待支付，1待发货，2待收货，3已完成，4待评价，5支付已关闭
+            case 0:
+                pay(item.getOrder_id());
+                break;
+            case 1:
+                reBuy(item);
+                break;
+            case 2:
+                receiveGoods(item);
+                break;
+            case 3:
+                break;
+            case 4:
+                comment(item);
+                break;
+            case 5:
+                break;
+            default:
+                break;
+        }
+
+    }
+
+    private void comment(OrderBean item) {
+        Intent intent = new Intent(mContext, AddOrderCommentActivity.class);
+        intent.putExtra("data", item);
+        startActivity(intent);
+    }
+
+    private void receiveGoods(OrderBean item) {
+
+    }
+
+    private void reBuy(OrderBean item) {
+
+    }
+
+    private void pay(String order_id) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("order_id", order_id);
+        params.put("pay_type", 1);//pay_type:1为支付宝2位微信支付
+
+        presenter.getPaySign(params);
     }
 
     @Override
@@ -130,7 +224,8 @@ public class OrderFragment extends BaseFragment implements OrderContract.View, O
 
     @Override
     public void dealDeleteOrderResult() {
-
+        showError("订单删除成功");
+        refreshLayout.autoRefresh();
     }
 
     @Override
@@ -167,6 +262,59 @@ public class OrderFragment extends BaseFragment implements OrderContract.View, O
 
     @Override
     public void showPaySign(String s) {
-
+        alipay(s);
     }
+
+    /**
+     * 支付宝支付
+     */
+    private void alipay(String s) {
+        AliPay aliPay = new AliPay();
+        //构造支付宝订单实体。一般都是由服务端直接返回。
+        AlipayInfoImpli alipayInfoImpli = new AlipayInfoImpli();
+        alipayInfoImpli.setOrderInfo(s);
+        //策略场景类调起支付方法开始支付，以及接收回调。
+        EasyPay.pay(aliPay, getActivity(), alipayInfoImpli, new IPayCallback() {
+            @Override
+            public void success() {
+                showError("支付成功");
+            }
+
+            @Override
+            public void failed() {
+                showError("支付失败");
+            }
+
+            @Override
+            public void cancel() {
+                showError("支付取消");
+            }
+        });
+    }
+
+    /**
+     * 微信支付
+     */
+    private void wxpay(WXPayInfoImpli wxPayInfoImpli) {
+        String wxAppId = "wx432ba0b2e3addde9";
+        WXPay wxPay = WXPay.getInstance(getActivity(), wxAppId);
+        EasyPay.pay(wxPay, getActivity(), wxPayInfoImpli, new IPayCallback() {
+            @Override
+            public void success() {
+                showError("支付成功");
+            }
+
+            @Override
+            public void failed() {
+                showError("支付失败");
+            }
+
+            @Override
+            public void cancel() {
+                showError("支付取消");
+            }
+        });
+    }
+
 }
+

@@ -16,7 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme1"
         tools:replace="label">
-        <activity android:name=".MainActivity" />
+        <activity
+            android:name=".MainActivity"
+            android:windowSoftInputMode="adjustPan" />
         <activity android:name=".ui.account.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -80,7 +82,12 @@
             android:exported="true"
             android:launchMode="singleTop"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-        <activity android:name=".ui.personal.ProductOrderMainActivity"></activity>
+        <activity android:name=".ui.personal.ProductOrderMainActivity" />
+        <activity android:name=".ui.personal.MyLikesActivity" />
+        <activity android:name=".ui.personal.MyCommentListActivity" />
+        <activity android:name=".ui.personal.MyCommentDetailActivity" />
+        <activity android:name=".ui.personal.AddOrderCommentActivity" />
+        <activity android:name=".ui.personal.AddOrderCommentSuccessActivity"></activity>
     </application>
 
 </manifest>

@@ -24,6 +24,7 @@ public class TimeUtils {
         SimpleDateFormat format = new SimpleDateFormat("yyyy.MM.dd HH:mm");
         return format.format(date);
     }
+
     public static String changeMDHM(Long l) {
         Date date = new Date(l);
         SimpleDateFormat format = new SimpleDateFormat("MM-dd HH:mm");
@@ -170,5 +171,23 @@ public class TimeUtils {
 
         int i = calendar.get(Calendar.DAY_OF_MONTH);
         return i;
+    }
+
+    public static String getDeadline(long create_time) {
+        Calendar calendar1 = Calendar.getInstance();
+        calendar1.setTime(new Date(create_time));
+        calendar1.set(calendar1.get(Calendar.YEAR), calendar1.get(Calendar.MONTH),
+                calendar1.get(Calendar.DAY_OF_MONTH) + 2, 0, 0, 0);
+        Date date1 = calendar1.getTime();
+
+        Calendar calendar2 = Calendar.getInstance();
+        Date date2 = calendar2.getTime();
+
+        long second = (date1.getTime() - date2.getTime()) / (long) 1000;
+        int hour = (int) (second / 3600);
+        int minute = (int) ((second - hour * 3600) / 60);
+        int se = (int) (second - hour * 300 - minute * 60) / 1000;
+        String str = hour + "小时" + minute + "分钟" + se + "秒";
+        return str;
     }
 }

@@ -1,12 +1,13 @@
 package com.lgh.wine.beans;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by niujingtong on 2018/8/1.
  * 模块：
  */
-public class OrderBean {
+public class OrderBean implements Serializable{
     private String order_id;
     private String user_id;
     private String addr_id;

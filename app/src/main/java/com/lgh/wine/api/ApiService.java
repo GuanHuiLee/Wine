@@ -157,14 +157,35 @@ public interface ApiService {
     Call<BaseResult<String>> deleteCollect(@FieldMap Map<String, Object> params);
 
     /**
-     * 评论列表
+     * 获取商品评论列表
      *
      * @param params
      * @return
      */
     @POST("select_goods_comment_list")
     @FormUrlEncoded
-    Call<BaseResult<String>> getCommentList(@FieldMap Map<String, Object> params);
+    Call<BaseResult<String>> getGoodsCommentList(@FieldMap Map<String, Object> params);
+
+
+    /**
+     * 获取用户评价列表
+     *
+     * @param params
+     * @return
+     */
+    @POST("select_order_comment_list")
+    @FormUrlEncoded
+    Call<BaseResult<String>> getOrderCommentList(@FieldMap Map<String, Object> params);
+
+    /**
+     * 商品评价
+     *
+     * @param params
+     * @return
+     */
+    @POST("add_goods_comment")
+    @FormUrlEncoded
+    Call<BaseResult<String>> addComment(@FieldMap Map<String, Object> params);
 
     /**
      * 获取发现
