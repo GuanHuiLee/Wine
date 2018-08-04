@@ -12,23 +12,32 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name_1"
-        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme1"
         tools:replace="label">
         <activity
             android:name=".MainActivity"
-            android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".ui.account.LoginActivity">
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name=".ui.account.LoginActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.account.RegisterActivity" />
-        <activity android:name=".ui.account.LoginBySmsCodeActivity" />
-        <activity android:name=".ui.account.SetPasswordActivity" />
+        <activity
+            android:name=".ui.account.RegisterActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.account.LoginBySmsCodeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.account.SetPasswordActivity"
+            android:screenOrientation="portrait" />
 
         <meta-data
             android:name="DATABASE"
@@ -43,15 +52,30 @@
             android:name="DOMAIN_PACKAGE_NAME"
             android:value="com.lgh.wine" />
 
-        <activity android:name=".ui.web.WebActivity" />
-        <activity android:name=".ui.product.ProductListActivity" />
-        <activity android:name=".ui.product.ProductDetailActivity" />
-        <activity android:name=".ui.coupon.CouponListActivity" />
-        <activity android:name=".ui.product.ProductParamsActivity" />
-        <activity android:name=".ui.shopping.ShoppingCartActivity" />
-        <activity android:name=".ui.discover.ArticleDetailActivity" />
+        <activity
+            android:name=".ui.web.WebActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.product.ProductListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.product.ProductDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.coupon.CouponListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.product.ProductParamsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.shopping.ShoppingCartActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.discover.ArticleDetailActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/Base.Theme.AppCompat" />
 
         <provider
@@ -64,30 +88,74 @@
                 android:resource="@xml/filepaths" />
         </provider>
 
-        <activity android:name=".ui.personal.SettingActivity" />
-        <activity android:name=".ui.personal.AboutActivity" />
-        <activity android:name=".ui.personal.FeedbackActivity" />
-        <activity android:name=".ui.product.SpoorListActivity" />
-        <activity android:name=".ui.collect.CollectListActivity" />
-        <activity android:name=".ui.coupon.CouponMainActivity" />
-        <activity android:name=".ui.personal.UserInfoActivity" />
-        <activity android:name=".ui.personal.AddressManageActivity" />
-        <activity android:name=".ui.personal.AddAddressActivity" />
-        <activity android:name=".ui.personal.UpdatePwdActivity" />
-        <activity android:name=".ui.product.AddOrderActivity" />
-        <activity android:name=".ui.personal.AddressSelectActivity" />
-        <activity android:name=".ui.product.InvoiceSelectActivity" />
+        <activity
+            android:name=".ui.personal.SettingActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.personal.AboutActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.personal.FeedbackActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.product.SpoorListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.collect.CollectListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.coupon.CouponMainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.personal.UserInfoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.personal.AddressManageActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.personal.AddAddressActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.personal.UpdatePwdActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.product.AddOrderActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.personal.AddressSelectActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.product.InvoiceSelectActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".wxapi.WXPayEntryActivity"
             android:exported="true"
             android:launchMode="singleTop"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-        <activity android:name=".ui.personal.ProductOrderMainActivity" />
-        <activity android:name=".ui.personal.MyLikesActivity" />
-        <activity android:name=".ui.personal.MyCommentListActivity" />
-        <activity android:name=".ui.personal.MyCommentDetailActivity" />
-        <activity android:name=".ui.personal.AddOrderCommentActivity" />
-        <activity android:name=".ui.personal.AddOrderCommentSuccessActivity"></activity>
+        <activity
+            android:name=".ui.personal.ProductOrderMainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.personal.MyLikesActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.personal.MyCommentListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.personal.MyCommentDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.personal.AddOrderCommentActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.personal.AddOrderCommentSuccessActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.personal.TrackerActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.product.OrderDetailActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

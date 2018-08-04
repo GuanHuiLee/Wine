@@ -21,6 +21,7 @@ import com.lgh.wine.base.BaseFragment;
 import com.lgh.wine.beans.Account;
 import com.lgh.wine.beans.OrderBean;
 import com.lgh.wine.beans.OrderStatusBean;
+import com.lgh.wine.beans.TrackerBean;
 import com.lgh.wine.contract.OrderContract;
 import com.lgh.wine.contract.UploadFileContract;
 import com.lgh.wine.model.OrderModel;
@@ -307,6 +308,11 @@ public class PersonalFragment extends BaseFragment implements UploadFileContract
 
     @Override
     public void showPaySign(String s) {
+
+    }
+
+    @Override
+    public void showTracker(TrackerBean.DataBean trackerBean) {
 
     }
 }

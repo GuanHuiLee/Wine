@@ -62,6 +62,14 @@ public class OrderAdapter extends BaseRecyclerAdapter<OrderBean, OrderAdapter.Vi
         holder.recyclerView.setAdapter(adapter);
         holder.recyclerView.setNestedScrollingEnabled(false);
         adapter.loadData(getList(orderGoodsList));
+        holder.recyclerView.setClickable(false);
+        adapter.setOnItemViewClickListener(new OnItemViewClickListener() {
+            @Override
+            public void onViewClick(View view, int position) {
+                if (onChildClickListener != null)
+                    onChildClickListener.onItemClick(holder.getAdapterPosition());
+            }
+        });
 
         holder.tv_buy_again.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,6 +85,7 @@ public class OrderAdapter extends BaseRecyclerAdapter<OrderBean, OrderAdapter.Vi
                     onChildClickListener.onDeleteClick(holder.getAdapterPosition());
             }
         });
+
 
         int order_status = item.getOrder_status();
         switch (order_status) {//0待支付，1待发货，2待收货，3已完成，4待评价，5支付已关闭
@@ -103,8 +112,8 @@ public class OrderAdapter extends BaseRecyclerAdapter<OrderBean, OrderAdapter.Vi
             case 3:
                 holder.tv_time.setVisibility(View.GONE);
                 holder.tv_status.setText("已完成");
-                holder.tv_buy_again.setText("去支付");
-                holder.tv_delete.setVisibility(View.VISIBLE);
+                holder.tv_buy_again.setText("再次购买");
+                holder.tv_delete.setVisibility(View.GONE);
                 break;
             case 4:
                 holder.tv_time.setVisibility(View.GONE);
@@ -184,5 +193,7 @@ public class OrderAdapter extends BaseRecyclerAdapter<OrderBean, OrderAdapter.Vi
         void onPayClick(int position);
 
         void onDeleteClick(int position);
+
+        void onItemClick(int position);
     }
 }

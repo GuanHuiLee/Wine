@@ -13,12 +13,15 @@ import com.lgh.wine.R;
 import com.lgh.wine.base.BaseFragment;
 import com.lgh.wine.beans.OrderBean;
 import com.lgh.wine.beans.OrderStatusBean;
+import com.lgh.wine.beans.TrackerBean;
 import com.lgh.wine.contract.OrderContract;
 import com.lgh.wine.model.OrderModel;
 import com.lgh.wine.presenter.OrderPresenter;
 import com.lgh.wine.ui.personal.AddOrderCommentActivity;
+import com.lgh.wine.ui.personal.TrackerActivity;
 import com.lgh.wine.ui.product.adapter.OrderAdapter;
 import com.lgh.wine.utils.AccountUtil;
+import com.lgh.wine.utils.BaseRecyclerAdapter;
 import com.lgh.wine.utils.Constant;
 import com.orhanobut.logger.Logger;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -37,8 +40,6 @@ import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
-
-import static android.app.Activity.RESULT_OK;
 
 /**
  * Created by ligh on 2018/7/12.
@@ -90,7 +91,24 @@ public class OrderFragment extends BaseFragment implements OrderContract.View, O
                 OrderBean item = adapter.getItem(position);
                 dealDeleteClick(item);
             }
+
+            @Override
+            public void onItemClick(int position) {
+                toOrderDetail(position);
+            }
         });
+        adapter.setOnItemViewClickListener(new BaseRecyclerAdapter.OnItemViewClickListener() {
+            @Override
+            public void onViewClick(View view, int position) {
+                toOrderDetail(position);
+            }
+        });
+    }
+
+    private void toOrderDetail(int position) {
+        Intent intent = new Intent(mContext, OrderDetailActivity.class);
+        intent.putExtra("data", adapter.getItem(position).getOrder_id());
+        startActivity(intent);
     }
 
     private void dealDeleteClick(OrderBean item) {
@@ -102,8 +120,10 @@ public class OrderFragment extends BaseFragment implements OrderContract.View, O
             case 1:
                 break;
             case 2:
+                dealTracker(item);
                 break;
             case 3:
+
                 break;
             case 4:
                 deleteOrder(item);
@@ -113,6 +133,12 @@ public class OrderFragment extends BaseFragment implements OrderContract.View, O
             default:
                 break;
         }
+    }
+
+    private void dealTracker(OrderBean item) {
+        Intent intent = new Intent(mContext, TrackerActivity.class);
+        intent.putExtra("data", item.getOrder_id());
+        startActivity(intent);
     }
 
     private void deleteOrder(OrderBean item) {
@@ -135,6 +161,7 @@ public class OrderFragment extends BaseFragment implements OrderContract.View, O
                 receiveGoods(item);
                 break;
             case 3:
+                reBuy(item);
                 break;
             case 4:
                 comment(item);
@@ -154,7 +181,10 @@ public class OrderFragment extends BaseFragment implements OrderContract.View, O
     }
 
     private void receiveGoods(OrderBean item) {
-
+        Map<String, Object> params = new HashMap<>();
+        params.put("order_id ", item.getOrder_id());
+        params.put("order_status ", 4);
+        presenter.updateOrder(params);
     }
 
     private void reBuy(OrderBean item) {
@@ -230,7 +260,8 @@ public class OrderFragment extends BaseFragment implements OrderContract.View, O
 
     @Override
     public void dealUpdateOrderResult() {
-
+        showError("成功");
+        refreshLayout.autoRefresh();
     }
 
     @Override
@@ -264,6 +295,12 @@ public class OrderFragment extends BaseFragment implements OrderContract.View, O
     public void showPaySign(String s) {
         alipay(s);
     }
+
+    @Override
+    public void showTracker(TrackerBean.DataBean bean) {
+
+    }
+
 
     /**
      * 支付宝支付

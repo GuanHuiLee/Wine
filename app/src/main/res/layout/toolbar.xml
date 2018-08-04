@@ -4,11 +4,11 @@
     android:id="@+id/toolbar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/color_white"
     android:layout_alignParentTop="true"
+    android:background="@color/color_white"
     android:minHeight="?attr/actionBarSize"
-    app:navigationIcon="@mipmap/ic_arrow_left"
-    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+    app:navigationIcon="@mipmap/ic_arrow_left">
 
     <TextView
         android:id="@+id/toolbar_title"

@@ -31,7 +31,8 @@ public class WineApplication extends BaseApplication {
             @NonNull
             @Override
             public RefreshHeader createRefreshHeader(@NonNull Context context, @NonNull RefreshLayout layout) {
-                return new ClassicsHeader(context);
+//                return new ClassicsHeader(context);
+                return new MaterialHeader(context).setColorSchemeColors(Color.parseColor("#248bfe"));
             }
         });
 

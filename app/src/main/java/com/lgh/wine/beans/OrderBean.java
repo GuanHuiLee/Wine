@@ -34,7 +34,8 @@ public class OrderBean implements Serializable{
     private long update_time;
     private List<ShoppingCartBean> orderGoodsList;
     private int order_goods_count;
-    private String orderAddress;
+    private AddressBean orderAddress;
+    private String waybillInfo;
 
     public String getOrder_id() {
         return order_id;
@@ -228,11 +229,19 @@ public class OrderBean implements Serializable{
         this.order_goods_count = order_goods_count;
     }
 
-    public String getOrderAddress() {
+    public String getWaybillInfo() {
+        return waybillInfo;
+    }
+
+    public void setWaybillInfo(String waybillInfo) {
+        this.waybillInfo = waybillInfo;
+    }
+
+    public AddressBean getOrderAddress() {
         return orderAddress;
     }
 
-    public void setOrderAddress(String orderAddress) {
+    public void setOrderAddress(AddressBean orderAddress) {
         this.orderAddress = orderAddress;
     }
 }

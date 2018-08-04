@@ -4,10 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/color_white"
     android:orientation="vertical"
     tools:context=".ui.account.RegisterActivity">
 
     <include layout="@layout/toolbar" />
+
+    <View style="@style/comDivider" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -34,6 +37,17 @@
             android:inputType="phone"
             android:maxLength="11"
             android:textSize="14sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="@color/color_white"
+        android:gravity="center_vertical">
+
+        <View
+            style="@style/comDivider"
+            android:layout_marginLeft="10dp" />
     </LinearLayout>
 
     <LinearLayout
@@ -78,7 +92,9 @@
         android:layout_marginLeft="@dimen/sp_16"
         android:layout_marginRight="@dimen/sp_16"
         android:layout_marginTop="10dp"
+        android:background="@color/color_grey_e5e5e5"
         android:text="下一步"
+        android:textColor="@color/color_white"
         android:textSize="18sp" />
 
 </LinearLayout>

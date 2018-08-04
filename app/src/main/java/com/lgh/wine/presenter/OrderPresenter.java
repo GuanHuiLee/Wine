@@ -7,6 +7,7 @@ import com.lgh.wine.beans.BaseResult;
 import com.lgh.wine.beans.OrderBean;
 import com.lgh.wine.beans.OrderStatusBean;
 import com.lgh.wine.beans.ShoppingCartBean;
+import com.lgh.wine.beans.TrackerBean;
 import com.lgh.wine.contract.OrderContract;
 import com.lgh.wine.contract.ShoppingCartContract;
 import com.lgh.wine.model.OrderModel;
@@ -188,6 +189,31 @@ public class OrderPresenter extends OrderContract.Presenter {
                     if (body.getCode() == 200) {
                         view.showPaySign(body.getData());
                     } else view.showError(body.getMsg());
+                    view.hideProgress();
+                }
+            }
+
+            @Override
+            public void onFail(String message) {
+                if (isAttach) {
+                    view.showError(message);
+                    view.hideProgress();
+                }
+            }
+        });
+    }
+
+    @Override
+    public void getTracker(Map<String, Object> par) {
+        model.getTracker(par, new MyCallBack<TrackerBean>() {
+            @Override
+            public void onSuc(Response<TrackerBean> response) {
+                if (isAttach) {
+                    TrackerBean body = response.body();
+                    TrackerBean.MetaBean meta = body.getMeta();
+                    if (meta.getCode() == 200) {
+                        view.showTracker(body.getData());
+                    } else view.showError(meta.getMessage());
                     view.hideProgress();
                 }
             }

@@ -96,7 +96,6 @@ public class LoginActivity extends BaseActivity implements AccountContract.View 
                 break;
             case R.id.tv_quick_login:
                 startActivity(new Intent(mContext, LoginBySmsCodeActivity.class));
-                finish();
                 break;
         }
     }

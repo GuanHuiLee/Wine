@@ -21,6 +21,7 @@ import com.lgh.wine.beans.GoodsInfoBean;
 import com.lgh.wine.beans.InvoiceBean;
 import com.lgh.wine.beans.OrderBean;
 import com.lgh.wine.beans.OrderStatusBean;
+import com.lgh.wine.beans.TrackerBean;
 import com.lgh.wine.contract.AddressContract;
 import com.lgh.wine.contract.CouponContract;
 import com.lgh.wine.contract.OrderContract;
@@ -325,6 +326,11 @@ public class AddOrderActivity extends BaseActivity implements AddressContract.Vi
     @Override
     public void showPaySign(String s) {
         alipay(s);
+    }
+
+    @Override
+    public void showTracker(TrackerBean.DataBean trackerBean) {
+
     }
 
     /**

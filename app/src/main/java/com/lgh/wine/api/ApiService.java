@@ -5,6 +5,7 @@ import com.lgh.wine.beans.Account;
 import com.lgh.wine.beans.BaseResult;
 import com.lgh.wine.beans.LoginInput;
 import com.lgh.wine.beans.SmsCodeInput;
+import com.lgh.wine.beans.TrackerBean;
 import com.lgh.wine.beans.VerifyPhoneInput;
 
 import java.util.Map;
@@ -15,6 +16,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.Header;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
@@ -418,4 +420,14 @@ public interface ApiService {
     @POST("pay_info_sign")
     @FormUrlEncoded
     Call<BaseResult<String>> getPaySign(@FieldMap Map<String, Object> params);
+
+    /**
+     * 查询物流
+     *
+     * @param params
+     * @return
+     */
+    @POST("trackings/realtime")
+    @FormUrlEncoded
+    Call<TrackerBean> getTrackerList(@Header("Trackingmore-Api-Key") String key, @FieldMap Map<String, Object> params);
 }

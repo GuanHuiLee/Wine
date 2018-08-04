@@ -4,6 +4,7 @@ import com.lgh.wine.base.BasePresenter;
 import com.lgh.wine.base.BaseView;
 import com.lgh.wine.beans.OrderBean;
 import com.lgh.wine.beans.OrderStatusBean;
+import com.lgh.wine.beans.TrackerBean;
 import com.lgh.wine.model.OrderModel;
 
 import java.util.List;
@@ -31,6 +32,8 @@ public interface OrderContract {
         void showCodeError(String s);
 
         void showPaySign(String s);
+
+        void showTracker(TrackerBean.DataBean bean);
     }
 
     public abstract class Presenter extends BasePresenter<View, OrderModel> {
@@ -53,5 +56,7 @@ public interface OrderContract {
         public abstract void updateOrder(Map<String, Object> params);
 
         public abstract void getPaySign(Map<String, Object> params);
+
+        public abstract void getTracker(Map<String, Object> par);
     }
 }
