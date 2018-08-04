@@ -79,7 +79,7 @@ public class ShoppingCartAdapter extends BaseRecyclerAdapter<ShoppingCartBean, S
         ShoppingCartBean item = getItem(position);
         holder.tvName.setText(item.getGoods_name());
         holder.tvPrice.setText("￥" + item.getGoods_price());
-        GlideHelper.loadImage(mContext, holder.ivIcon, Constant.IMG_IP + item.getGoods_pic());
+        GlideHelper.loadImage(mContext, holder.ivIcon, Constant.IMG_IP + item.getGoods_pics().split("\\|")[0]);
 
         holder.volume.setOnVolumeChangeListener(new VolumeView.OnVolumeChangeListener() {
             @Override

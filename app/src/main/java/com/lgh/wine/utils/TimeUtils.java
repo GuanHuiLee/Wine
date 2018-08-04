@@ -186,7 +186,7 @@ public class TimeUtils {
         long second = (date1.getTime() - date2.getTime()) / (long) 1000;
         int hour = (int) (second / 3600);
         int minute = (int) ((second - hour * 3600) / 60);
-        int se = (int) (second - hour * 300 - minute * 60) / 1000;
+        int se = (int) (second - hour * 3600 - minute * 60);
         String str = hour + "小时" + minute + "分钟" + se + "秒";
         return str;
     }
