@@ -20,6 +20,7 @@ import com.lgh.wine.beans.CollectBean;
 import com.lgh.wine.beans.GoodsDetailBean;
 import com.lgh.wine.beans.SpoorBean;
 import com.lgh.wine.ui.shopping.ShoppingCartActivity;
+import com.lgh.wine.utils.CommonMethod;
 import com.lgh.wine.utils.Constant;
 import com.lgh.wine.base.BaseActivity;
 import com.lgh.wine.beans.ProductBean;
@@ -70,15 +71,15 @@ public class ProductDetailActivity extends BaseActivity implements ShoppingCartC
     private ShoppingCartPresenter cartPresenter;
     private CollectPresenter collectPresenter;
     private ProductPresenter productPresenter;
-    private boolean isCollect;
+    private int isCollect;
 
     private ProductDetailBean productDetailBean;
     private AlertDialog dialog;
     private int count = 1;
     private String grade_name;
     private String grade_id;
-    private static final int TYPE_ADD_CART = 1;
-    private static final int TYPE_BUY = 2;
+    public static final int TYPE_ADD_CART = 1;
+    public static final int TYPE_BUY = 2;
     private int type = 0;
 
 
@@ -123,7 +124,7 @@ public class ProductDetailActivity extends BaseActivity implements ShoppingCartC
 
     @OnClick({R.id.ll_discuss, R.id.ll_img_text, R.id.ll_params,
             R.id.tv_coupon, R.id.tv_add_car, R.id.tv_collect, R.id.tv_buy,
-            R.id.tv_car})
+            R.id.tv_car, R.id.tv_service})
     public void clickView(View view) {
         switch (view.getId()) {
             case R.id.ll_discuss:
@@ -155,6 +156,9 @@ public class ProductDetailActivity extends BaseActivity implements ShoppingCartC
                 break;
             case R.id.tv_car:
                 startActivity(new Intent(mContext, ShoppingCartActivity.class));
+                break;
+            case R.id.tv_service:
+                CommonMethod.contact(this);
                 break;
             default:
                 break;
@@ -246,7 +250,7 @@ public class ProductDetailActivity extends BaseActivity implements ShoppingCartC
      * 添加收藏
      */
     private void addCollect() {
-        isCollect = !isCollect;
+        isCollect = isCollect == 0 ? 1 : 0;
         Map<String, Object> params = new HashMap<>();
         params.put("goods_id", productBean.getProduct_id());
         params.put(Constant.USER_ID, AccountUtil.getUserId());
@@ -295,8 +299,8 @@ public class ProductDetailActivity extends BaseActivity implements ShoppingCartC
 
     @Override
     protected void initToolbar(Toolbar toolbar) {
-        toolbar.setTitle("");
-        toolbar.setNavigationIcon(R.mipmap.ic_arrow_left);
+        TextView tv_title = toolbar.findViewById(R.id.toolbar_title);
+        tv_title.setText("商品详情");
     }
 
     @Override
@@ -336,7 +340,7 @@ public class ProductDetailActivity extends BaseActivity implements ShoppingCartC
 
     @Override
     public void dealAddCollectResult() {
-        Drawable dra = getResources().getDrawable(isCollect ? R.mipmap.ic_collection_def : R.mipmap.ic_collection_sel);
+        Drawable dra = getResources().getDrawable(isCollect == 1 ? R.mipmap.ic_collection_def : R.mipmap.ic_collection_sel);
         dra.setBounds(0, 0, dra.getMinimumWidth(), dra.getMinimumHeight());
         tv_collect.setCompoundDrawables(dra, null, null, null);
     }

@@ -25,12 +25,14 @@ import com.lgh.wine.beans.ShoppingCartBean;
 import com.lgh.wine.beans.TrackerBean;
 import com.lgh.wine.beans.TrackinfoBean;
 import com.lgh.wine.contract.OrderContract;
+import com.lgh.wine.model.CommentModel;
 import com.lgh.wine.model.OrderModel;
 import com.lgh.wine.presenter.OrderPresenter;
 import com.lgh.wine.ui.personal.TrackerActivity;
 import com.lgh.wine.ui.product.adapter.GoodsAdapter;
 import com.lgh.wine.ui.product.adapter.OrderAdapter;
 import com.lgh.wine.utils.AccountUtil;
+import com.lgh.wine.utils.CommonMethod;
 import com.lgh.wine.utils.Constant;
 
 import java.util.ArrayList;
@@ -224,7 +226,7 @@ public class OrderDetailActivity extends BaseActivity implements OrderContract.V
             case R.id.tv_call:
                 break;
             case R.id.tv_contact:
-                contact();
+                CommonMethod.contact(this);
                 break;
             case R.id.tv_all:
                 Intent intent = new Intent(mContext, TrackerActivity.class);
@@ -239,10 +241,6 @@ public class OrderDetailActivity extends BaseActivity implements OrderContract.V
         }
     }
 
-    private void contact() {
-        String url3521 = "mqqwpa://im/chat?chat_type=wpa&uin=503425407";
-        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url3521)));
-    }
 
     private void addCart() {
 

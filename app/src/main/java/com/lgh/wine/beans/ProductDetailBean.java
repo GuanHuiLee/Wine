@@ -11,7 +11,7 @@ public class ProductDetailBean {
     private String product_volume;
     private int if_collect;
     private String product_content;
-    private String product_price;
+    private double product_price;
     private String product_id;
     private String product_judge;
     private String product_brand;
@@ -37,7 +37,7 @@ public class ProductDetailBean {
     public static class ProductChildBean {
         private String product_original;
         private long create_time;
-        private String product_price;
+        private double product_price;
         private String product_name;
         private String product_pictures;
         private String product_sale;
@@ -67,11 +67,11 @@ public class ProductDetailBean {
             this.create_time = create_time;
         }
 
-        public String getProduct_price() {
+        public double getProduct_price() {
             return product_price;
         }
 
-        public void setProduct_price(String product_price) {
+        public void setProduct_price(double product_price) {
             this.product_price = product_price;
         }
 
@@ -197,11 +197,11 @@ public class ProductDetailBean {
         this.product_content = product_content;
     }
 
-    public String getProduct_price() {
+    public double getProduct_price() {
         return product_price;
     }
 
-    public void setProduct_price(String product_price) {
+    public void setProduct_price(double product_price) {
         this.product_price = product_price;
     }
 

@@ -1,7 +1,5 @@
 package com.lgh.wine.ui.product;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,7 +15,6 @@ import com.lgh.wine.base.BaseActivity;
 import com.lgh.wine.beans.AddressBean;
 import com.lgh.wine.beans.CouponBean;
 import com.lgh.wine.beans.GoodsDetailBean;
-import com.lgh.wine.beans.GoodsInfoBean;
 import com.lgh.wine.beans.InvoiceBean;
 import com.lgh.wine.beans.OrderBean;
 import com.lgh.wine.beans.OrderStatusBean;
@@ -121,7 +118,7 @@ public class AddOrderActivity extends BaseActivity implements AddressContract.Vi
             goodsInfoBeans.add(params);
         }
 
-        price=total_price;
+        price = total_price;
         tv_product_price.setText("￥" + total_price);
         tv_count_price.setText("￥" + total_price);
     }
@@ -172,8 +169,7 @@ public class AddOrderActivity extends BaseActivity implements AddressContract.Vi
 
     private void addOrder() {
         if (selectInvoice == null) {
-            showError("请选择发票信息");
-            return;
+            selectInvoice = new InvoiceBean();
         }
 
         Map<String, Object> params = new HashMap<>();
@@ -313,14 +309,19 @@ public class AddOrderActivity extends BaseActivity implements AddressContract.Vi
 
     @Override
     public void showCodeError(String s) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-        builder.setNegativeButton("取消", null).setPositiveButton("确定", new DialogInterface.OnClickListener() {
+        new com.adorkable.iosdialog.AlertDialog(mContext).builder().setMsg(s).setTitle("温馨提示").
+                setPositiveButton("确定", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        ct_code.setText("");
+                        addOrder();
+                    }
+                }).setNegativeButton("取消", new View.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                ct_code.setText("");
-                addOrder();
+            public void onClick(View view) {
+
             }
-        }).setMessage(s).setTitle("提示").show();
+        }).show();
     }
 
     @Override
