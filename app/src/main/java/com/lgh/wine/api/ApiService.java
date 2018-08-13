@@ -200,6 +200,16 @@ public interface ApiService {
     Call<BaseResult<String>> getArticleList(@FieldMap Map<String, Object> params);
 
     /**
+     * 我的喜欢
+     *
+     * @param params
+     * @return
+     */
+    @POST("user_article_list")
+    @FormUrlEncoded
+    Call<BaseResult<String>> getUserArticleList(@FieldMap Map<String, Object> params);
+
+    /**
      * 文章详情
      *
      * @param params

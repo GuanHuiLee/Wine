@@ -1,1 +1,1 @@
-include ':app','IosDialog'
+include ':app','IosDialog','sobotsdk'

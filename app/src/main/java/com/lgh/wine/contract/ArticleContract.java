@@ -3,6 +3,7 @@ package com.lgh.wine.contract;
 import com.lgh.wine.base.BasePresenter;
 import com.lgh.wine.base.BaseView;
 import com.lgh.wine.beans.ArticleBean;
+import com.lgh.wine.beans.UserArticleBean;
 import com.lgh.wine.model.ArticleModel;
 import com.lgh.wine.model.ShoppingCartModel;
 
@@ -18,6 +19,8 @@ public interface ArticleContract {
 
         void showArticleList(List<ArticleBean> list);
 
+        void showUserArticleList(List<UserArticleBean> list);
+
         void showArticleDetail(ArticleBean bean);
 
         void dealAddUserResult();
@@ -31,6 +34,8 @@ public interface ArticleContract {
 
 
         public abstract void getArticleList(Map<String, Object> params);
+
+        public abstract void getUserArticleList(Map<String, Object> params);
 
         public abstract void getArticleDetail(Map<String, Object> params);
 

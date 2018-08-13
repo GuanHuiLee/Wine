@@ -218,7 +218,7 @@ public class ProductDetailActivity extends BaseActivity implements ShoppingCartC
         });
 
         if (productBean.getProduct_type() == 3) {
-            grade_name = "-" + productDetailBean.getChild_list().get(0);
+            grade_name = "-" + productDetailBean.getChild_list().get(0).getGrade_name();
             count = 6;
             volume.setVolume(6);
             volume.setMin(6);

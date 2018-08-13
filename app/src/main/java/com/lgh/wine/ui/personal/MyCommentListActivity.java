@@ -38,7 +38,8 @@ import static com.lgh.wine.utils.Constant.USER_ID;
 /**
  * 我的评价
  */
-public class MyCommentListActivity extends BaseActivity implements CommentContract.View, OnRefreshLoadMoreListener {
+public class MyCommentListActivity extends BaseActivity implements CommentContract.View,
+        OnRefreshLoadMoreListener {
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
     @BindView(R.id.ll_no_data)

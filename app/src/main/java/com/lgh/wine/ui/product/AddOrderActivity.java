@@ -220,6 +220,10 @@ public class AddOrderActivity extends BaseActivity implements AddressContract.Vi
     }
 
     private void setAddress() {
+        if (selectAddress == null) {
+            showError("请先选择或添加默认收货地址");
+            return;
+        }
         tv_address.setText(selectAddress.getAddr_province() +
                 selectAddress.getAddr_city() + selectAddress.getAddr_district());
         tv_name.setText("收货人：" + selectAddress.getAddr_cnee() + " " + selectAddress.getAddr_phone());

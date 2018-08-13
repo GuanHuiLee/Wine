@@ -20,6 +20,7 @@ import android.widget.TextView;
 import com.lgh.wine.R;
 import com.lgh.wine.base.BaseActivity;
 import com.lgh.wine.beans.ArticleBean;
+import com.lgh.wine.beans.UserArticleBean;
 import com.lgh.wine.contract.ArticleContract;
 import com.lgh.wine.model.ArticleModel;
 import com.lgh.wine.presenter.ArticlePresenter;
@@ -65,6 +66,7 @@ public class ArticleDetailActivity extends BaseActivity implements ArticleContra
         if (bean == null) return;
 
         presenter = new ArticlePresenter(this, ArticleModel.newInstance());
+        addPresenter(presenter);
         Map<String, Object> params = new HashMap<>();
         params.put("article_id", bean.getArticle_id());
         params.put(Constant.USER_ID, AccountUtil.getUserId());
@@ -198,6 +200,11 @@ public class ArticleDetailActivity extends BaseActivity implements ArticleContra
 
     @Override
     public void showArticleList(List<ArticleBean> list) {
+
+    }
+
+    @Override
+    public void showUserArticleList(List<UserArticleBean> list) {
 
     }
 

@@ -124,7 +124,7 @@ public class PersonalFragment extends BaseFragment implements UploadFileContract
     @OnClick({R.id.iv_icon, R.id.input_spoor, R.id.input_collect, R.id.input_coupon, R.id.tv_edit
             , R.id.iv_setting, R.id.iv_feedback
             , R.id.tv_need_pay, R.id.tv_need_send, R.id.tv_receive, R.id.tv_need_access
-            , R.id.input_comment})
+            , R.id.input_comment, R.id.input_like})
     public void clickView(View view) {
         switch (view.getId()) {
             case R.id.iv_icon:
@@ -163,6 +163,9 @@ public class PersonalFragment extends BaseFragment implements UploadFileContract
                 break;
             case R.id.input_comment:
                 startActivity(new Intent(mContext, MyCommentListActivity.class));
+                break;
+            case R.id.input_like:
+                startActivity(new Intent(mContext, MyLikesActivity.class));
                 break;
             default:
                 break;

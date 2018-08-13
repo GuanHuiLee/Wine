@@ -232,6 +232,7 @@
                 app:inputItemTitle="我的评价" />
 
             <com.lgh.wine.utils.InputItemView
+                android:id="@+id/input_like"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"

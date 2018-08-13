@@ -22,6 +22,10 @@ public class ArticleModel extends BaseModel {
     public void getArticleList(Map<String, Object> params, MyCallBack callBack) {
         ApiFactory.getService().getArticleList(params).enqueue(callBack);
     }
+    public void getUserArticleList(Map<String, Object> params, MyCallBack callBack) {
+        ApiFactory.getService().getArticleList(params).enqueue(callBack);
+    }
+
 
     public void getArticleDetail(Map<String, Object> params, MyCallBack callBack) {
         ApiFactory.getService().getArticleDetail(params).enqueue(callBack);

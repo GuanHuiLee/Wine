@@ -12,6 +12,7 @@ import android.widget.FrameLayout;
 import com.lgh.wine.R;
 import com.lgh.wine.base.BaseFragment;
 import com.lgh.wine.beans.ArticleBean;
+import com.lgh.wine.beans.UserArticleBean;
 import com.lgh.wine.contract.ArticleContract;
 import com.lgh.wine.model.ArticleModel;
 import com.lgh.wine.presenter.ArticlePresenter;
@@ -100,6 +101,11 @@ public class DiscoverFragment extends BaseFragment implements ArticleContract.Vi
             articleListAdapter.insertData(articleListAdapter.getItemCount(), beans);
             ++pageNum;
         }
+    }
+
+    @Override
+    public void showUserArticleList(List<UserArticleBean> list) {
+
     }
 
     @Override

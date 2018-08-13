@@ -230,6 +230,7 @@ public class ShoppingFragment extends BaseFragment implements ShoppingCartContra
                     tv_manage.setText("完成");
                     ll_clean.setVisibility(View.VISIBLE);
                 } else {
+                    mShoppingCartAdapter.unSelectAll();
                     tv_manage.setText("管理");
                     ll_clean.setVisibility(View.GONE);
                 }
@@ -279,7 +280,10 @@ public class ShoppingFragment extends BaseFragment implements ShoppingCartContra
     }
 
     private void delete() {
-        if (TextUtils.isEmpty(cart_ids)) return;
+        if (TextUtils.isEmpty(cart_ids)) {
+            showError("请选择商品");
+            return;
+        }
 
         Map<String, Object> params = new HashMap<>();
         params.put("cart_ids", cart_ids);

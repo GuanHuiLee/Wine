@@ -134,6 +134,19 @@ public class ShoppingCartAdapter extends BaseRecyclerAdapter<ShoppingCartBean, S
         onCheckListener.onCheckChanged();
     }
 
+    /**
+     * 全选
+     */
+    public void unSelectAll() {
+        Set<Map.Entry<Integer, Boolean>> entries = map.entrySet();
+        for (Map.Entry<Integer, Boolean> entry : entries) {
+            entry.setValue(false);
+        }
+        notifyDataSetChanged();
+
+        onCheckListener.onCheckChanged();
+    }
+
 
     class ViewHolder extends RecyclerView.ViewHolder {
 

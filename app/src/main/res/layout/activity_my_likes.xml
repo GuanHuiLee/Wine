@@ -8,4 +8,6 @@
     tools:context=".ui.personal.MyLikesActivity">
 
     <include layout="@layout/toolbar" />
+
+    <include layout="@layout/include_reflush_layout" />
 </LinearLayout>
