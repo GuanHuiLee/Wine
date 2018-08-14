@@ -76,7 +76,7 @@ public class ProductDetailActivity extends BaseActivity implements ShoppingCartC
     private ProductDetailBean productDetailBean;
     private AlertDialog dialog;
     private int count = 1;
-    private String grade_name;
+    private String grade_name = "";
     private String grade_id;
     public static final int TYPE_ADD_CART = 1;
     public static final int TYPE_BUY = 2;

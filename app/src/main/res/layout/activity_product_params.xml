@@ -13,9 +13,12 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/color_white"
         android:orientation="vertical">
 
         <include layout="@layout/toolbar" />
+
+        <View style="@style/comDivider" />
 
         <LinearLayout
             android:layout_width="match_parent"

@@ -236,10 +236,16 @@ public class OrderFragment extends BaseFragment implements OrderContract.View, O
 
     @Override
     public void hideProgress() {
-        super.hideProgress();
-        refreshLayout.finishRefresh();
+        if (refreshLayout != null) {//空指针错误
+            refreshLayout.finishRefresh();
+        }
+
         int itemCount = adapter.getItemCount();
-        llNoData.setVisibility(itemCount > 0 ? View.GONE : View.VISIBLE);
+        if (llNoData != null) {
+            llNoData.setVisibility(itemCount > 0 ? View.GONE : View.VISIBLE);
+        }
+
+        super.hideProgress();
     }
 
     @Override
