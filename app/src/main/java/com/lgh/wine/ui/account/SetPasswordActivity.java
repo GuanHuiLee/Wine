@@ -4,9 +4,13 @@ import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -29,6 +33,8 @@ public class SetPasswordActivity extends BaseActivity implements AccountContract
     EditText et_password;
     @BindView(R.id.switch_view)
     SwitchView switch_view;
+    @BindView(R.id.btn_done)
+    Button btn_done;
 
 
     private AccountPresenter presenter;
@@ -51,6 +57,34 @@ public class SetPasswordActivity extends BaseActivity implements AccountContract
                 );
             }
         });
+
+        et_password.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                String s = editable.toString().trim();
+                if (TextUtils.isEmpty(s)) {
+                    setBtnEnable(false);
+                } else {
+                    setBtnEnable(true);
+                }
+            }
+        });
+    }
+
+    private void setBtnEnable(boolean b) {
+        btn_done.setEnabled(b);
+        btn_done.setBackgroundColor(b ? getResources().getColor(R.color.color_red) :
+                getResources().getColor(R.color.color_grey_e5e5e5));
     }
 
     @Override

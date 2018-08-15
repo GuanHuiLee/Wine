@@ -86,6 +86,7 @@
 
     <Button
         android:id="@+id/btn_next"
+        android:enabled="false"
         style="?android:attr/borderlessButtonStyle"
         android:layout_width="match_parent"
         android:layout_height="47dp"

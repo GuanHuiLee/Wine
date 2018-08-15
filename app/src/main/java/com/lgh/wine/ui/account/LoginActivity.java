@@ -4,9 +4,13 @@ import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -37,9 +41,15 @@ public class LoginActivity extends BaseActivity implements AccountContract.View 
     ClearEditText et_password;
     @BindView(R.id.switch_view)
     SwitchView switch_view;
+    @BindView(R.id.btn_login)
+    Button btn_login;
+
+    private boolean isPhoneNull = true;
+    private boolean isPwdNull = true;
 
     private AccountPresenter presenter;
     private String pwd;
+
 
     @Override
     protected int getLayoutId() {
@@ -53,6 +63,7 @@ public class LoginActivity extends BaseActivity implements AccountContract.View 
         if (account != null) {
             et_phone.setText(account.getUserPhone());
             et_password.setText(account.getUserPassword());
+            setBtnEnable(true);
         }
         switch_view.setOnCheckedChangeListener(new SwitchView.OnCheckedChangeListener() {
             @Override
@@ -62,6 +73,61 @@ public class LoginActivity extends BaseActivity implements AccountContract.View 
                 );
             }
         });
+
+        et_phone.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                String s = editable.toString().trim();
+                if (TextUtils.isEmpty(s)) {
+                    isPhoneNull = true;
+                    setBtnEnable(false);
+                } else {
+                    isPhoneNull = false;
+                    if (!isPwdNull)
+                        setBtnEnable(true);
+                }
+            }
+        });
+        et_password.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                String s = editable.toString().trim();
+                if (TextUtils.isEmpty(s)) {
+                    isPwdNull = true;
+                    setBtnEnable(false);
+                } else {
+                    isPwdNull = false;
+                    if (!isPhoneNull)
+                        setBtnEnable(true);
+                }
+            }
+        });
+    }
+
+    private void setBtnEnable(boolean b) {
+        btn_login.setEnabled(b);
+        btn_login.setBackgroundColor(b ? getResources().getColor(R.color.color_red) :
+                getResources().getColor(R.color.color_grey_e5e5e5));
     }
 
     @Override

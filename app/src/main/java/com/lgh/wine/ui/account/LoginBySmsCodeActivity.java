@@ -6,7 +6,11 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.RequiresApi;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -32,6 +36,10 @@ public class LoginBySmsCodeActivity extends BaseActivity implements AccountContr
     EditText et_code;
     @BindView(R.id.tv_getCode)
     TextView tv_getCode;
+    @BindView(R.id.btn_login)
+    Button btn_login;
+    private boolean isPhoneNull = true;
+    private boolean isPwdNull = true;
 
     private AccountPresenter presenter;
     private static final int START = 1;
@@ -46,7 +54,60 @@ public class LoginBySmsCodeActivity extends BaseActivity implements AccountContr
 
     @Override
     protected void initUI() {
+        et_phone.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                String s = editable.toString().trim();
+                if (TextUtils.isEmpty(s)) {
+                    isPhoneNull = true;
+                    setBtnEnable(false);
+                } else {
+                    isPhoneNull = false;
+                    if (!isPwdNull)
+                        setBtnEnable(true);
+                }
+            }
+        });
+        et_code.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                String s = editable.toString().trim();
+                if (TextUtils.isEmpty(s)) {
+                    isPwdNull = true;
+                    setBtnEnable(false);
+                } else {
+                    isPwdNull = false;
+                    if (!isPhoneNull)
+                        setBtnEnable(true);
+                }
+            }
+        });
+    }
+
+    private void setBtnEnable(boolean b) {
+        btn_login.setEnabled(b);
+        btn_login.setBackgroundColor(b ? getResources().getColor(R.color.color_red) :
+                getResources().getColor(R.color.color_grey_e5e5e5));
     }
 
     @Override

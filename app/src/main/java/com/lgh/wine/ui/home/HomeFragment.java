@@ -15,6 +15,10 @@ import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.lgh.wine.R;
+import com.lgh.wine.beans.ProductBean;
+import com.lgh.wine.ui.product.ProductDetailActivity;
+import com.lgh.wine.ui.product.adapter.ProductAdapter;
+import com.lgh.wine.utils.BaseRecyclerAdapter;
 import com.lgh.wine.utils.Constant;
 import com.lgh.wine.base.BaseFragment;
 import com.lgh.wine.beans.BannerBean;
@@ -49,6 +53,8 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
     RecyclerView recyclerView_custom;//散酒
     @BindView(R.id.recyclerView_bluk)
     RecyclerView recyclerView_bulk;//定制
+    @BindView(R.id.recyclerView_products)
+    RecyclerView recyclerView_products;//商品
     @BindView(R.id.tv_update)
     TextView tv_update;
 
@@ -60,6 +66,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
     private List<WineAdBean> customList;
     private PictureAdapter adapterBulk;
     private PictureAdapter adapterCustom;
+    private ProductAdapter productAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -76,6 +83,10 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
         recyclerView_custom.setLayoutManager(new GridLayoutManager(mContext, 3));
         adapterCustom = new PictureAdapter(R.layout.item_pic, customList);
         recyclerView_custom.setAdapter(adapterCustom);
+        recyclerView_products.setLayoutManager(new GridLayoutManager(mContext, 2));
+        productAdapter = new ProductAdapter(mContext);
+        recyclerView_products.setAdapter(productAdapter);
+        recyclerView_products.setNestedScrollingEnabled(false);
 
         mContentBanner.setDelegate(new BGABanner.Delegate<ImageView, String>() {
             @Override
@@ -105,6 +116,16 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
             }
         });
 
+        productAdapter.setOnItemViewClickListener(new BaseRecyclerAdapter.OnItemViewClickListener() {
+            @Override
+            public void onViewClick(View view, int position) {
+                ProductBean info = productAdapter.getItem(position);
+                Intent intent = new Intent(mContext, ProductDetailActivity.class);
+                intent.putExtra("data", info);
+                startActivity(intent);
+            }
+        });
+
         SpannableStringBuilder str = SpannableStringUtils.getBuilder("App版本已更新，下单更")
                 .append("优惠")
                 .setForegroundColor(ContextCompat.getColor(mContext, R.color.pink))
@@ -127,10 +148,14 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
         presenter.getHomeData();
     }
 
-    @OnClick({R.id.iv_brand, R.id.recyclerView_bluk, R.id.recyclerView_custom})
+    @OnClick({R.id.iv_brand, R.id.recyclerView_bluk, R.id.recyclerView_custom
+            , R.id.tv_new})
     public void clickView(View view) {
         switch (view.getId()) {
             case R.id.iv_brand:
+                gotoProductList(1);
+                break;
+            case R.id.tv_new:
                 gotoProductList(1);
                 break;
             default:
@@ -171,13 +196,17 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
         }
 
         List<WineAdBean> bulkWineAdList = result.getBulkWineAdList();
-        if (bulkWineAdList != null && bannerLists.size() > 0) {
+        if (bulkWineAdList != null && bulkWineAdList.size() > 0) {
             setBulkAdapter(bulkWineAdList);
         }
 
         List<WineAdBean> customMadeWineAdList = result.getCustomMadeWineAdList();
         if (customMadeWineAdList != null && !customMadeWineAdList.isEmpty()) {
             setCustomAdapter(customMadeWineAdList);
+        }
+        List<ProductBean> productList = result.getProductList();
+        if (productList != null && !productList.isEmpty()) {
+            productAdapter.loadData(productList);
         }
     }
 
