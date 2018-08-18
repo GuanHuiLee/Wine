@@ -91,13 +91,13 @@ public class ProductListActivity extends BaseActivity implements OnRefreshLoadMo
             @Override
             public void onViewClick(View view, int position) {
                 ProductBean info = mProductAdapter.getItem(position);
-                gotoDetail(info);
+                gotoDetail(info.getProduct_id());
             }
         });
 
     }
 
-    private void gotoDetail(ProductBean info) {
+    private void gotoDetail(String info) {
         Intent intent = new Intent(mContext, ProductDetailActivity.class);
         intent.putExtra("data", info);
         startActivity(intent);

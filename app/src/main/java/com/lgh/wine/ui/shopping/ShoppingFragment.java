@@ -16,13 +16,16 @@ import android.widget.TextView;
 import com.lgh.wine.R;
 import com.lgh.wine.base.BaseFragment;
 import com.lgh.wine.beans.GoodsDetailBean;
+import com.lgh.wine.beans.ProductBean;
 import com.lgh.wine.beans.ShoppingCartBean;
 import com.lgh.wine.contract.ShoppingCartContract;
 import com.lgh.wine.model.ShoppingCartModel;
 import com.lgh.wine.presenter.ShoppingCartPresenter;
 import com.lgh.wine.ui.product.AddOrderActivity;
+import com.lgh.wine.ui.product.ProductDetailActivity;
 import com.lgh.wine.ui.shopping.adapter.ShoppingCartAdapter;
 import com.lgh.wine.utils.AccountUtil;
+import com.lgh.wine.utils.BaseRecyclerAdapter;
 import com.lgh.wine.utils.Constant;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -72,7 +75,8 @@ public class ShoppingFragment extends BaseFragment implements ShoppingCartContra
     private final static int size = 10;
     private int loadType;
     private ShoppingCartAdapter mShoppingCartAdapter;
-    private String cart_ids = "";
+    private StringBuilder cart_ids;
+    private int total_count;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -87,6 +91,14 @@ public class ShoppingFragment extends BaseFragment implements ShoppingCartContra
         recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         mShoppingCartAdapter = new ShoppingCartAdapter(mContext);
         recyclerView.setAdapter(mShoppingCartAdapter);
+        mShoppingCartAdapter.setOnItemViewClickListener(new BaseRecyclerAdapter.OnItemViewClickListener() {
+            @Override
+            public void onViewClick(View view, int position) {
+                ShoppingCartBean item = mShoppingCartAdapter.getItem(position);
+
+                gotoDetail(item.getGoods_id());
+            }
+        });
         mShoppingCartAdapter.setOnCheckChangedListener(new ShoppingCartAdapter.OnCheckListener() {
             @Override
             public void onCheckChanged() {
@@ -110,19 +122,32 @@ public class ShoppingFragment extends BaseFragment implements ShoppingCartContra
                     tv_buy.setText("结算（" + getSelectCount() + "）");
 
                     count();
+
                 }
 
             }
 
             @Override
-            public void onCountChange() {
+            public void onCountChange(int poi) {
                 count();
+                mShoppingCartAdapter.setItemChecked(poi);
             }
         });
     }
 
+    private void gotoDetail(String info) {
+        Intent intent = new Intent(mContext, ProductDetailActivity.class);
+        intent.putExtra("data", info);
+        startActivity(intent);
+    }
+
+    /**
+     * 计算总价
+     */
     private void count() {
-        double totle_price = 0.00;
+        cart_ids = new StringBuilder();
+        double total_price = 0.00;
+        int count = 0;
         HashMap<Integer, Boolean> map = mShoppingCartAdapter.getMap();
         HashMap<Integer, Integer> countMap = mShoppingCartAdapter.getCountMap();
         Set<Map.Entry<Integer, Boolean>> entries = map.entrySet();
@@ -131,13 +156,17 @@ public class ShoppingFragment extends BaseFragment implements ShoppingCartContra
                 Integer key = entry.getKey();
                 Integer i = countMap.get(key);
                 ShoppingCartBean item = mShoppingCartAdapter.getItem(key);
-                totle_price += i * item.getGoods_price();
+                total_price += i * item.getGoods_price();
 
-                cart_ids += item.getCart_id();
+                cart_ids.append(item.getCart_id());
+                count++;
+                if (count < total_count) {
+                    cart_ids.append(",");
+                }
             }
         }
 
-        tv_totle_price.setText(String.valueOf(totle_price));
+        tv_totle_price.setText(String.valueOf(total_price));
     }
 
     private int getSelectCount() {
@@ -148,6 +177,7 @@ public class ShoppingFragment extends BaseFragment implements ShoppingCartContra
             if (entry.getValue())
                 select++;
         }
+        total_count = select;
         return select;
     }
 
@@ -186,8 +216,13 @@ public class ShoppingFragment extends BaseFragment implements ShoppingCartContra
     @Override
     public void dealDeleteShoppingCartResult() {
         showError("删除成功");
-        cart_ids = "";
+        cart_ids.setLength(0);
+
         refreshLayout.autoRefresh();
+        cb_all.setText("全选");
+        cb_all.setChecked(false);
+        tv_buy.setText("结算（0）");
+        tv_totle_price.setText("0.00");
     }
 
     @Override
@@ -239,7 +274,7 @@ public class ShoppingFragment extends BaseFragment implements ShoppingCartContra
                 mShoppingCartAdapter.selectAll();
                 break;
             case R.id.tv_buy:
-                if (getSelectCount() > 0)
+                if (total_count > 0)
                     addOrder();
                 break;
             case R.id.tv_delete:
@@ -286,7 +321,7 @@ public class ShoppingFragment extends BaseFragment implements ShoppingCartContra
         }
 
         Map<String, Object> params = new HashMap<>();
-        params.put("cart_ids", cart_ids);
+        params.put("cart_ids", cart_ids.toString());
 
         presenter.deleteShoppingCartInfo(params);
     }

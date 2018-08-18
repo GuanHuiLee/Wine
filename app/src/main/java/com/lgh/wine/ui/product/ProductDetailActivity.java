@@ -66,7 +66,7 @@ public class ProductDetailActivity extends BaseActivity implements ShoppingCartC
     @BindView(R.id.tv_collect)
     TextView tv_collect;
 
-    private ProductBean productBean;
+    private String goodId;
     private List<String> bannerBeans;
     private ShoppingCartPresenter cartPresenter;
     private CollectPresenter collectPresenter;
@@ -95,17 +95,35 @@ public class ProductDetailActivity extends BaseActivity implements ShoppingCartC
      */
     @Override
     protected void initUI() {
-        productBean = (ProductBean) getIntent().getSerializableExtra("data");
-        if (productBean == null) return;
+        goodId = getIntent().getStringExtra("data");
+    }
 
-        isCollect = productBean.getIf_collect();
+    @Override
+    protected void initData() {
+        cartPresenter = new ShoppingCartPresenter(this, ShoppingCartModel.newInstance());
+        addPresenter(cartPresenter);
+        collectPresenter = new CollectPresenter(this, CollectModel.newInstance());
+        addPresenter(collectPresenter);
+        productPresenter = new ProductPresenter(this, ProductModel.newInstance());
+        addPresenter(productPresenter);
 
-        tv_old_price.setText("原价：" + productBean.getProduct_original());
-        tv_price.setText("￥" + productBean.getProduct_price());
-        tv_title.setText(productBean.getProduct_name());
-        tv_sale_count.setText("销量" + productBean.getProduct_sale() + "件");
+        Map<String, Object> params = new HashMap<>();
+        params.put("goods_id", goodId);
+        params.put(Constant.USER_ID, AccountUtil.getUserId());
+        productPresenter.getProductDetail(params);
+    }
 
-        String detail_pictures = productBean.getProduct_pictures();
+    private void setMsg() {
+        if (productDetailBean == null) return;
+
+        isCollect = productDetailBean.getIf_collect();
+
+        tv_old_price.setText("原价：" + productDetailBean.getProduct_original());
+        tv_price.setText("￥" + productDetailBean.getProduct_price());
+        tv_title.setText(productDetailBean.getProduct_name());
+        tv_sale_count.setText("销量" + productDetailBean.getProduct_sale() + "件");
+
+        String detail_pictures = productDetailBean.getProduct_pictures();
         String[] strings = detail_pictures.split("\\|");
 
         bannerBeans = Arrays.asList(strings);
@@ -133,7 +151,7 @@ public class ProductDetailActivity extends BaseActivity implements ShoppingCartC
                 break;
             case R.id.ll_params:
                 Intent intent = new Intent(mContext, ProductParamsActivity.class);
-                intent.putExtra("goodsId", productBean.getProduct_id());
+                intent.putExtra("goodsId", productDetailBean.getProduct_id());
                 startActivity(intent);
                 break;
             case R.id.tv_coupon:
@@ -142,7 +160,12 @@ public class ProductDetailActivity extends BaseActivity implements ShoppingCartC
             case R.id.tv_add_car:
                 if (productDetailBean != null) {
                     type = TYPE_ADD_CART;
-                    showDialog();
+                    int product_type = productDetailBean.getProduct_type();
+                    if (product_type == 3) {//定制酒
+                        showDialog();
+                    } else {
+                        addShoppingCart();
+                    }
                 }
                 break;
             case R.id.tv_collect:
@@ -151,7 +174,12 @@ public class ProductDetailActivity extends BaseActivity implements ShoppingCartC
             case R.id.tv_buy:
                 if (productDetailBean != null) {
                     type = TYPE_BUY;
-                    showDialog();
+                    int product_type = productDetailBean.getProduct_type();
+                    if (product_type == 3) {//定制酒
+                        showDialog();
+                    } else {
+                        addShoppingCart();
+                    }
                 }
                 break;
             case R.id.tv_car:
@@ -213,11 +241,11 @@ public class ProductDetailActivity extends BaseActivity implements ShoppingCartC
             @Override
             public void onClick(View view) {
                 dialog.dismiss();
-                addShoppoingCart();
+                addShoppingCart();
             }
         });
 
-        if (productBean.getProduct_type() == 3) {
+        if (productDetailBean.getProduct_type() == 3) {
             grade_name = "-" + productDetailBean.getChild_list().get(0).getGrade_name();
             count = 6;
             volume.setVolume(6);
@@ -252,12 +280,12 @@ public class ProductDetailActivity extends BaseActivity implements ShoppingCartC
     private void addCollect() {
         isCollect = isCollect == 0 ? 1 : 0;
         Map<String, Object> params = new HashMap<>();
-        params.put("goods_id", productBean.getProduct_id());
+        params.put("goods_id", productDetailBean.getProduct_id());
         params.put(Constant.USER_ID, AccountUtil.getUserId());
         params.put("goods_count", count);
-        params.put("goods_name", productBean.getProduct_name());
-        params.put("goods_price", productBean.getProduct_price());
-        params.put("goods_icon", productBean.getProduct_pictures());
+        params.put("goods_name", productDetailBean.getProduct_name());
+        params.put("goods_price", productDetailBean.getProduct_price());
+        params.put("goods_icon", productDetailBean.getProduct_pictures());
         params.put("if_collect", isCollect);//1收藏，0取消收藏
 
         collectPresenter.addCollect(params);
@@ -266,36 +294,20 @@ public class ProductDetailActivity extends BaseActivity implements ShoppingCartC
     /**
      * 添加到购物车
      */
-    private void addShoppoingCart() {
-        int product_type = productBean.getProduct_type();
-
+    private void addShoppingCart() {
         Map<String, Object> params = new HashMap<>();
-        params.put("goods_id", productBean.getProduct_id());
+        params.put("goods_id", productDetailBean.getProduct_id());
         params.put(Constant.USER_ID, AccountUtil.getUserId());
         params.put("goods_count", count);//数量（如果为定制酒是至少6瓶）
-        params.put("goods_name", productBean.getProduct_name() + grade_name);//商品名称（如果为定制酒是则将定制酒名称“-”拼接在后面）
-        params.put("goods_price", productBean.getProduct_price());
-        params.put("goods_pics", productBean.getProduct_pictures());
+        params.put("goods_name", productDetailBean.getProduct_name() + grade_name);//商品名称（如果为定制酒是则将定制酒名称“-”拼接在后面）
+        params.put("goods_price", productDetailBean.getProduct_price());
+        params.put("goods_pics", productDetailBean.getProduct_pictures());
         if (grade_id != null)
             params.put("grade_id", grade_id);//定制酒ID（如果为定制酒时上传所选择的散酒id）
 
         cartPresenter.addShoppingCart(params);
     }
 
-    @Override
-    protected void initData() {
-        cartPresenter = new ShoppingCartPresenter(this, ShoppingCartModel.newInstance());
-        addPresenter(cartPresenter);
-        collectPresenter = new CollectPresenter(this, CollectModel.newInstance());
-        addPresenter(collectPresenter);
-        productPresenter = new ProductPresenter(this, ProductModel.newInstance());
-        addPresenter(productPresenter);
-
-        Map<String, Object> params = new HashMap<>();
-        params.put("goods_id", productBean.getProduct_id());
-        params.put(Constant.USER_ID, AccountUtil.getUserId());
-        productPresenter.getProductDetail(params);
-    }
 
     @Override
     protected void initToolbar(Toolbar toolbar) {
@@ -316,10 +328,10 @@ public class ProductDetailActivity extends BaseActivity implements ShoppingCartC
 
         GoodsDetailBean bean = new GoodsDetailBean();
         bean.setCount(count);
-        bean.setGoods_id(productBean.getProduct_id());
-        bean.setName(productBean.getProduct_name());
-        bean.setPrice(productBean.getProduct_price());
-        bean.setIcon(productBean.getProduct_icon());
+        bean.setGoods_id(productDetailBean.getProduct_id());
+        bean.setName(productDetailBean.getProduct_name());
+        bean.setPrice(productDetailBean.getProduct_price());
+        bean.setIcon(productDetailBean.getProduct_icon());
 
         List<GoodsDetailBean> list = new ArrayList<>();
         list.add(bean);
@@ -365,6 +377,7 @@ public class ProductDetailActivity extends BaseActivity implements ShoppingCartC
         if (bean != null) {
             productDetailBean = bean;
             initDialog();
+            setMsg();
         }
     }
 

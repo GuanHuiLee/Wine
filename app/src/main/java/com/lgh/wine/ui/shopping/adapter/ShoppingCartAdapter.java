@@ -81,13 +81,15 @@ public class ShoppingCartAdapter extends BaseRecyclerAdapter<ShoppingCartBean, S
         holder.tvPrice.setText("￥" + item.getGoods_price());
         GlideHelper.loadImage(mContext, holder.ivIcon, Constant.IMG_IP + item.getGoods_pics().split("\\|")[0]);
 
+        if (item.getGoods_name().contains("-")) {
+            holder.volume.setMin(6);
+        }
+
         holder.volume.setOnVolumeChangeListener(new VolumeView.OnVolumeChangeListener() {
             @Override
             public void onVolumeChange(View view, int Volume) {
                 countMap.put(holder.getAdapterPosition(), Volume);
-                if (map.get(holder.getAdapterPosition())) {
-                    onCheckListener.onCountChange();
-                }
+                onCheckListener.onCountChange(holder.getAdapterPosition());
             }
         });
 
@@ -147,6 +149,12 @@ public class ShoppingCartAdapter extends BaseRecyclerAdapter<ShoppingCartBean, S
         onCheckListener.onCheckChanged();
     }
 
+    public void setItemChecked(int poi) {
+        map.put(poi, true);
+        notifyDataSetChanged();
+        onCheckListener.onCheckChanged();
+    }
+
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -174,6 +182,6 @@ public class ShoppingCartAdapter extends BaseRecyclerAdapter<ShoppingCartBean, S
     public interface OnCheckListener {
         void onCheckChanged();
 
-        void onCountChange();
+        void onCountChange(int poisition);
     }
 }

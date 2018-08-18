@@ -42,7 +42,7 @@ public class ProductDetailBean {
         private String product_pictures;
         private String product_sale;
         private long update_time;
-        private int product_type;
+        private int product_type;//3为定制酒
         private String product_grade;
         private String product_id;
         private int product_judge;
