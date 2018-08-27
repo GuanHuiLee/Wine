@@ -169,7 +169,8 @@ public class AddOrderActivity extends BaseActivity implements AddressContract.Vi
 
     private void addOrder() {
         if (selectInvoice == null) {
-            selectInvoice = new InvoiceBean();
+            showError("请选择发票类型");
+            return;
         }
 
         Map<String, Object> params = new HashMap<>();

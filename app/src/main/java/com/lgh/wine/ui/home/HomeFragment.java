@@ -121,7 +121,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
             public void onViewClick(View view, int position) {
                 ProductBean info = productAdapter.getItem(position);
                 Intent intent = new Intent(mContext, ProductDetailActivity.class);
-                intent.putExtra("data", info);
+                intent.putExtra("data", info.getProduct_id());
                 startActivity(intent);
             }
         });

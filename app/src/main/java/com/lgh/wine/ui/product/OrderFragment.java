@@ -129,6 +129,7 @@ public class OrderFragment extends BaseFragment implements OrderContract.View, O
                 deleteOrder(item);
                 break;
             case 5:
+                deleteOrder(item);
                 break;
             default:
                 break;
@@ -167,6 +168,7 @@ public class OrderFragment extends BaseFragment implements OrderContract.View, O
                 comment(item);
                 break;
             case 5:
+                pay(item.getOrder_id());
                 break;
             default:
                 break;
@@ -188,7 +190,9 @@ public class OrderFragment extends BaseFragment implements OrderContract.View, O
     }
 
     private void reBuy(OrderBean item) {
-
+        Intent intent = new Intent(mContext, ProductDetailActivity.class);
+//        intent.putExtra("data", item.get);
+//        startActivity(intent);
     }
 
     private void pay(String order_id) {
